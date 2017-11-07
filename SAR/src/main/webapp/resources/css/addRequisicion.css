@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 17, 2017, 9:12:38 PM
+    Author     : Jason
+*/
+
+.formrequi{
+    background: rgb(41, 157, 206) !important;
+    background: -moz-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -webkit-linear-gradient(top, rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%) !important;
+    background: linear-gradient(to bottom, rgba(228, 73, 73, 0.8) 0%,rgb(252, 200, 200) 50%,rgb(255, 255, 255) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ) !important;
+    font-family: futura !important;
+    color: white !important;
+}
+
+.panladdpost{
+    margin-left: 40% !important;
+    margin-right: 50% !important;
+}
+
+.botonrequi {
+    width: 202px !important;
+    height: 36px !important;
+    color: #262626 !important;
+    box-shadow: inset 0 0 0 1.5px #474343 !important;
+    background: #ff944d !important;
+    margin-left: 43% !important;
+    margin-right: 50% !important;
+}
+
+.botonrequi:hover, .botonrequi:focus, .botonrequi:active{
+    -webkit-transform: scale(0.9) !important;
+    transform: scale(0.9) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #ff6600 !important;
+    box-shadow: inset 0 0 0 1.5px #474343 !important;
+}
+

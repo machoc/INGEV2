@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>SAR-LANCO</title>
+    </h:head>
+    <h:body>
+        <p:accordionPanel activeIndex="null" >
+        <p:tab title="Preseleccionados" >
+            <p:dataList value="#{requisicionController.preseleccionados()}" var="car" type="unordered" itemType="none" paginator="true" paginatorPosition="bottom" rows="10" styleClass="paginated">
+        <f:facet name="header">
+            Postulantes Preseleccionados
+        </f:facet>
+        <p:commandLink oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+            <f:setPropertyActionListener value="#{car}" target="#{requisicionController.seleccionado}" />
+            <h:outputText value="#{car.cedula}, #{car.nombrecompleto}" />
+        </p:commandLink>
+        <h:outputText value="#{car.cedula}, #{car.nombrecompleto}" style="display:inline-block"/>
+    </p:dataList>
+ 
+           
+        </p:tab>
+        <p:tab title="2 estado">
+            <h:panelGrid columns="2" cellpadding="10">
+               
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="3 estado">
+            <h:panelGrid columns="2" cellpadding="10">
+               
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+ 
+    </h:body>
+</html>
+

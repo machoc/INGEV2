@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/addRequisicion.css"/>
+       <!-- <h:outputStylesheet name="grid/grid.css" library="primefaces" />-->
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+         <h:form id="table" class="formrequi">
+            <div align="center" >     
+                <p:panelGrid columns="6" class="panelusuario" layout="grid">
+                    <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                    <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="inicio"></p:button>
+                    <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="AGREGAR USUARIO" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="AGREGAR POSTULANTE" outcome="Postulante"></p:button>
+                    <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="requisicion"></p:button>
+                    <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="ayuda"></p:button>
+                </p:panelGrid>     
+            </div>
+             
+             
+  
+                <h1><h:outputText value=" Requisiciones"/></h1>
+                <p:dataTable id="requisicion" value="#{requisicionController.listar()}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numero requisicion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numrequisicion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Puesto"/>
+                        </f:facet>
+                        <h:outputText value="#{item.puesto}"/>
+                    </p:column>
+                   
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Departamento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.departamento.descripcion}"/>
+                    </p:column>
+                    <p:column>
+                     <f:facet name="header">
+                            <h:outputText value="Ver"/>
+                        </f:facet>
+                       
+                    <p:commandButton update="posInfo" class="modificar" value="Ver Info" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
+                    <p:commandButton value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion" />
+                   
+                    </p:column>
+                </p:dataTable>
+                
+            
+       
+            </h:form>
+        </f:view>
+              <p:commandButton value="Agregar"  oncomplete="PF('widAdd').show();" />
+                  <p:commandButton value="Agregar Departamento" />
+            <p:button class="botonrequi" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisicion" outcome="estados"></p:button>
+            <p:button class="botonrequi" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
+            
+            <p:dialog id="dialogo" widgetVar="widAdd" header="Agregar Requisicion" maximizable="true" >
+            <h:form>
+
+                <h1><h:outputText value="Crear"/></h1>
+                <h:panelGrid cellpadding="3" columns="3" id="grid">
+                    
+                                <p:outputLabel value="Puesto:" for="puesto" />
+                                <p:inputText id="puesto" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
+                                             <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                                </p:inputText>
+                                 <p:message for="puesto" />
+                                <p:outputLabel value="Vacantes:" for="vacantes" />
+                                <p:inputNumber id="vacantes"  decimalPlaces="0" value="#{requisicionController.r.vacantes}"  validatorMessage="No se permite numeros" title="Vacantes" />
+                                <p:message for="vacantes" />
+                                <p:outputLabel value="Contratante:" for="contratante" />
+                                <p:inputText id="contratante" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
+                                         <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                                </p:inputText>
+                                <p:message for="contratante" />
+                                <p:outputLabel value="Fecha Inicio:" for="startDate" />
+                       
+                                 <p:calendar id="startDate" pattern="dd/MM/yyyy"  mindate="calwidget.today()" widgetVar="calwidget" locale="es" value="#{requisicionController.r.fechaInicio}" >
+                                            <p:ajax event="dateSelect" update="endDate"/>
+                                    </p:calendar> 
+                                 <p:message for="startDate" />
+                                 <p:outputLabel value="Fecha Entrega:" for="endDate" />
+                                 <p:calendar id="endDate"  locale="es" pattern="dd/MM/yyyy"  value="#{requisicionController.r.fechaEntrega}" mindate="#{requisicionController.r.fechaInicio}" disabled="#{empty requisicionController.r.fechaInicio}"/>
+                                   <p:message for="endDate" />            
+                                <p:outputLabel value="Departamento:" for="departamento" />
+                                <p:selectOneMenu id="departamento" value="#{requisicionController.d.codigoDepartamento}" >
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{lController.listDepartamentos()}"  var="dep" itemLabel="#{dep.descripcion}" itemValue="#{dep.codigoDepartamento}"/>
+                                </p:selectOneMenu>
+                                 <p:message for="departamento" />
+                         
+
+                    
+                    <p:commandButton icon="ui-icon-check" validateClient="true" value="guardar" action="#{requisicionController.agregar()}" update=":table:requisicion, grid"  />
+                    <p:commandButton value="cancelar"  onclick="PF('widAdd').hide();" />
+
+                </h:panelGrid>
+
+            </h:form>
+        </p:dialog>
+       
+       <p:dialog header="Informacion Requisicion" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="posInfo" style="text-align:center;">
+           <p:panelGrid  columns="2" columnClasses="label,value">
+
+               <p:outputLabel value="Numero Requisicion:" />
+               <p:outputLabel value="#{requisicionController.r.numrequisicion}" />
+
+              <p:outputLabel value="Puesto" />
+              <p:outputLabel value="#{requisicionController.r.puesto}" />
+
+               <p:outputLabel value="Vacantes:" />
+               <p:outputLabel value="#{requisicionController.r.vacantes}"/>
+
+           </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+        <h:outputScript library="js" name="calendar_es.js"/>
+    </h:body>
+</html>
+

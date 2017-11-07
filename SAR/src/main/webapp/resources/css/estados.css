@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 18, 2017, 12:32:21 AM
+    Author     : Jason
+*/
+
+.panlestado{
+    margin-left: 40% !important;
+    margin-right: 50% !important;
+}
+
+.formestado {
+    background: rgb(41, 157, 206) !important;
+    background: -moz-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -webkit-linear-gradient(top, rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%) !important;
+    background: linear-gradient(to bottom, rgb(255, 108, 108) 0%,rgb(255, 255, 255) 50%,rgb(255, 255, 255) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ) !important;
+    font-family: futura !important;
+    color: white !important;
+}
+

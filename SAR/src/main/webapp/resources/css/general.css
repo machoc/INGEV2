@@ -1,0 +1,115 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 13, 2017, 10:31:47 PM
+    Author     : Jason
+*/
+
+.boton{
+    width:200px !important; 
+    height:40px !important;
+    color: white !important;
+    box-shadow: inset 0 0 0 1px black !important;
+    background: #75a3a3 !important;
+}
+
+.boton:hover, .boton:focus, .boton:active {
+  -webkit-transform: scale(0.9) !important;
+  transform: scale(0.9) !important;
+  -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+  transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+  background: #e60000 !important;
+   box-shadow: inset 0 0 0 1px #f2f2f2 !important;
+}
+
+.imagenmini{
+     height: 40px !important;
+     width: 120px !important;
+}
+
+.si{
+    background: #00b33c !important;
+    color: white !important;
+    box-shadow: inset 0 0 0 2px #00ff00 !important;
+}
+
+.no{
+    background: #b30000 !important;
+    color: white !important;
+    box-shadow: inset 0 0 0 2px #ff0000 !important;
+}
+
+.agregar{
+    width:100px !important; 
+    height:30px !important;
+    color: white !important;
+    box-shadow: inset 0 0 0 1px #00ff00 !important;
+    background: #003300 !important;
+    margin-left: 47% !important;
+}
+
+.eliminar{
+    box-shadow: inset 0 0 0 2px #ff4d4d !important;
+    color: white !important;
+    background: #993333 !important;
+}
+
+.eliminar:hover , .eliminar:focus , .eliminar:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #e60000 !important;
+    box-shadow: inset 0 0 0 1px #f2f2f2 !important;
+}
+
+.modificar{
+    box-shadow: inset 0 0 0 2px #ff9900 !important;
+    color: white !important;
+    background: #cc4400 !important;
+}
+
+.modificar:hover , .modificar:focus , .modificar:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #ff6600 !important;
+    box-shadow: inset 0 0 0 1px #f2f2f2 !important;
+}
+
+.ui-widget-header{
+
+    background-color: #fff !important;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#99a699),color-stop(100%,#778877)) !important;
+    background: -webkit-linear-gradient(#99a699,#778877) !important;
+    background: -moz-linear-gradient(#fff,#fff) !important;
+    background: -ms-linear-gradient(#99a699,#778877) !important;
+    background: -o-linear-gradient(#99a699,#778877) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99a699', endColorstr='#778877') !important;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99a699', endColorstr='#778877') !important;
+    background: linear-gradient(#fff,#5c6c5c) !important;
+    outline: 0 !important;
+<<<<<<< HEAD
+<<<<<<< HEAD
+    border: 1px solid black !important;
+        border-bottom-width: 1px !important;
+        border-bottom-style: solid !important;
+        border-bottom-color: rgb(0, 0, 0) !important;
+=======
+=======
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+    border: 1px solid #3bce2c !important;
+        border-bottom-width: 1px !important;
+        border-bottom-style: solid !important;
+        border-bottom-color: rgb(21, 18, 18) !important;
+<<<<<<< HEAD
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+=======
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+    color: #fff !important;
+    font-weight: bold !important;
+}

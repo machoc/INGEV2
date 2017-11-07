@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/postulante.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+            <h:form id="table" class="formpostu">
+                <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="AGREGAR USUARIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="AGREGAR POSTULANTE" outcome="Postulante"></p:button>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
+=======
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/index.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+=======
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/index.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+                </div>
+                <h1 align="center"><h:outputText value="Postulantes"/></h1>
+                <p:dataTable emptyMessage="No se encuentra postulante" id="listP" value="#{posController.listar()}" var="item" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         currentPageReportTemplate="1 de 1" >
+                    <p:column filterBy="#{item.cedula}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Cedula"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cedula}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.nombrecompleto}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Completo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombrecompleto}" style="text-transform: uppercase"/>
+                    </p:column>
+                   <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.edad}"/>
+                    </p:column>
+                    
+                    <p:column filterBy="#{item.residencia}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Residencia"/>
+                        </f:facet>
+                        <h:outputText value="#{item.residencia}"/>
+                    </p:column>
+                   
+                    
+                   
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.edad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.edad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opciones"/>
+                        </f:facet>
+                            <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{posController.delete(item)}" update="mensaje2, listP">
+                            <p:commandButton icon="ui-icon-wrench" class="modificar" value="Modificar" actionListener="#{posController.edit(item)}" oncomplete="PF('modify').show();" update="dialogoEdit"  />
+                                <p:confirm header="CONFIRMACION" message="DESEA ELIMINAR EL POSTULANTE?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="SI" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
+                         </p:confirmDialog>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                           <p:commandButton update="posInfo" class="modificar" value="Ver Info" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
+=======
+                            <p:commandButton update="posInfo" class="modificar" value="Ver Info" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+=======
+                            <p:commandButton update="posInfo" class="modificar" value="Ver Info" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+                           </p:commandButton>
+                      </p:column>
+                </p:dataTable>
+                <br/>
+                <p:commandButton class="agregar" icon="ui-icon-circle-arrow-e" value="Agregar" oncomplete="PF('widModify').show();" update="dialogo"  />
+            </h:form>
+        </f:view>
+
+        <p:dialog id="dialogo" widgetVar="widModify" header="Agregar Postulante" maximizable="true" >
+            <p:messages id="advertencia" showDetail="true" autoUpdate="false" closable="true" />
+
+            <h:form> 
+                <h1><h:outputText value="Crear"/></h1>
+                <h:panelGrid cellpadding="3" columns="3" id="grid">
+                    <h:outputLabel value="Cedula:" for="cedula" />
+                     <p:inputMask id="cedula" maxlength="20" value="#{posController.p.cedula}" mask="*-9999-9999" title="Cedula" required="true" requiredMessage="Cedula vacia.">
+                         <p:ajax event="blur" update="advertencia"   listener="#{posController.checkId()}" />
+                     </p:inputMask>
+                    
+                    <p:message for="cedula" />
+                    <h:outputLabel value="Nombre:" for="nombrecompleto" />
+                    <h:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombrecompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                          <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                    </h:inputText>
+                    <p:message for="nombrecompleto" />
+                    <h:outputLabel value="Edad:" for="edad" />
+                    <p:inputMask id="edad"  mask="99" value="#{posController.p.edad}" maxlength="2"  validatorMessage="Edad no permitida"  title="Edad">
+                      <f:validateDoubleRange minimum="18" />
+                      
+                        <!--<f:validateRegex pattern= "[0-9]+" />-->
+                    </p:inputMask>
+                    <p:message for="edad" />
+                    <h:outputLabel value="Experiencia:" for="experiencia" />
+                    <p:inputTextarea id="experiencia" value="#{posController.p.experiencia}"  label="Description"
+                                     maxlength="100"  autoResize="false">
+
+                    </p:inputTextarea>
+                    <p:message for="experiencia" />
+                    
+                     <h:outputLabel value="Telefono:" for="telefono" />
+                     <p:inputMask id="telefono"  mask="9999-9999" value="#{posController.p.telefono}" maxlength="10"  validatorMessage=" no permitido"  title="Telefono"/>
+                    <p:message for="telefono" />
+                    
+                    <h:outputLabel for="licencia" value="Licencia:" />
+                    <p:selectCheckboxMenu id="licencia" value="#{posController.selectedCities}" label="Escoger"
+                                          panelStyle="width:250px, height: 250px" rendered="true" multiple="true" >
+                      
+                        <f:selectItems value="#{posController.licencias}"   />
+
+                    </p:selectCheckboxMenu>
+                    <p:message for="licencia" />
+                    
+                    <h:outputLabel value="Especialidad:" for="especialidad" />        
+                    <h:inputText  id="especialidad" required="true"  maxlength="30" value="#{posController.p.especialidad}" requiredMessage="Favor llenar" validatorMessage="Solo letra" title="Especialidad" >
+                      <f:validateRegex pattern="^[a-zA-z\s][a-zA-z\s]*$" />
+                    </h:inputText>
+                    <p:message for="especialidad" />
+                    <p:outputLabel for="country" value="Provincia: " />
+                    <p:selectOneMenu id="country" value="#{posController.p.residencia}" style="width:150px" validatorMessage="Provincia no Escogida" requiredMessage="Provincia no escogida">
+                        <f:selectItem itemLabel="Select Provincia" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{posController.provincias}" />
+                    </p:selectOneMenu>
+                    <p:message for="country" />
+<<<<<<< HEAD
+                    
+                    <p:commandButton icon="ui-icon-check" validateClient="true" value="guardar" action="#{posController.agregar()}" update=":table:listP, grid,mensaje2"  />
+                    <p:commandButton value="cancelar"  onclick="PF('widModify').hide();" />
+=======
+                    <p:outputLabel for="city" value="Canton: " />
+                    <p:selectOneMenu  id="city" value="#{posController.p.residencia}" style="width:150px"  validatorMessage="Canton no escogido">
+
+                        <f:selectItem itemLabel="Select Canton" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{lController.cantones}" />
+                    </p:selectOneMenu>
+                    <p:message for="city" />
+                    <p:outputLabel for="estado" value="Estado: " />
+                    <p:selectOneMenu id="estado" value="#{posController.e.codigoEstado}" validatorMessage="Estado no escogido" style="width:150px">
+                        <f:selectItem itemLabel="Estados" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{lController.listEstados()}" var="e" itemLabel="#{e.detalle}" itemValue="#{e.codigoEstado}"  />
+                    </p:selectOneMenu>
+                    <p:message for="estado" />
+                    <p:commandButton icon="ui-icon-check" validateClient="true" class="si" value="guardar" action="#{posController.agregar()}" update=":table:listP, grid, mensaje2"  />
+                    <p:commandButton icon="ui-icon-close" value="cancelar" class="no" onclick="PF('widModify').hide();" />
+<<<<<<< HEAD
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+=======
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+
+                </h:panelGrid>
+
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog id="dialogoEdit" widgetVar="modify" header="Modificar Postulante">
+            <f:view>
+
+
+                <h:form>
+                    <h1><h:outputText value="Modificar"/></h1>
+                    <p:panelGrid columns="2">
+                        <h:outputLabel value="Cedula:" for="cedula" />
+                     <p:inputMask id="cedula" maxlength="20" value="#{posController.p.cedula}" mask="*-9999-9999" title="Cedula" required="true" requiredMessage="Cedula vacia.">
+                         <p:ajax event="blur" update="advertencia"   listener="#{posController.checkId()}" />
+                     </p:inputMask>
+                       <h:outputLabel value="Nombre:" for="nombrecompleto" />
+                    <h:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombrecompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                          <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                    </h:inputText>
+                       <h:outputLabel value="Edad:" for="edad" />
+                    <p:inputMask id="edad"  mask="99" value="#{posController.p.edad}" maxlength="2"  validatorMessage="Edad no permitida"  title="Edad">
+                      <f:validateDoubleRange minimum="18" />
+                      
+                        <!--<f:validateRegex pattern= "[0-9]+" />-->
+                    </p:inputMask>
+                      <h:outputLabel value="Telefono:" for="telefono" />
+                     <p:inputMask id="telefono"  mask="9999-9999" value="#{posController.p.telefono}" maxlength="10"  validatorMessage=" no permitido"  title="Telefono"/>
+                    <h:outputLabel value="Experiencia:" for="experiencia" />
+                    <p:inputTextarea id="experiencia" value="#{posController.p.experiencia}"  label="Description"
+                                     maxlength="100"  autoResize="false">
+
+                    </p:inputTextarea>
+                    <p:outputLabel value="Licencia:" for="licencia" />
+                        <p:inputText id="licencia" value="#{posController.p.licencia}" title="Licencia" />
+                       <h:outputLabel value="Especialidad:" for="especialidad" />        
+                    <h:inputText  id="especialidad" required="true"  maxlength="30" value="#{posController.p.especialidad}" requiredMessage="Favor llenar" validatorMessage="Solo letra" title="Especialidad" >
+                      <f:validateRegex pattern="^[a-zA-z\s][a-zA-z\s]*$" />
+                    </h:inputText>
+                       <p:outputLabel value="Residencia:" for="residencia" />
+                        <p:inputText id="residencia" value="#{posController.p.residencia}" title="Residencia" required="true" requiredMessage="The Residencia field is required."/>
+                        <p:outputLabel value="Estado:" for="estado" />
+                        <p:inputText id="estado" value="#{posController.e.codigoEstado}" style="width:150px"/>
+
+<<<<<<< HEAD
+                           
+                         <p:outputLabel value="Requisicion:" for="req" />
+                       
+                         <p:inputText id="req" value="#{posController.r.numrequisicion}" style="width:150px"/>
+
+                           
+                        <p:commandButton value="guardar" action="#{posController.modify()}" update=":table:listP,mensaje2" />
+                        <p:commandButton value="cancelar"  onclick="PF('modify').hide();" />
+=======
+                            <f:selectItems value="#{lController.listEstados()}" var="e" itemLabel="#{e.detalle}" itemValue="#{e.codigoEstado}" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="guardar" icon="ui-icon-check" class="si" action="#{posController.modify()}" update=":table:listP,mensaje2" onclick="PF('modify').hide();" />
+                        <p:commandButton value="cancelar" icon="ui-icon-close" class="no"  onclick="PF('modify').hide();" />
+<<<<<<< HEAD
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+=======
+>>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+                    </p:panelGrid>
+                </h:form>
+            </f:view>
+
+        </p:dialog>
+        <p:dialog header="Informacion Postulante" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="posInfo" style="text-align:center;">
+           <p:panelGrid  columns="2" columnClasses="label,value">
+
+               <p:outputLabel value="Cedula:" />
+               <p:outputLabel value="#{posController.p.cedula}" />
+
+              <p:outputLabel value="Nombre Completo" />
+               <p:outputLabel value="#{posController.p.nombrecompleto}" />
+
+               <p:outputLabel value="Edad:" />
+               <p:outputLabel value="#{posController.p.edad}"/>
+
+                <p:outputLabel value="Experiencia:" />
+                <p:outputLabel value="#{posController.p.experiencia}" />
+                
+                <p:outputLabel value="Licencia:" />
+                <p:outputLabel value="#{posController.p.licencia}" />
+                
+                <p:outputLabel value="Especialidad:" />
+                <p:outputLabel value="#{posController.p.especialidad}" />
+                
+                <p:outputLabel value="Residencia:" />
+                <p:outputLabel value="#{posController.p.residencia}" />
+                
+                <p:outputLabel value="Estado:" />
+                <p:outputLabel value="#{posController.p.estado.detalle}" />
+                
+                <p:outputLabel value="Telefono:" />
+                <p:outputLabel value="#{posController.p.telefono}" />
+                
+                <p:outputLabel value="Requisicion:" />
+                <p:outputLabel value="#{posController.p.requisicion}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,34 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 25, 2017, 5:37:20 PM
+    Author     : Jason
+*/
+
+.panelindex{
+    margin-left: 9% !important;
+    margin-right: 8% !important;
+    width:auto !important;
+    height:100px !important;
+}
+
+.menuindex {
+    background: rgb(41, 157, 206) !important;
+    background: -moz-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -webkit-linear-gradient(top, rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%) !important;
+    background: linear-gradient(to bottom, rgba(254, 48, 69, 0.5) 0%,rgba(254, 87, 87, 0.2) 50%,rgb(255, 255, 255) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 )!important;
+}
+
+.pie{
+    width:50% !important;
+    height:100px !important;
+}
+
+.pie2{
+    width:50% !important;
+    height:100px !important;
+}
