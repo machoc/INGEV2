@@ -6,11 +6,26 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/asigpostu.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
     </h:head>
     <h:body>
+        <div class="formasigpostu">
+            <div align="center" class="menuindex">     
+                <p:panelGrid columns="4" class="panelindex" layout="grid">
+                    <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                    <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+            </div><br></br>
+       
         <h:form id="table">
-                <h1><h:outputText value="Asignar Postulantes"/></h1>
-               <p:selectOneMenu id="departamento" value="#{posController.r.numrequisicion}" >
+
+            <h1 align="center" ><h:outputText value="Asignar Postulantes"/></h1>
+
+               <p:selectOneMenu style="text-transform: uppercase" id="departamento" value="#{posController.r.numrequisicion}" >
                         <!-- TODO: update below reference to list of available items-->
                        
                         <f:selectItems value="#{posController.loadRequisiciones()}" var="it" itemLabel="#{it.toString()}" itemValue="#{it.numrequisicion}" />
@@ -19,7 +34,7 @@
         
         <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
        
-        <p:column headerText="Cedula" filterBy="#{car.cedula}" filterMatchMode="contains">
+        <p:column headerText="Cédula" filterBy="#{car.cedula}" filterMatchMode="contains">
             <h:outputText value="#{car.cedula}" />
         </p:column>
         <p:column headerText="Nombre Completo">
@@ -35,15 +50,12 @@
             <h:outputText value="#{car.residencia}" style="text-transform: uppercase" />
         </p:column>
        <f:facet name="footer">
-           <p:commandButton   update="cars" icon="ui-icon-check"  value="Agregar" action="#{posController.relacionarPostulantes()}"  />
+           <p:commandButton class="agregar"  update="cars" icon="ui-icon-check"  value="Agregar" action="#{posController.relacionarPostulantes()}"  />
         </f:facet>
     </p:dataTable> 
-                
- 
-    
- 
-    
+
   </h:form>
+        </div>
     </h:body>
 </html>
 

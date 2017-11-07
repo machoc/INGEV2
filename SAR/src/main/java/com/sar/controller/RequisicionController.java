@@ -5,22 +5,23 @@
  */
 package com.sar.controller;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import com.sar.model.Departamento;
 import com.sar.model.Estado;
 import com.sar.model.Postulante;
 import com.sar.model.Requisicion;
 import com.sar.session.PostulanteFacadeLocal;
 import com.sar.session.RequisicionFacadeLocal;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -28,7 +29,8 @@ import com.sar.session.RequisicionFacadeLocal;
  */
 @Named(value = "requisicionController")
 @RequestScoped
-public class RequisicionController implements Serializable {
+public class requisicionController implements Serializable
+{
 
     @EJB
     private RequisicionFacadeLocal requisicionFacade;
@@ -39,95 +41,141 @@ public class RequisicionController implements Serializable {
     private Departamento d = new Departamento();
     private Postulante p = new Postulante();
     private Estado estado = new Estado();
-    private List<Postulante> postulantes;
     private List<Postulante> aux = new ArrayList<Postulante>();
-    private boolean flag= true;
-     private Postulante selectedCar;
-  
-    public RequisicionController() {
-       
+    private Postulante seleccionado;
+    private List<Requisicion> requisicion = new ArrayList<Requisicion>();
+
+    public requisicionController()
+    {
+
+    }
+    
+     public List<Requisicion> listar() {
+        return this.requisicionFacade.findAll();
+        
     }
 
-    public Requisicion getR() {
+    public Requisicion getR()
+    {
         return r;
     }
 
-    public void setR(Requisicion r) {
+    public void setR(Requisicion r)
+    {
         this.r = r;
     }
 
-    public Departamento getD() {
+    public Departamento getD()
+    {
         return d;
     }
 
-    public void setD(Departamento d) {
+    public void setD(Departamento d)
+    {
         this.d = d;
     }
 
-    public Postulante getP() {
+    public Postulante getP()
+    {
         return p;
     }
 
-    public void setP(Postulante p) {
+    public void setP(Postulante p)
+    {
         this.p = p;
     }
 
-    public Estado getEstado() {
+    public Estado getEstado()
+    {
         return estado;
     }
 
-    public void setEstado(Estado e) {
+    public void setEstado(Estado e)
+    {
         this.estado = e;
     }
 
-    public Postulante getSelectedCar() {
-        return selectedCar;
+    public Postulante getSeleccionado()
+    {
+        return seleccionado;
     }
 
-    public void setSelectedCar(Postulante selectedCar) {
-        this.selectedCar = selectedCar;
+    public void setSeleccionado(Postulante seleccionado)
+    {
+        this.seleccionado = seleccionado;
     }
+
+ /*  public List<Requisicion> listar() {
+        for (Requisicion i : requisicionFacade.findAll()) {
+            if (i.getNumrequisicion().compareTo(BigDecimal.valueOf(100)) == 1) {
+                requisicion.add(i);
+            }
+        }
+        return requisicion;
+    }*/
+      
+   
 
 
     public String agregar() {
-       try{
-           this.r.setDepartamento(this.d);
-           requisicionFacade.create(this.r);
-           p.setRequisicion(this.r);
-           estado.setCodigoEstado("evaluacion");
-           p.setEstado(estado);
-           
-           this.r=new Requisicion();
-           this.r.getPostulanteList().add(this.p);
-       }catch(Exception e){
-           System.out.println(e.getMessage());
-       }
-        return "index";
-    }
-    
-    public List<Requisicion> listar() {
-        return this.requisicionFacade.findAll();
-    }
+        try {
+            this.r.setDepartamento(this.d);
+          //  System.out.println(r.getNumrequisicion());   
+              //  System.out.println(sirva[0].getCedula());
+            
+             requisicionFacade.create(this.r);
+             r = new Requisicion();
+             d = new Departamento();
+              RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('widAdd').hide();");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "AGREGADA EXITOSAMENTE"));
 
-    public void addPostulantes() {
-
-    }
-
-    public List<Postulante> loadPostulantes() {
-       if(flag){
-        postulantes = postulanteFacade.findAll();
-        for (Postulante i : postulantes) {
-            if (i.getEstado().getDetalle().equals("Preseleccionado")) {
-               // System.out.println(i.getEstado().getDetalle());
-                aux.add(i);
-            }
+           /* for (Postulante pos : sirva) {
+                if(pos.equals(null))
+                    break;
+                
+                System.out.println(pos.getCedula());
+                System.out.println(r.getPuesto());
+                pos.setRequisicion(this.r);
+                estado.setCodigoEstado("evaluacion");
+                pos.setEstado(estado);
+                this.r.getPostulanteList().add(pos);*/
+            
+       } catch (Exception e) {
+            System.out.println(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR AL AGREGAR"));
 
         }
-       }
-        flag= false;
+        return "addRequisicion";
+    }
+
+    public List<Postulante> preseleccionados(){
+               for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("PRESELECCIONADO")) {
+                aux.add(i);
+            }
+        }
         return aux;
-        
     }
     
-   
+      public void delete(Requisicion req) {
+        try{
+        this.requisicionFacade.remove(req);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "ELIMINADO EXITOSAMENTE"));
+
+        }
+        catch(Exception e){
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+
+        }
+    }
+      
+    public String edit(Requisicion req) {
+        this.r = req;
+        this.d = req.getDepartamento();
+       
+        //return add
+        return "addRequisicion";
+    }
+    
 }

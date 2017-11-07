@@ -5,43 +5,23 @@
  */
 package com.sar.controller;
 
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import com.sar.model.Estado;
 import com.sar.model.Postulante;
 import com.sar.model.Requisicion;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.primefaces.context.RequestContext;
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
 import com.sar.session.EstadoFacadeLocal;
 import com.sar.session.PostulanteFacadeLocal;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import com.sar.session.RequisicionFacadeLocal;
-=======
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
-
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -49,9 +29,10 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "posController")
 @RequestScoped
-public class PostulanteController implements Serializable {
+public class PostulanteController implements Serializable
+{
 
-     @EJB
+    @EJB
     private EstadoFacadeLocal estadoFacade;
 
     @EJB
@@ -59,7 +40,6 @@ public class PostulanteController implements Serializable {
 
     @EJB
     private PostulanteFacadeLocal pFacade;
-  
 
     private Postulante p = new Postulante();
     private Estado e = new Estado();
@@ -71,104 +51,101 @@ public class PostulanteController implements Serializable {
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
     private Postulante[] selected;
-    
-<<<<<<< HEAD
-=======
-     
-   private Postulante p = new Postulante();
-   private Lugares l = new Lugares();
-   private Estado e = new Estado();
-   private Requisicion r = new Requisicion();
-   private List<String> licencias;
-   private String[] selectedCities;
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
 
-    public String[] getSelectedCities() {
+    public String[] getSelectedCities()
+    {
         return selectedCities;
     }
 
-    public void setSelectedCities(String[] selectedCities) {
+    public void setSelectedCities(String[] selectedCities)
+    {
         this.selectedCities = selectedCities;
     }
 
-    public List<String> getLicencias() {
+    public List<String> getLicencias()
+    {
         return licencias;
     }
 
-    public void setLicencias(List<String> licencias) {
+    public void setLicencias(List<String> licencias)
+    {
         this.licencias = licencias;
     }
 
-    public List<String> getProvincias() {
+    public List<String> getProvincias()
+    {
         return provincias;
     }
 
-    public void setProvincias(List<String> provincias) {
+    public void setProvincias(List<String> provincias)
+    {
         this.provincias = provincias;
     }
-   
 
-    public Postulante getP() {
+    public Postulante getP()
+    {
         return p;
     }
 
-    public void setP(Postulante p) {
+    public void setP(Postulante p)
+    {
         this.p = p;
     }
 
-    public Estado getE() {
+    public Estado getE()
+    {
         return e;
     }
 
-    public void setE(Estado e) {
+    public void setE(Estado e)
+    {
         this.e = e;
     }
 
-    public Requisicion getR() {
+    public Requisicion getR()
+    {
         return r;
     }
 
-    public void setR(Requisicion r) {
+    public void setR(Requisicion r)
+    {
         this.r = r;
     }
 
-    public Postulante[] getSelected() {
+    public Postulante[] getSelected()
+    {
         return selected;
     }
 
-    public void setSelected(Postulante[] selected) {
+    public void setSelected(Postulante[] selected)
+    {
         this.selected = selected;
     }
 
     /**
      * Creates a new instance of cursoController
      */
-    public PostulanteController() {
+    public PostulanteController()
+    {
         inicio();
 
     }
 
-    public List<Postulante> listar() {
+    public List<Postulante> listar()
+    {
         return this.pFacade.findAll();
     }
-<<<<<<< HEAD
 
-    public String agregar() {
-        try {
+    public String agregar()
+    {
+        try
+        {
             r.setNumrequisicion(BigDecimal.valueOf(100));
             //System.out.println(estadoFacade.find("000").getDetalle());
             e.setCodigoEstado("001");
-           
-           
-=======
-    
-    public String agregar(){
-        try{
-            r.setNumrequisicion(BigDecimal.ZERO);
-            this.p.setEstado(e);
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+
             this.p.licencia = funcione();
-            this.p.setEstado(this.e);  
+            this.p.setEstado(this.e);
             this.p.setRequisicion(this.r);
             System.out.println(this.p.getRequisicion().getNumrequisicion());
             System.out.println(this.p.getEstado().getCodigoEstado());
@@ -182,54 +159,58 @@ public class PostulanteController implements Serializable {
             req.execute("PF('widModify').hide();");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "REGISTRADO EXITOSAMENTE"));
 
-            
-
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             System.out.println(e.toString());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "REGISTRADO EXITOSAMENTE"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "POSTULANTE EXISTENTE"));
 
         }
         return "Postulante";
     }
 
-    public void delete(Postulante al) {
-        try{
+    public void delete(Postulante al)
+    {
+        try
+        {
             this.pFacade.remove(al);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "ELIMINADO EXITOSAMENTE"));
-        } catch(Exception e)
+        } catch (Exception e)
         {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
         }
     }
 
-    public String modify() {
-        try{
-        //falta requisicion
-      this.p.setEstado(this.e);
-        this.p.setRequisicion(this.r);
-        System.out.println(r.getNumrequisicion());
-        System.out.println(e.getCodigoEstado());
-        this.pFacade.edit(this.p);
-        this.p = new Postulante();
-        this.e = new Estado();
-        RequestContext req = RequestContext.getCurrentInstance();
-        req.execute("PF('modify').hide();");
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE MODIFICO CORRECTAMENTE"));
+    public String modify()
+    {
+        try
+        {
+            //falta requisicion
+            this.p.setEstado(this.e);
+            this.p.setRequisicion(this.r);
+            System.out.println(r.getNumrequisicion());
+            System.out.println(e.getCodigoEstado());
+            this.pFacade.edit(this.p);
+            this.p = new Postulante();
+            this.e = new Estado();
+            RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('modify').hide();");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE MODIFICO CORRECTAMENTE"));
 
-        }
-        catch(Exception e){
+        } catch (Exception e)
+        {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
         }
-        
+
         /*
          Definir tod en  la base de datos mayuscula o minuscula
-         
+
          */
         return "Postulante";
     }
 
-    //falta modificar , falta campo area, falta 
-    public String edit(Postulante cur) {
+    //falta modificar , falta campo area, falta
+    public String edit(Postulante cur)
+    {
         this.p = cur;
         this.e = cur.getEstado();
         this.r = cur.getRequisicion();
@@ -237,12 +218,15 @@ public class PostulanteController implements Serializable {
         return "Postulante";
     }
 
-    public String funcione() {
+    public String funcione()
+    {
         StringBuilder builder = new StringBuilder();
         int c = 1;
-        for (String s : selectedCities) {
+        for (String s : selectedCities)
+        {
             builder.append(s);
-            if (c < selectedCities.length) {
+            if (c < selectedCities.length)
+            {
                 builder.append(" ");
                 c++;
             }
@@ -253,7 +237,8 @@ public class PostulanteController implements Serializable {
         return str;
     }
 
-    public void inicio() {
+    public void inicio()
+    {
         licencias = new ArrayList<String>();
         licencias.add("A2");
         licencias.add("A3");
@@ -263,23 +248,27 @@ public class PostulanteController implements Serializable {
         licencias.add("B4");
         licencias.add("E1");
         licencias.add("E2");
-       
+
         provincias = new ArrayList<String>();
-        provincias.add("San Jose");
+        provincias.add("San José");
         provincias.add("Alajuela");
         provincias.add("Heredia");
         provincias.add("Cartago");
         provincias.add("Puntarenas");
-        provincias.add("Limon");
+        provincias.add("Limón");
         provincias.add("Guanacaste");
-      
+
     }
 
-    public List<Postulante> loadPostulantes() {
-        if (flag) {
+    public List<Postulante> loadPostulantes()
+    {
+        if (flag)
+        {
             //    postulantes = postulanteFacade.findAll();
-            for (Postulante i : pFacade.findAll()) {
-                if (i.getEstado().getDetalle().equals("NINGUNO")) {
+            for (Postulante i : pFacade.findAll())
+            {
+                if (i.getEstado().getDetalle().equals("NINGUNO"))
+                {
                     // System.out.println(i.getEstado().getDetalle());
                     aux.add(i);
                 }
@@ -290,48 +279,47 @@ public class PostulanteController implements Serializable {
         return aux;
     }
 
-    public List<Requisicion> loadRequisiciones() {
-        for (Requisicion i : rFacade.findAll()) {
-            if (i.getNumrequisicion().compareTo(BigDecimal.valueOf(100)) == 1) {
+    public List<Requisicion> loadRequisiciones()
+    {
+        for (Requisicion i : rFacade.findAll())
+        {
+            if (i.getNumrequisicion().compareTo(BigDecimal.valueOf(100)) == 1)
+            {
                 requisicion.add(i);
             }
         }
         return requisicion;
     }
-    
-      public void checkId() {
-          System.out.println(p.getCedula());
-        for (Postulante i : pFacade.findAll()) {
-            if (i.getCedula().equals(p.getCedula())) {
-                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Cedula ya existe."));
-                 break;
+
+    public void checkId()
+    {
+        System.out.println(p.getCedula());
+        for (Postulante i : pFacade.findAll())
+        {
+            if (i.getCedula().equals(p.getCedula()))
+            {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Cedula ya existe."));
+                break;
             }
         }
-       
+
     }
 
-    public String relacionarPostulantes() {
+    public String relacionarPostulantes()
+    {
 
-        for (Postulante pos : selected) {
-           System.out.println(pos.getCedula());
+        for (Postulante pos : selected)
+        {
+            System.out.println(pos.getCedula());
             System.out.println(this.r.getNumrequisicion());
             pos.setRequisicion(r);
             e.setCodigoEstado("002");
             pos.setEstado(this.e);
             pFacade.edit(pos);
-           //RequestContext req = RequestContext.getCurrentInstance();
-           // req.execute("PF('tableDialog').hide();");
+            //RequestContext req = RequestContext.getCurrentInstance();
+            // req.execute("PF('tableDialog').hide();");
         }
         return "addRequisicion";
     }
-    
-    
-  
-    
-   
-
-    
-   
-
 
 }

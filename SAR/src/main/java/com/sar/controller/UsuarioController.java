@@ -8,6 +8,7 @@ package com.sar.controller;
 import com.sar.model.UsuarioInge;
 import com.sar.session.UsuarioIngeFacadeLocal;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,7 +24,7 @@ import org.primefaces.context.RequestContext;
  * @author manuel
  */
 @Named("usuarioController")
-@RequestScoped
+@SessionScoped
 public class UsuarioController implements Serializable
 {
 
@@ -81,6 +82,7 @@ public class UsuarioController implements Serializable
         {
             // this.user.setCodigo(persona);
             facade.create(user);
+            user.setNumrequisicion(BigInteger.valueOf(100));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "REGISTRADO EXITOSAMENTE"));
         } catch (Exception e)
         {

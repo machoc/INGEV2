@@ -12,21 +12,24 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Jason
  */
 @Stateless
-public class UsuarioIngeFacade extends AbstractFacade<UsuarioInge> implements UsuarioIngeFacadeLocal {
+public class UsuarioIngeFacade extends AbstractFacade<UsuarioInge> implements UsuarioIngeFacadeLocal
+{
 
     @PersistenceContext(unitName = "ingePU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    protected EntityManager getEntityManager()
+    {
         return em;
     }
 
-    public UsuarioIngeFacade() {
+    public UsuarioIngeFacade()
+    {
         super(UsuarioInge.class);
     }
-    
+
 }

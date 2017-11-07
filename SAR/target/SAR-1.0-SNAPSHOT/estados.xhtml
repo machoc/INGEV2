@@ -6,11 +6,24 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/estados.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
     </h:head>
-    <h:body>
+    <h:body class="panl" >
+        <div class="fond">
+            <div align="center" class="menuindex">     
+                <p:panelGrid columns="4" class="panelindex" layout="grid">
+                    <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                    <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+            </div><br></br>
+        
         <p:accordionPanel activeIndex="null" >
         <p:tab title="Preseleccionados" >
-            <p:dataList value="#{requisicionController.preseleccionados()}" var="car" type="unordered" itemType="none" paginator="true" paginatorPosition="bottom" rows="10" styleClass="paginated">
+            <p:dataList emptyMessage="No hay postulantes" value="#{requisicionController.preseleccionados()}" var="car" type="unordered" itemType="none" paginator="true" paginatorPosition="bottom" rows="10" styleClass="paginated">
         <f:facet name="header">
             Postulantes Preseleccionados
         </f:facet>
@@ -34,7 +47,9 @@
             </h:panelGrid>
         </p:tab>
     </p:accordionPanel>
- 
+        </div>
+        
+        
     </h:body>
 </html>
 

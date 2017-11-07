@@ -22,33 +22,22 @@
                         <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="AGREGAR USUARIO" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="AGREGAR POSTULANTE" outcome="Postulante"></p:button>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
-=======
-                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/index.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
-                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/index.xhtml" value="CREAR REQUISICION" outcome="usuario"></p:button>
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
                     </p:panelGrid>     
             </div>
             
+            
             <h1 align="center"><h:outputText value="Usuarios"/></h1>
             
+            <p:commandButton class="agregar" icon="ui-icon-circle-arrow-e" value="Agregar" oncomplete="PF('widModify').show();" update="dialogo1"  />
+            <br>
+            </br>
             <p:dataTable id="listUsuario" value="#{usuarioController.listar()}" var="item"
                          paginator="true" 
-<<<<<<< HEAD
-<<<<<<< HEAD
                          paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
-=======
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}"
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
                          currentPageReportTemplate="1 de 1">
-                     <p:column headerText="Cedula">
+                     <p:column headerText="Cédula">
                         <p:outputLabel value="#{item.cedula}"/>
                 </p:column>
                      <p:column headerText="Nombre Completo" >
@@ -63,29 +52,19 @@
                 
                      <p:column headerText="Opciones">
                          <p:commandButton class="eliminar" icon="ui-icon-trash" value="Eliminar" actionListener="#{usuarioController.eliminar(item)}" update="mensaje2, listUsuario">
-                         <p:confirm header="CONFIRMACION" message="DESEA ELIMINAR EL USUARIO?" icon="ui-icon-alert" />
+                         <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR EL USUARIO?" icon="ui-icon-alert" />
                     </p:commandButton>
                           <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                              <p:commandButton value="SI" type="button" styleClass="si , ui-confirmdialog-yes"  icon="ui-icon-check" />
+                              <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes"  icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                          </p:confirmDialog>
-<<<<<<< HEAD
-<<<<<<< HEAD
                     
-                         <p:commandButton update="usInfo" class="modificar" value="Ver Info" actionListener="#{usuarioController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
+                         <p:commandButton update="usInfo" class="ver" value="Ver Info" actionListener="#{usuarioController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
                       </p:commandButton>
                          <p:commandButton icon="ui-icon-wrench" class="modificar" value="Modificar" actionListener="#{usuarioController.edit(item)}" oncomplete="PF('widModify').show();" update="dialogo" />
-=======
-                    <p:commandButton icon="ui-icon-wrench" class="modificar" value="Modificar" actionListener="#{usuarioController.edit(item)}" oncomplete="PF('widModify').show();" update="dialogo" />
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
-                    <p:commandButton icon="ui-icon-wrench" class="modificar" value="Modificar" actionListener="#{usuarioController.edit(item)}" oncomplete="PF('widModify').show();" update="dialogo" />
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
                 </p:column>
                
             </p:dataTable>
-            <br/>
-            <p:commandButton class="agregar" icon="ui-icon-circle-arrow-e" value="Agregar" oncomplete="PF('widModify').show();" update="dialogo1"  />
                 
             </h:form>
        
@@ -98,7 +77,7 @@
                 <h1><font family="futura">
                         <h:outputText value="Crear"/></font></h1>
                 <h:panelGrid id="panel" cellpadding="3" columns="3">
-                    <h:outputLabel value="* Cedula:" for="cedula" />
+                    <h:outputLabel value="* Cédula:" for="cedula" />
                     <p:inputText  id="cedula" value="#{usuarioController.user.cedula}" maxlength="17" title="Cedula" required="true" requiredMessage="Se requiere una cedula" />
                     <p:message for="cedula" />
                     <h:outputLabel value="Nombre:" for="nombre" />
@@ -127,12 +106,12 @@
         </f:view>
      </p:dialog>
         
-     <p:dialog id="dialogo" widgetVar="widModify" header="Modificar Categoria">
+     <p:dialog id="dialogo" widgetVar="widModify" header="Modificar Categoría">
          <f:view>
              <h:form >
                 <h1><h:outputText value="Editar Usuario"/></h1>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="Cedula:" for="cedula" />
+                    <h:outputLabel value="Cédula:" for="cedula" />
                     <h:inputText id="cedula"  value="#{usuarioController.user.cedula}" title="Cedula" />
                     <h:outputLabel value="Nombre:" for="nombre" />
                     <h:inputText id="nombre" value="#{usuarioController.user.nombre}" title="Nombre" />
@@ -140,38 +119,31 @@
                          <h:inputText id="contraseña" value="#{usuarioController.user.contraseña}" title="Contraseña" />
                          <h:outputLabel value="Tipo:" for="tipo" />
                          <h:inputText id="tipo" value="#{usuarioController.user.tipo}" title="Tipo" />
-                         <h:outputLabel value="NumeroRequisicion:" for="numeroRequisicion" />
-<<<<<<< HEAD
+                         <h:outputLabel value="Número Requisición:" for="numeroRequisicion" />
                          <h:inputText disabled="true" id="numeroRequisicion" value="#{usuarioController.user.numrequisicion}" title="Numero Requisicion" />
                       <p:commandButton icon="ui-icon-check" class="si" value="MODIFICAR" actionListener="#{usuarioController.modificar()}" onclick="PF('widModify').hide();"  update=":form-list:listUsuario, mensaje2" />
                       <p:commandButton icon="ui-icon-close" class="no" value="CANCELAR"  onclick="PF('widModify').hide();" />
-=======
-                         <h:inputText disabled="true" id="numeroRequisicion" value="#{usuarioController.user.numeroRequisicion}" title="NumeroRequisicion" />
-                      <p:commandButton icon="ui-icon-check" class="si" value="MODIFICAR" actionListener="#{usuarioController.modificar()}" onclick="PF('widModify').hide();"  update=":form-list:listUsuario, mensaje2" />
-                      <p:commandButton icon="ui-icon-close" class="no" value="CANCELAR"  onclick="PF('widModify').hide();" />
-                   
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
                      </h:panelGrid>
                  </h:form>
              </f:view>
 
         </p:dialog>
         
-        <p:dialog header="Informacion Usuario" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
+        <p:dialog header="Información Usuario" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
        <p:outputPanel id="usInfo" style="text-align:center;">
            <p:panelGrid  columns="2" columnClasses="label,value">
 
-               <p:outputLabel value="Cedula:" />
+               <p:outputLabel value="Cédula:" />
                <p:outputLabel value="#{usuarioController.user.cedula}" />
 
-              <p:outputLabel value="Nombre Completo" />
-               <p:outputLabel value="#{usuarioController.user.nombre}" />
+              <p:outputLabel value="Nombre Completo:" />
+               <p:outputLabel value="#{usuarioController.user.nombre}" style="text-transform: uppercase"/>
 
                <p:outputLabel value="Contraseña:" />
                <p:outputLabel value="#{usuarioController.user.contraseña}"/>
 
                 <p:outputLabel value="Tipo:"  />
-                <p:outputLabel value="#{usuarioController.user.tipo}" />
+                <p:outputLabel value="#{usuarioController.user.tipo}" style="text-transform: uppercase" />
                
             </p:panelGrid>
         </p:outputPanel>

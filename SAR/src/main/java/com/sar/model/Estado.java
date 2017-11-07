@@ -6,7 +6,7 @@
 package com.sar.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,16 +22,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author manuel
+ * @author Jason
  */
 @Entity
 @Table(name = "ESTADO")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")
-    , @NamedQuery(name = "Estado.findByCodigoEstado", query = "SELECT e FROM Estado e WHERE e.codigoEstado = :codigoEstado")
-    , @NamedQuery(name = "Estado.findByDetalle", query = "SELECT e FROM Estado e WHERE e.detalle = :detalle")})
-public class Estado implements Serializable {
+@NamedQueries(
+{
+    @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e"),
+    @NamedQuery(name = "Estado.findByCodigoEstado", query = "SELECT e FROM Estado e WHERE e.codigoEstado = :codigoEstado"),
+    @NamedQuery(name = "Estado.findByDetalle", query = "SELECT e FROM Estado e WHERE e.detalle = :detalle")
+})
+public class Estado implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,63 +47,76 @@ public class Estado implements Serializable {
     @Column(name = "DETALLE")
     private String detalle;
     @OneToMany(mappedBy = "estado")
-    private List<Postulante> postulanteList;
+    private Collection<Postulante> postulanteCollection;
 
-    public Estado() {
+    public Estado()
+    {
     }
 
-    public Estado(String codigoEstado) {
+    public Estado(String codigoEstado)
+    {
         this.codigoEstado = codigoEstado;
     }
 
-    public String getCodigoEstado() {
+    public String getCodigoEstado()
+    {
         return codigoEstado;
     }
 
-    public void setCodigoEstado(String codigoEstado) {
+    public void setCodigoEstado(String codigoEstado)
+    {
         this.codigoEstado = codigoEstado;
     }
 
-    public String getDetalle() {
+    public String getDetalle()
+    {
         return detalle;
     }
 
-    public void setDetalle(String detalle) {
+    public void setDetalle(String detalle)
+    {
         this.detalle = detalle;
     }
 
     @XmlTransient
-    public List<Postulante> getPostulanteList() {
-        return postulanteList;
+    public Collection<Postulante> getPostulanteCollection()
+    {
+        return postulanteCollection;
     }
 
-    public void setPostulanteList(List<Postulante> postulanteList) {
-        this.postulanteList = postulanteList;
+    public void setPostulanteCollection(Collection<Postulante> postulanteCollection)
+    {
+        this.postulanteCollection = postulanteCollection;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (codigoEstado != null ? codigoEstado.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estado)) {
+        if (!(object instanceof Estado))
+        {
             return false;
         }
         Estado other = (Estado) object;
-        if ((this.codigoEstado == null && other.codigoEstado != null) || (this.codigoEstado != null && !this.codigoEstado.equals(other.codigoEstado))) {
+        if ((this.codigoEstado == null && other.codigoEstado != null) || (this.codigoEstado != null && !this.codigoEstado.equals(other.codigoEstado)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
-        return "com.sar.controller.Estado[ codigoEstado=" + codigoEstado + " ]";
+    public String toString()
+    {
+        return "com.sar.model.Estado[ codigoEstado=" + codigoEstado + " ]";
     }
-    
+
 }

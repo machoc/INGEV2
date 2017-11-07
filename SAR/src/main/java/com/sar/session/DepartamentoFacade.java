@@ -12,21 +12,24 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Jason
  */
 @Stateless
-public class DepartamentoFacade extends AbstractFacade<Departamento> implements DepartamentoFacadeLocal {
+public class DepartamentoFacade extends AbstractFacade<Departamento> implements DepartamentoFacadeLocal
+{
 
     @PersistenceContext(unitName = "ingePU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    protected EntityManager getEntityManager()
+    {
         return em;
     }
 
-    public DepartamentoFacade() {
+    public DepartamentoFacade()
+    {
         super(Departamento.class);
     }
-    
+
 }

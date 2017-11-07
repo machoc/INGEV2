@@ -12,51 +12,26 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import javax.persistence.SequenceGenerator;
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author manuel
-=======
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-
-/**
- *
- * @author Luis Alejandro
-<<<<<<< HEAD
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
  */
 @Entity
 @Table(name = "REQUISICION")
@@ -73,42 +48,20 @@ public class Requisicion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-<<<<<<< HEAD
-<<<<<<< HEAD
      @Id
     @NotNull
     //@GeneratedValue(strategy= GenerationType.IDENTITY)
+     //, allocationSize=1
    @GeneratedValue(generator="some_seq_name")
    @SequenceGenerator(name="some_seq_name", sequenceName="AUTO_SEQ", allocationSize=1)
     @Column(name = "NUMREQUISICION")
     private BigDecimal numrequisicion;
     @Size(max = 50)
-=======
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "NUMREQUISICION")
-    private BigDecimal numrequisicion;
-    @Size(max = 60)
-<<<<<<< HEAD
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
     @Column(name = "PUESTO")
     private String puesto;
     @Column(name = "VACANTES")
     private Short vacantes;
-<<<<<<< HEAD
-<<<<<<< HEAD
     @Size(max = 60)
-=======
-    @Size(max = 30)
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
-    @Size(max = 30)
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
     @Column(name = "CONTRATANTE")
     private String contratante;
     @Column(name = "FECHA_INICIO")
@@ -186,13 +139,7 @@ public class Requisicion implements Serializable {
         this.departamento = departamento;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     @XmlTransient
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
     public List<Postulante> getPostulanteList() {
         return postulanteList;
     }
@@ -223,15 +170,7 @@ public class Requisicion implements Serializable {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-<<<<<<< HEAD
         return  numrequisicion +"- "+ puesto;
-=======
-        return "com.sar.model.Requisicion[ numrequisicion=" + numrequisicion + " ]";
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
-=======
-        return "com.sar.model.Requisicion[ numrequisicion=" + numrequisicion + " ]";
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
     }
     
 }

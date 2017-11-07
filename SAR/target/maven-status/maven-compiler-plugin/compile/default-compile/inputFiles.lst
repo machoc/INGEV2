@@ -1,54 +1,20 @@
-<<<<<<< HEAD
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/UsuarioIngeFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/DepartamentoFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/model/Departamento.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/model/Requisicion.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/model/UsuarioInge.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/PostulanteFacadeLocal.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/UsuarioIngeFacadeLocal.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/model/Postulante.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/controller/UsuarioController.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/EstadoFacadeLocal.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/controller/ListController.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/RequisicionFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/controller/PostulanteController.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/AbstractFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/EstadoFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/DepartamentoFacadeLocal.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/controller/requisicionController.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/model/Estado.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/PostulanteFacade.java
-/home/manuel/Downloads/SAR/src/main/java/com/sar/session/RequisicionFacadeLocal.java
-=======
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\LugaresFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\controller\PostulanteController.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\ContactoFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Estado.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Direccion.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\UsuarioFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Lugares.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\PostulanteFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\RequisicionFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\controller\ListController.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Usuario.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\PostulanteFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\LugaresFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Departamento.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\RequisicionFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\controller\UsuarioController.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\UsuarioFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\ContactoFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\UsuarioInge.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\LicenciaFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\AbstractFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Licencia.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Contacto.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\DepartamentoFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\EstadoFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Requisicion.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\DepartamentoFacade.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\controller\RequisicionController.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\model\Postulante.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\EstadoFacadeLocal.java
-C:\Users\Luis Alejandro\Desktop\INGE\SAR\src\main\java\com\sar\session\LicenciaFacade.java
->>>>>>> 2b81dbbd337be31ff3c70ebf39abdca403d1edac
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\controller\PostulanteController.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\model\Departamento.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\RequisicionFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\model\UsuarioInge.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\controller\UsuarioController.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\controller\ListController.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\AbstractFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\model\Postulante.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\controller\requisicionController.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\PostulanteFacadeLocal.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\UsuarioIngeFacadeLocal.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\model\Requisicion.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\UsuarioIngeFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\DepartamentoFacadeLocal.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\PostulanteFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\EstadoFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\model\Estado.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\DepartamentoFacade.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\EstadoFacadeLocal.java
+C:\Users\Jason\Desktop\New folder\INGE-master\SAR\src\main\java\com\sar\session\RequisicionFacadeLocal.java

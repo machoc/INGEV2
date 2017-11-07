@@ -8,16 +8,15 @@ and open the template in the editor.
     Author     : Jason
 */
 
-.panlestado{
-    margin-left: 40% !important;
-    margin-right: 50% !important;
+.panl{
+    background: #ff00004d !important;
 }
 
-.formestado {
+.fond {
     background: rgb(41, 157, 206) !important;
     background: -moz-linear-gradient(top, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
     background: -webkit-linear-gradient(top, rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%) !important;
-    background: linear-gradient(to bottom, rgb(255, 108, 108) 0%,rgb(255, 255, 255) 50%,rgb(255, 255, 255) 100%) !important;
+    background: linear-gradient(to bottom, rgb(255, 108, 108) 0%,rgba(255, 0, 0, 0.71) 50%,rgb(207, 115, 115) 100%) !important;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee',GradientType=0 ) !important;
     font-family: futura !important;
     color: white !important;

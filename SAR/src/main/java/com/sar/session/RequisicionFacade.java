@@ -12,21 +12,24 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Jason
  */
 @Stateless
-public class RequisicionFacade extends AbstractFacade<Requisicion> implements RequisicionFacadeLocal {
+public class RequisicionFacade extends AbstractFacade<Requisicion> implements RequisicionFacadeLocal
+{
 
     @PersistenceContext(unitName = "ingePU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    protected EntityManager getEntityManager()
+    {
         return em;
     }
 
-    public RequisicionFacade() {
+    public RequisicionFacade()
+    {
         super(Requisicion.class);
     }
-    
+
 }

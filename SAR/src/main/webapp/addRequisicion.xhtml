@@ -8,11 +8,12 @@
         <title>SAR-LANCO</title>
         <h:outputStylesheet name="css/general.css"/>
         <h:outputStylesheet name="css/addRequisicion.css"/>
-       <!-- <h:outputStylesheet name="grid/grid.css" library="primefaces" />-->
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
     </h:head>
     <h:body>
         <f:view>
 
+        <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
 
          <h:form id="table" class="formrequi">
             <div align="center" >     
@@ -28,11 +29,18 @@
              
              
   
-                <h1><h:outputText value=" Requisiciones"/></h1>
+             <h1 align="center" ><h:outputText value=" Requisiciones"/></h1>
+       <div>      
+        <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();" />
+        <p:button class="botonrequiES" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
+        <p:button class="botonrequiP" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
+        <p:commandButton class="botonrequiAGREDEP" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />
+        </div><br></br>
+        
                 <p:dataTable id="requisicion" value="#{requisicionController.listar()}" var="item">
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Numero requisicion"/>
+                            <h:outputText value="Número Requisición"/>
                         </f:facet>
                         <h:outputText value="#{item.numrequisicion}"/>
                     </p:column>
@@ -40,23 +48,29 @@
                         <f:facet name="header">
                             <h:outputText value="Puesto"/>
                         </f:facet>
-                        <h:outputText value="#{item.puesto}"/>
+                        <h:outputText value="#{item.puesto}" style="text-transform: uppercase"/>
                     </p:column>
                    
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Departamento"/>
                         </f:facet>
-                        <h:outputText value="#{item.departamento.descripcion}"/>
+                        <h:outputText value="#{item.departamento.descripcion}" style="text-transform: uppercase"/>
                     </p:column>
                     <p:column>
                      <f:facet name="header">
-                            <h:outputText value="Ver"/>
+                            <h:outputText value="Opciones"/>
                         </f:facet>
                        
-                    <p:commandButton update="posInfo" class="modificar" value="Ver Info" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
-                    <p:commandButton value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion" />
-                   
+                    <p:commandButton update="posInfo" class="ver" value="Ver Info" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
+                    <p:commandButton class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
+                      <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICION?" icon="ui-icon-alert" />
+
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                     </p:column>
                 </p:dataTable>
                 
@@ -64,12 +78,8 @@
        
             </h:form>
         </f:view>
-              <p:commandButton value="Agregar"  oncomplete="PF('widAdd').show();" />
-                  <p:commandButton value="Agregar Departamento" />
-            <p:button class="botonrequi" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisicion" outcome="estados"></p:button>
-            <p:button class="botonrequi" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
-            
-            <p:dialog id="dialogo" widgetVar="widAdd" header="Agregar Requisicion" maximizable="true" >
+ 
+            <p:dialog id="dialogo" widgetVar="widAdd" header="Agregar Requisición" maximizable="true" >
             <h:form>
 
                 <h1><h:outputText value="Crear"/></h1>
@@ -106,26 +116,32 @@
                          
 
                     
-                    <p:commandButton icon="ui-icon-check" validateClient="true" value="guardar" action="#{requisicionController.agregar()}" update=":table:requisicion, grid"  />
-                    <p:commandButton value="cancelar"  onclick="PF('widAdd').hide();" />
+                    <p:commandButton class="si" icon="ui-icon-check" validateClient="true" value="GUARDAR" action="#{requisicionController.agregar()}" update=":table:requisicion, grid,mensaje2"  />
+                    <p:commandButton class="no" value="CANCELAR"  onclick="PF('widAdd').hide();" />
 
                 </h:panelGrid>
 
             </h:form>
         </p:dialog>
        
-       <p:dialog header="Informacion Requisicion" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:dialog header="Información Requisición" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
        <p:outputPanel id="posInfo" style="text-align:center;">
            <p:panelGrid  columns="2" columnClasses="label,value">
 
-               <p:outputLabel value="Numero Requisicion:" />
-               <p:outputLabel value="#{requisicionController.r.numrequisicion}" />
+               <p:outputLabel value="Número Requisición:" />
+               <p:outputLabel value="#{requisicionController.r.numrequisicion}" style="text-transform: uppercase" />
 
               <p:outputLabel value="Puesto" />
-              <p:outputLabel value="#{requisicionController.r.puesto}" />
+              <p:outputLabel value="#{requisicionController.r.puesto}" style="text-transform: uppercase" />
 
                <p:outputLabel value="Vacantes:" />
-               <p:outputLabel value="#{requisicionController.r.vacantes}"/>
+               <p:outputLabel value="#{requisicionController.r.vacantes}" style="text-transform: uppercase"/>
+               
+               <p:outputLabel value="Contratante:" />
+               <p:outputLabel value="#{requisicionController.r.contratante}" style="text-transform: uppercase"/>
+               
+               <p:outputLabel value="Departamento:" />
+               <p:outputLabel value="#{requisicionController.r.departamento.descripcion}" style="text-transform: uppercase"/>
 
            </p:panelGrid>
         </p:outputPanel>

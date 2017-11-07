@@ -12,21 +12,24 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Jason
  */
 @Stateless
-public class EstadoFacade extends AbstractFacade<Estado> implements EstadoFacadeLocal {
+public class EstadoFacade extends AbstractFacade<Estado> implements EstadoFacadeLocal
+{
 
     @PersistenceContext(unitName = "ingePU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    protected EntityManager getEntityManager()
+    {
         return em;
     }
 
-    public EstadoFacade() {
+    public EstadoFacade()
+    {
         super(Estado.class);
     }
-    
+
 }
