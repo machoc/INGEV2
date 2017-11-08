@@ -47,7 +47,7 @@ and open the template in the editor.
     height:30px !important;
     color: white !important;
     box-shadow: inset 0 0 0 1px #00ff00 !important;
-    background: #003300 !important;
+    background: #006600 !important;
     margin-left: 1% !important;
 }
 
@@ -56,7 +56,7 @@ and open the template in the editor.
     transform: scale(1.1) !important;
     -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
     transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #006600 !important;
+    background: #003300 !important;
     box-shadow: inset 0 0 0 1px #00ff00 !important;
 }
 

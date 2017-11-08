@@ -20,8 +20,8 @@
                 <p:panelGrid columns="6" class="panelusuario" layout="grid">
                     <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                     <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="inicio"></p:button>
-                    <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="AGREGAR USUARIO" outcome="usuario"></p:button>
-                    <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="AGREGAR POSTULANTE" outcome="Postulante"></p:button>
+                    <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                     <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="requisicion"></p:button>
                     <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="ayuda"></p:button>
                 </p:panelGrid>     
@@ -31,27 +31,30 @@
   
              <h1 align="center" ><h:outputText value=" Requisiciones"/></h1>
        <div>      
-        <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();" />
-        <p:button class="botonrequiES" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
-        <p:button class="botonrequiP" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
-        <p:commandButton class="botonrequiAGREDEP" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />
+        <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();"  />
+        <p:button class="botonrequi1" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
+        <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
+        <p:commandButton class="botonrequi3" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />
         </div><br></br>
         
-                <p:dataTable id="requisicion" value="#{requisicionController.listar()}" var="item">
-                    <p:column>
+        <p:dataTable id="requisicion" value="#{requisicionController.listFilter()}" var="item" paginator="true" 
+                         paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         currentPageReportTemplate="1 de 1" paginatorPosition="bottom">
+                    
+                    <p:column filterBy="#{item.numrequisicion}">
                         <f:facet name="header">
-                            <h:outputText value="Número Requisición"/>
+                            <h:outputText  value="Número Requisición"/>
                         </f:facet>
                         <h:outputText value="#{item.numrequisicion}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.puesto}">
                         <f:facet name="header">
                             <h:outputText value="Puesto"/>
                         </f:facet>
                         <h:outputText value="#{item.puesto}" style="text-transform: uppercase"/>
                     </p:column>
                    
-                    <p:column>
+                    <p:column filterBy="#{item.departamento}">
                         <f:facet name="header">
                             <h:outputText value="Departamento"/>
                         </f:facet>
@@ -62,7 +65,7 @@
                             <h:outputText value="Opciones"/>
                         </f:facet>
                        
-                    <p:commandButton update="posInfo" class="ver" value="Ver Info" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
+                    <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
                     <p:commandButton class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
                       <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICION?" icon="ui-icon-alert" />
 
@@ -86,15 +89,15 @@
                 <h:panelGrid cellpadding="3" columns="3" id="grid">
                     
                                 <p:outputLabel value="Puesto:" for="puesto" />
-                                <p:inputText id="puesto" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
+                                <p:inputText id="puesto" placeholder="Facturación" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
                                              <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                                 </p:inputText>
                                  <p:message for="puesto" />
                                 <p:outputLabel value="Vacantes:" for="vacantes" />
-                                <p:inputNumber id="vacantes"  decimalPlaces="0" value="#{requisicionController.r.vacantes}"  validatorMessage="No se permite numeros" title="Vacantes" />
+                                <p:inputNumber id="vacantes" placeholder="7" maxValue="50" maxlength="3" decimalPlaces="0" value="#{requisicionController.r.vacantes}"  validatorMessage="No se permite letras" title="Vacantes" />
                                 <p:message for="vacantes" />
                                 <p:outputLabel value="Contratante:" for="contratante" />
-                                <p:inputText id="contratante" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
+                                <p:inputText id="contratante" placeholder="Alicia Hernández" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
                                          <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                                 </p:inputText>
                                 <p:message for="contratante" />

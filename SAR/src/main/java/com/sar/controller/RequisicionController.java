@@ -44,6 +44,7 @@ public class requisicionController implements Serializable
     private List<Postulante> aux = new ArrayList<Postulante>();
     private Postulante seleccionado;
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
+    boolean flag = true;
 
     public requisicionController()
     {
@@ -176,6 +177,22 @@ public class requisicionController implements Serializable
        
         //return add
         return "addRequisicion";
+    }
+    
+    public List<Requisicion> listFilter() {
+       
+          if (flag) {
+            //    postulantes = postulanteFacade.findAll();
+             for (Requisicion i : requisicionFacade.findAll()) {
+            if (i.getNumrequisicion().compareTo(BigDecimal.valueOf(100)) == 1) 
+                requisicion.add(i);
+            
+        }
+
+            }
+        
+        flag = false;
+        return requisicion;
     }
     
 }

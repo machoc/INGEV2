@@ -23,52 +23,71 @@ and open the template in the editor.
     margin-right: 50% !important;
 }
 
-.botonrequiES {
+.botonrequi1 {
     width: 202px !important;
-    height: 36px !important;
+    height: 28px !important;
     color: white !important;
-    box-shadow: inset 0 0 0 1.5px #ffff00 !important;
-    background: #e65c00  !important;
-    margin-left: 43% !important;
-    margin-right: 50% !important;
+    box-shadow: inset 0 0 0 1.5px white !important;
+    background: #404040  !important;
+    margin-left: 2% !important;
+    margin-right: -1% !important;
 }
 
-.botonrequiES:hover, .botonrequiES:focus, .botonrequiES:active{
+.botonrequi1:hover, .botonrequi1:focus, .botonrequi1:active{
     -webkit-transform: scale(0.9) !important;
     transform: scale(0.9) !important;
     -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
     transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #ff8000 !important;
-    box-shadow: inset 0 0 0 1.5px #ffff00 !important;
+    background: #004d4d !important;
+    box-shadow: inset 0 0 0 1.5px #80ffff !important;
 }
 
-.botonrequiP {
+.botonrequi2 {
     width: 202px !important;
-    height: 36px !important;
+    height: 28px !important;
     color: white !important;
-    box-shadow: inset 0 0 0 1.5px #00ffff !important;
-    background: #003333 !important;
-    margin-left: 43% !important;
-    margin-right: 50% !important;
+    box-shadow: inset 0 0 0 1.5px white !important;
+    background: #737373  !important;
+    margin-left: 2% !important;
+    margin-right: -1% !important;
 }
 
-.botonrequiP:hover, .botonrequiP:focus, .botonrequiP:active{
+.botonrequi2:hover, .botonrequi2:focus, .botonrequi2:active{
     -webkit-transform: scale(0.9) !important;
     transform: scale(0.9) !important;
     -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
     transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #009999 !important;
-    box-shadow: inset 0 0 0 1.5px #00ffff !important;
+    background: #004d4d !important;
+    box-shadow: inset 0 0 0 1.5px #80ffff !important;
+}
+
+.botonrequi3 {
+    width: 202px !important;
+    height: 28px !important;
+    color: white !important;
+    box-shadow: inset 0 0 0 1.5px white !important;
+    background: #a6a6a6  !important;
+    margin-left: 2% !important;
+    margin-right: -1% !important;
+}
+
+.botonrequi3:hover, .botonrequi3:focus, .botonrequi3:active{
+    -webkit-transform: scale(0.9) !important;
+    transform: scale(0.9) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #004d4d !important;
+    box-shadow: inset 0 0 0 1.5px #80ffff !important;
 }
 
 .botonrequiAGRE {
     width: 202px !important;
-    height: 36px !important;
+    height: 28px !important;
     color: white !important;
     box-shadow: inset 0 0 0 1.5px #00ff00 !important;
-    background: #003300 !important;
-    margin-left: 43% !important;
-    margin-right: 50% !important;
+    background: #006600 !important;
+    margin-left: 2% !important;
+    margin-right: -1% !important;
 }
 
 .botonrequiAGRE:hover, .botonrequiAGRE:focus, .botonrequiAGRE:active{
@@ -76,25 +95,6 @@ and open the template in the editor.
     transform: scale(0.9) !important;
     -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
     transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #006600 !important;
+    background: #003300 !important;
     box-shadow: inset 0 0 0 1.5px #00ff00 !important;
-}
-
-.botonrequiAGREDEP {
-    width: 202px !important;
-    height: 36px !important;
-    color: white !important;
-    box-shadow: inset 0 0 0 1.5px #0000ff !important;
-    background: #00001a !important;
-    margin-left: 43% !important;
-    margin-right: 50% !important;
-}
-
-.botonrequiAGREDEP:hover, .botonrequiAGREDEP:focus, .botonrequiAGREDEP:active{
-    -webkit-transform: scale(0.9) !important;
-    transform: scale(0.9) !important;
-    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #000066 !important;
-    box-shadow: inset 0 0 0 1.5px #0000ff !important;
 }

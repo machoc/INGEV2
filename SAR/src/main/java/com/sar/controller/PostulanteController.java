@@ -307,6 +307,7 @@ public class PostulanteController implements Serializable
 
     public String relacionarPostulantes()
     {
+        try{
 
         for (Postulante pos : selected)
         {
@@ -316,10 +317,18 @@ public class PostulanteController implements Serializable
             e.setCodigoEstado("002");
             pos.setEstado(this.e);
             pFacade.edit(pos);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE ASIGNÓ EXITOSAMENTE"));
+
             //RequestContext req = RequestContext.getCurrentInstance();
             // req.execute("PF('tableDialog').hide();");
         }
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+        }
         return "addRequisicion";
     }
+    
+    
 
 }

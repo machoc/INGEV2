@@ -11,15 +11,18 @@
         <h:outputStylesheet name="grid/grid.css" library="primefaces" />
     </h:head>
     <h:body>
+        <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
         <div class="formasigpostu">
-            <div align="center" class="menuindex">     
-                <p:panelGrid columns="4" class="panelindex" layout="grid">
-                    <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
-                    <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
-                    <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
-                    <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+            <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
                     </p:panelGrid>     
-            </div><br></br>
+                </div><br></br>
        
         <h:form id="table">
 
@@ -30,7 +33,7 @@
                        
                         <f:selectItems value="#{posController.loadRequisiciones()}" var="it" itemLabel="#{it.toString()}" itemValue="#{it.numrequisicion}" />
                     </p:selectOneMenu>
-           <p:dataTable id="cars" var="car" value="#{posController.loadPostulantes()}" selection="#{posController.selected}" rowKey="#{car.cedula}" style="margin-bottom:0">
+           <p:dataTable emptyMessage="No se encuentra postulante" id="cars" var="car" value="#{posController.loadPostulantes()}" selection="#{posController.selected}" rowKey="#{car.cedula}" style="margin-bottom:0">
         
         <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
        
@@ -50,7 +53,7 @@
             <h:outputText value="#{car.residencia}" style="text-transform: uppercase" />
         </p:column>
        <f:facet name="footer">
-           <p:commandButton class="agregar"  update="cars" icon="ui-icon-check"  value="Agregar" action="#{posController.relacionarPostulantes()}"  />
+           <p:commandButton class="agregar"  update=":table:cars,mensaje2" icon="ui-icon-check"  value="Agregar" action="#{posController.relacionarPostulantes()}"  />
         </f:facet>
     </p:dataTable> 
 
