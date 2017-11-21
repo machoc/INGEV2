@@ -83,6 +83,8 @@ public class UsuarioController implements Serializable
             // this.user.setCodigo(persona);
             facade.create(user);
             user.setNumrequisicion(BigInteger.valueOf(100));
+            RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('widModify').hide();");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "REGISTRADO EXITOSAMENTE"));
         } catch (Exception e)
         {

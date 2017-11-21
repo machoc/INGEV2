@@ -34,7 +34,7 @@
         <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();"  />
         <p:button class="botonrequi1" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
         <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
-        <p:commandButton class="botonrequi3" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />
+       <!-- <p:commandButton class="botonrequi3" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />-->
         </div><br></br>
         
         <p:dataTable id="requisicion" value="#{requisicionController.listFilter()}" var="item" paginator="true" 
@@ -65,15 +65,17 @@
                             <h:outputText value="Opciones"/>
                         </f:facet>
                        
-                    <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
-                    <p:commandButton class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
-                      <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICION?" icon="ui-icon-alert" />
+
+                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
+                        <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICION?" icon="ui-icon-alert" />
 
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
+                     <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
+
                     </p:column>
                 </p:dataTable>
                 
@@ -84,8 +86,9 @@
  
             <p:dialog id="dialogo" widgetVar="widAdd" header="Agregar Requisición" maximizable="true" >
             <h:form>
-
-                <h1><h:outputText value="Crear"/></h1>
+                <p:fieldset legend="Datos Requisicion" style="margin-bottom:100px">
+                <h1><font family="futura">
+                <h:outputText value="Crear"/></font></h1>
                 <h:panelGrid cellpadding="3" columns="3" id="grid">
                     
                                 <p:outputLabel value="Puesto:" for="puesto" />
@@ -119,11 +122,11 @@
                          
 
                     
-                    <p:commandButton class="si" icon="ui-icon-check" validateClient="true" value="GUARDAR" action="#{requisicionController.agregar()}" update=":table:requisicion, grid,mensaje2"  />
-                    <p:commandButton class="no" value="CANCELAR"  onclick="PF('widAdd').hide();" />
+                    <p:commandButton class="si" icon="ui-icon-plusthick" validateClient="true" value="GUARDAR" action="#{requisicionController.agregar()}" update=":table:requisicion, grid,mensaje2"  />
+                    <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('widAdd').hide();" />
 
                 </h:panelGrid>
-
+                    </p:fieldset>
             </h:form>
         </p:dialog>
        
