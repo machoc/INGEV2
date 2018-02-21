@@ -49,7 +49,7 @@ public class Postulante implements Serializable
     @Column(name = "CEDULA")
     private String cedula;
     @Size(max = 30)
-    @Column(name = "NOMBRECOMPLETO")
+    @Column(name = "NOMBRE_COMPLETO")
     private String nombrecompleto;
     @Column(name = "EDAD")
     private Short edad;

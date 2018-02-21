@@ -37,7 +37,7 @@
        <!-- <p:commandButton class="botonrequi3" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />-->
         </div><br></br>
         
-        <p:dataTable id="requisicion" value="#{requisicionController.listFilter()}" var="item" paginator="true" 
+        <p:dataTable emptyMessage="No se encuentra requisición" id="requisicion" value="#{requisicionController.listFilter()}" var="item" paginator="true" 
                          paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
                          currentPageReportTemplate="1 de 1" paginatorPosition="bottom">
                     
@@ -67,8 +67,7 @@
                        
 
                         <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
-                        <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICION?" icon="ui-icon-alert" />
-
+                            <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICIÓN?" icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />

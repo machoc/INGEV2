@@ -142,7 +142,7 @@ public class PostulanteController implements Serializable
         {
             r.setNumrequisicion(BigDecimal.valueOf(100));
             //System.out.println(estadoFacade.find("000").getDetalle());
-            e.setCodigoEstado("001");
+            e.setCodigoEstado("000");
 
             this.p.licencia = funcione();
             this.p.setEstado(this.e);
@@ -314,7 +314,7 @@ public class PostulanteController implements Serializable
             System.out.println(pos.getCedula());
             System.out.println(this.r.getNumrequisicion());
             pos.setRequisicion(r);
-            e.setCodigoEstado("002");
+            e.setCodigoEstado("001");
             pos.setEstado(this.e);
             pFacade.edit(pos);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE ASIGNÓ EXITOSAMENTE"));
