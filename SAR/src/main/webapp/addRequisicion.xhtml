@@ -34,7 +34,8 @@
         <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();"  />
         <p:button class="botonrequi1" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
         <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
-       <!-- <p:commandButton class="botonrequi3" icon="ui-icon-arrowreturnthick-1-e" value="Agregar Departamento" />-->
+        <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/departamentos.xhtml" value="Departamentos" outcome="departamentos"></p:button>
+
         </div><br></br>
         
         <p:dataTable emptyMessage="No se encuentra requisición" id="requisicion" value="#{requisicionController.listFilter()}" var="item" paginator="true" 

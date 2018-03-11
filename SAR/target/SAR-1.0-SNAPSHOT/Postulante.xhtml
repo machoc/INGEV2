@@ -59,9 +59,9 @@
                     </p:column>
                     <p:column filterBy="#{item.requisicion.puesto}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="Número de Requisición"/>
+                            <h:outputText value="Requisición"/>
                         </f:facet>
-                        <h:outputText value="#{item.requisicion.puesto}"/>
+                        <h:outputText value="#{item.requisicion.puesto}" style="text-transform: uppercase"/>
                     </p:column>
                     
                    
@@ -244,7 +244,7 @@
                 <p:outputLabel value="#{posController.p.telefono}" />
                 
                 <p:outputLabel value="Requisición:" />
-                <p:outputLabel value="#{posController.p.requisicion}" />
+                <p:outputLabel value="#{posController.p.requisicion}" style="text-transform: uppercase"/>
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>
