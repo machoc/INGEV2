@@ -11,11 +11,10 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Jason
+ * @author Luis Alejandro
  */
 @Local
-public interface EstadoFacadeLocal
-{
+public interface EstadoFacadeLocal {
 
     void create(Estado estado);
 
@@ -30,5 +29,5 @@ public interface EstadoFacadeLocal
     List<Estado> findRange(int[] range);
 
     int count();
-
+    
 }

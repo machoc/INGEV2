@@ -7,13 +7,12 @@ package com.sar.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Entity
 @Table(name = "REQUISICION")
@@ -48,11 +47,9 @@ public class Requisicion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-     @Id
+    @Id
     @NotNull
-    //@GeneratedValue(strategy= GenerationType.IDENTITY)
-     //, allocationSize=1
-   @GeneratedValue(generator="some_seq_name")
+    @GeneratedValue(generator="some_seq_name")
    @SequenceGenerator(name="some_seq_name", sequenceName="AUTO_SEQ", allocationSize=1)
     @Column(name = "NUMREQUISICION")
     private BigDecimal numrequisicion;
@@ -73,8 +70,11 @@ public class Requisicion implements Serializable {
     @JoinColumn(name = "DEPARTAMENTO", referencedColumnName = "CODIGO_DEPARTAMENTO")
     @ManyToOne
     private Departamento departamento;
+    @JoinColumn(name = "USUARIO", referencedColumnName = "CEDULA")
+    @ManyToOne
+    private UsuarioInge usuario;
     @OneToMany(mappedBy = "requisicion")
-    private List<Postulante> postulanteList;
+    private Collection<Postulante> postulanteCollection;
 
     public Requisicion() {
     }
@@ -139,13 +139,21 @@ public class Requisicion implements Serializable {
         this.departamento = departamento;
     }
 
-    @XmlTransient
-    public List<Postulante> getPostulanteList() {
-        return postulanteList;
+    public UsuarioInge getUsuario() {
+        return usuario;
     }
 
-    public void setPostulanteList(List<Postulante> postulanteList) {
-        this.postulanteList = postulanteList;
+    public void setUsuario(UsuarioInge usuario) {
+        this.usuario = usuario;
+    }
+
+    @XmlTransient
+    public Collection<Postulante> getPostulanteCollection() {
+        return postulanteCollection;
+    }
+
+    public void setPostulanteCollection(Collection<Postulante> postulanteCollection) {
+        this.postulanteCollection = postulanteCollection;
     }
 
     @Override

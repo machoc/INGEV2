@@ -11,11 +11,10 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Jason
+ * @author Luis Alejandro
  */
 @Local
-public interface DepartamentoFacadeLocal
-{
+public interface DepartamentoFacadeLocal {
 
     void create(Departamento departamento);
 
@@ -30,5 +29,5 @@ public interface DepartamentoFacadeLocal
     List<Departamento> findRange(int[] range);
 
     int count();
-
+    
 }

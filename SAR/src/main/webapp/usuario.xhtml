@@ -48,6 +48,14 @@
                 <p:column headerText="Rol">
                     <p:outputLabel value="#{item.tipo}" style="text-transform: uppercase"/>
                 </p:column>
+                
+                <p:column headerText="Email">
+                    <p:outputLabel value="#{item.email}" style="text-transform: uppercase"/>
+                </p:column>
+                
+                <p:column headerText="Teléfono">
+                    <p:outputLabel value="#{item.telefono}" style="text-transform: uppercase"/>
+                </p:column>
                     
                 
                      <p:column headerText="Opciones">
@@ -85,18 +93,20 @@
                         <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                     </p:inputText>
                     <p:message for="nombre" />
-                    <h:outputLabel value="Contraseña:" for="contraseña" />
-                    <p:password placeholder="1234567"  maxlength="12" id="clave1" value="#{usuarioController.user.contraseña}" title="Contraseña" validatorMessage="Las claves son distintas" weakLabel="debil" goodLabel="segura" strongLabel="fuerte" match="clave2" feedback="true" promptLabel="ingrese una clave"/>
-                    <p:message for="clave1" />
-                    <h:outputLabel value=" Repetir Contraseña:" />
-                    <p:password placeholder="1234567" maxlength="12" id="clave2"/>
-                    <p:message for="clave2" />
                     <h:outputLabel value="Tipo:" for="tipo"/>
                     <p:selectOneMenu id="tipo" value= "#{usuarioController.user.tipo}">
                         <f:selectItem itemValue='Administrador' itemLabel="Administrador"/>
                         <f:selectItem itemValue='Usuario' itemLabel="Usuario"/>
                     </p:selectOneMenu>
                     <p:message for="tipo" />
+                    <h:outputLabel value="Email:" for="email" />
+                    <p:inputText placeholder="jasonchaves@hotmail.com" id="email" value="#{usuarioController.user.email}" maxlength="60" title="Email" required="true" requiredMessage="Se requiere un email" />
+                    <p:message for="email" />
+                    <h:outputLabel value="Teléfono:" for="telefono" />
+                    <p:inputMask id="telefono"  mask="9999-9999" value="#{usuarioController.user.telefono}" maxlength="10"  validatorMessage=" No permitido"  title="Telefono">
+                                          <p:watermark for="telefono" value="8311-3219" id="watermarktelefono"/>
+                     </p:inputMask>
+                    <p:message for="telefono" />
                     <p:commandButton icon="ui-icon-plusthick" class="si" value="AGREGAR" validateClient="true" actionListener="#{usuarioController.registrar()}"  update=":form-list:listUsuario, mensaje2,panel" /> 
                     <p:commandButton icon="ui-icon-close" class="no" value="CANCELAR" onclick="PF('widModify').hide();" style="margin-right:20px;" />
  
@@ -119,8 +129,10 @@
                          <h:inputText id="contraseña" value="#{usuarioController.user.contraseña}" title="Contraseña" />
                          <h:outputLabel value="Tipo:" for="tipo" />
                          <h:inputText id="tipo" value="#{usuarioController.user.tipo}" title="Tipo" />
-                         <h:outputLabel value="Número Requisición:" for="numeroRequisicion" />
-                         <h:inputText disabled="true" id="numeroRequisicion" value="#{usuarioController.user.numrequisicion}" title="Numero Requisicion" />
+                         <h:outputLabel value="Email:" for="email" />
+                         <h:inputText id="email" value="#{usuarioController.user.email}" title="Email" />
+                         <h:outputLabel value="Teléfono:" for="telefono" />
+                         <h:inputText id="telefono" value="#{usuarioController.user.telefono}" title="Telefono" />
                       <p:commandButton icon="ui-icon-check" class="si" value="MODIFICAR" actionListener="#{usuarioController.modificar()}" onclick="PF('widModify').hide();"  update=":form-list:listUsuario, mensaje2" />
                       <p:commandButton icon="ui-icon-close" class="no" value="CANCELAR"  onclick="PF('widModify').hide();" />
                      </h:panelGrid>
@@ -144,6 +156,12 @@
 
                 <p:outputLabel value="Tipo:"  />
                 <p:outputLabel value="#{usuarioController.user.tipo}" style="text-transform: uppercase" />
+                
+                <p:outputLabel value="Email:"  />
+                <p:outputLabel value="#{usuarioController.user.email}" style="text-transform: uppercase" />
+                
+                <p:outputLabel value="Teléfono:"  />
+                <p:outputLabel value="#{usuarioController.user.telefono}" style="text-transform: uppercase" />
                
             </p:panelGrid>
         </p:outputPanel>

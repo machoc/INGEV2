@@ -22,19 +22,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Jason
+ * @author Luis Alejandro
  */
 @Entity
 @Table(name = "DEPARTAMENTO")
 @XmlRootElement
-@NamedQueries(
-{
-    @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
-    @NamedQuery(name = "Departamento.findByCodigoDepartamento", query = "SELECT d FROM Departamento d WHERE d.codigoDepartamento = :codigoDepartamento"),
-    @NamedQuery(name = "Departamento.findByDescripcion", query = "SELECT d FROM Departamento d WHERE d.descripcion = :descripcion")
-})
-public class Departamento implements Serializable
-{
+@NamedQueries({
+    @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")
+    , @NamedQuery(name = "Departamento.findByCodigoDepartamento", query = "SELECT d FROM Departamento d WHERE d.codigoDepartamento = :codigoDepartamento")
+    , @NamedQuery(name = "Departamento.findByDescripcion", query = "SELECT d FROM Departamento d WHERE d.descripcion = :descripcion")})
+public class Departamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,74 +46,61 @@ public class Departamento implements Serializable
     @OneToMany(mappedBy = "departamento")
     private Collection<Requisicion> requisicionCollection;
 
-    public Departamento()
-    {
+    public Departamento() {
     }
 
-    public Departamento(String codigoDepartamento)
-    {
+    public Departamento(String codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
     }
 
-    public String getCodigoDepartamento()
-    {
+    public String getCodigoDepartamento() {
         return codigoDepartamento;
     }
 
-    public void setCodigoDepartamento(String codigoDepartamento)
-    {
+    public void setCodigoDepartamento(String codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
     }
 
-    public String getDescripcion()
-    {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion)
-    {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     @XmlTransient
-    public Collection<Requisicion> getRequisicionCollection()
-    {
+    public Collection<Requisicion> getRequisicionCollection() {
         return requisicionCollection;
     }
 
-    public void setRequisicionCollection(Collection<Requisicion> requisicionCollection)
-    {
+    public void setRequisicionCollection(Collection<Requisicion> requisicionCollection) {
         this.requisicionCollection = requisicionCollection;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (codigoDepartamento != null ? codigoDepartamento.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Departamento))
-        {
+        if (!(object instanceof Departamento)) {
             return false;
         }
         Departamento other = (Departamento) object;
-        if ((this.codigoDepartamento == null && other.codigoDepartamento != null) || (this.codigoDepartamento != null && !this.codigoDepartamento.equals(other.codigoDepartamento)))
-        {
+        if ((this.codigoDepartamento == null && other.codigoDepartamento != null) || (this.codigoDepartamento != null && !this.codigoDepartamento.equals(other.codigoDepartamento))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "com.sar.model.Departamento[ codigoDepartamento=" + codigoDepartamento + " ]";
     }
-
+    
 }

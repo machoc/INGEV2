@@ -5,9 +5,11 @@
  */
 package com.sar.controller;
 
+import com.sar.model.Entrevistados;
 import com.sar.model.Estado;
 import com.sar.model.Postulante;
 import com.sar.model.Requisicion;
+import com.sar.session.EntrevistadosFacadeLocal;
 import com.sar.session.EstadoFacadeLocal;
 import com.sar.session.PostulanteFacadeLocal;
 import com.sar.session.RequisicionFacadeLocal;
@@ -40,6 +42,9 @@ public class PostulanteController implements Serializable
 
     @EJB
     private PostulanteFacadeLocal pFacade;
+    
+    @EJB
+    private EntrevistadosFacadeLocal eFacade;
 
     private Postulante p = new Postulante();
     private Estado e = new Estado();
@@ -51,6 +56,8 @@ public class PostulanteController implements Serializable
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
     private Postulante[] selected;
+    private String note;
+    private String prueba;
 
     public String[] getSelectedCities()
     {
@@ -128,7 +135,27 @@ public class PostulanteController implements Serializable
     public PostulanteController()
     {
         inicio();
+        note = "";
+        prueba = "";
 
+
+    }
+    
+     public String getNote() {
+        return note;
+    }
+
+    public String getPrueba() {
+        return prueba;
+    }
+    
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setPrueba(String prueba) {
+        this.prueba = prueba;
     }
 
     public List<Postulante> listar()
@@ -329,6 +356,57 @@ public class PostulanteController implements Serializable
         return "addRequisicion";
     }
     
+    public String changeToEvaluate(){
+        System.out.println(this.p.getCedula());
+        for(Postulante pos : pFacade.findAll()){
+            if(pos.getCedula().equals(this.p.getCedula())){
+            
+                pos.setNotas(note);
+                pos.setDoprueba(prueba);
+                
+                pFacade.edit(pos);
+               // System.out.println("paso");
+                break;
+            }
+        }
+         this.p = new Postulante();
+         
+       
+         RequestContext req = RequestContext.getCurrentInstance();
+        req.execute("PF('modify').hide();");
+        /*
+         this.p.setNotas(notes);
+       this.p.setDoprueba(s);*/
+        return "estados";
+    }
+    
+     public void cambiarEstados(Postulante pos){
+         System.out.println(pos.getNombreCompleto());
+         boolean bandera = false;
+         if(pos.getEstado().getCodigoEstado().equals("001")){
+             e.setCodigoEstado("002");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }
+         else if(pos.getEstado().getCodigoEstado().equals("002") && pos.getDoprueba().equals("SI")){
+             e.setCodigoEstado("003");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }else if (pos.getEstado().getCodigoEstado().equals("003")){
+             for(Entrevistados est : eFacade.findAll() ){
+                 if(est.getPostulante().getCedula().equals(pos.getCedula())){
+                e.setCodigoEstado("004");
+                pos.setEstado(this.e);
+                pFacade.edit(pos);
+                bandera = true;
+                break;
+            }
+        }
+        }
+         if(!bandera) System.out.println("ALERTA DE MENSAJE");
+         }
     
 
 }

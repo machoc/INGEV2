@@ -37,11 +37,11 @@
                         </f:facet>
                         <h:outputText value="#{item.cedula}"/>
                     </p:column>
-                    <p:column filterBy="#{item.nombrecompleto}" filterMatchMode="contains">
+                    <p:column filterBy="#{item.nombreCompleto}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="Nombre Completo"/>
                         </f:facet>
-                        <h:outputText value="#{item.nombrecompleto}" style="text-transform: uppercase"/>
+                        <h:outputText value="#{item.nombreCompleto}" style="text-transform: uppercase"/>
                     </p:column>
                     
                     <p:column filterBy="#{item.especialidad}" filterMatchMode="contains">
@@ -102,7 +102,7 @@
                     
                     <p:message for="cedula" />
                     <h:outputLabel value="Nombre:" for="nombrecompleto" />
-                    <p:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombrecompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                    <p:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombreCompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
                         <p:watermark for="nombrecompleto" value="Luis Alejandro Castaing Vargas" id="watermarknombre" />
 
                           <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
@@ -171,7 +171,7 @@
                          <p:ajax event="blur" update="advertencia"   listener="#{posController.checkId()}" />
                      </p:inputText>
                        <h:outputLabel value="Nombre:" for="nombrecompleto" />
-                    <h:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombrecompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                    <h:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombreCompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
                           <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                     </h:inputText>
                        <h:outputLabel value="Edad:" for="edad" />
@@ -220,7 +220,7 @@
                <p:outputLabel value="#{posController.p.cedula}" />
 
               <p:outputLabel value="Nombre Completo" />
-               <p:outputLabel value="#{posController.p.nombrecompleto}" style="text-transform: uppercase"/>
+               <p:outputLabel value="#{posController.p.nombreCompleto}" style="text-transform: uppercase"/>
 
                <p:outputLabel value="Edad:" />
                <p:outputLabel value="#{posController.p.edad}"/>

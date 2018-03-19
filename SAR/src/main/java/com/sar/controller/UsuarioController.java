@@ -28,18 +28,11 @@ import org.primefaces.context.RequestContext;
 public class UsuarioController implements Serializable
 {
 
-    private UsuarioInge  user;
+    private UsuarioInge  user = new UsuarioInge();
 
     @EJB
     private UsuarioIngeFacadeLocal facade;
 
-    @PostConstruct
-    public void init()
-    {
-        user = new UsuarioInge();
-
-        System.out.println("aqui voy");
-    }
 
     public UsuarioInge getUser()
     {
@@ -82,7 +75,8 @@ public class UsuarioController implements Serializable
         {
             // this.user.setCodigo(persona);
             facade.create(user);
-            user.setNumrequisicion(BigInteger.valueOf(100));
+            this.user.setContraseña("1234");
+            this.user = new UsuarioInge();
             RequestContext req = RequestContext.getCurrentInstance();
             req.execute("PF('widModify').hide();");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "REGISTRADO EXITOSAMENTE"));
@@ -122,9 +116,10 @@ public class UsuarioController implements Serializable
         // return "categoria";
     }
 
-    public void edit(UsuarioInge c)
+    public String edit(UsuarioInge c)
     {
         this.user = c;
+        return "usuario";
         //return "editar";
     }
 

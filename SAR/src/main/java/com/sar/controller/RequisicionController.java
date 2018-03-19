@@ -9,8 +9,10 @@ import com.sar.model.Departamento;
 import com.sar.model.Estado;
 import com.sar.model.Postulante;
 import com.sar.model.Requisicion;
+import com.sar.model.UsuarioInge;
 import com.sar.session.PostulanteFacadeLocal;
 import com.sar.session.RequisicionFacadeLocal;
+import com.sar.session.UsuarioIngeFacadeLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,11 +38,14 @@ public class requisicionController implements Serializable
     private RequisicionFacadeLocal requisicionFacade;
     @EJB
     private PostulanteFacadeLocal postulanteFacade;
+    @EJB
+    private UsuarioIngeFacadeLocal userFacade;
 
     private Requisicion r = new Requisicion();
     private Departamento d = new Departamento();
     private Postulante p = new Postulante();
     private Estado estado = new Estado();
+    private UsuarioInge user = new UsuarioInge();
     private List<Postulante> aux = new ArrayList<Postulante>();
     private Postulante seleccionado;
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
@@ -95,6 +100,10 @@ public class requisicionController implements Serializable
     {
         this.estado = e;
     }
+    
+    public UsuarioInge getUser() {
+        return user;
+    }
 
     public Postulante getSeleccionado()
     {
@@ -123,10 +132,13 @@ public class requisicionController implements Serializable
             this.r.setDepartamento(this.d);
           //  System.out.println(r.getNumrequisicion());   
               //  System.out.println(sirva[0].getCedula());
-            
+              this.user = userFacade.find("20764013");
+            System.out.println(user.getNombre());
+              this.r.setUsuario(this.user);
              requisicionFacade.create(this.r);
              r = new Requisicion();
              d = new Departamento();
+             user = new UsuarioInge();
               RequestContext req = RequestContext.getCurrentInstance();
             req.execute("PF('widAdd').hide();");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "AGREGADA EXITOSAMENTE"));
@@ -153,6 +165,24 @@ public class requisicionController implements Serializable
     public List<Postulante> preseleccionados(){
                for (Postulante i : postulanteFacade.findAll()) {
             if (i.getEstado().getDetalle().equals("PRESELECCIONADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+    
+    public List<Postulante> evaluados(){
+               for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("EVALUADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+    
+    public List<Postulante> entrevistados(){
+               for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("ENTREVISTADO")) {
                 aux.add(i);
             }
         }

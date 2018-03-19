@@ -11,11 +11,10 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Jason
+ * @author Luis Alejandro
  */
 @Local
-public interface RequisicionFacadeLocal
-{
+public interface RequisicionFacadeLocal {
 
     void create(Requisicion requisicion);
 
@@ -30,5 +29,5 @@ public interface RequisicionFacadeLocal
     List<Requisicion> findRange(int[] range);
 
     int count();
-
+    
 }
