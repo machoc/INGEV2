@@ -25,7 +25,6 @@ import com.sar.session.EstadoFacadeLocal;
 import com.sar.session.RequisicionFacadeLocal;
 import java.awt.event.ActionEvent;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
@@ -35,7 +34,7 @@ import org.primefaces.context.RequestContext;
  */
 @Named(value = "entrevistaController")
 @RequestScoped
-public class EntrevistadoController implements Serializable{
+public class EntrevistadoController implements Serializable {
 
     @EJB
     private EntrevistadosFacadeLocal entrevistaFacade;
@@ -55,8 +54,8 @@ public class EntrevistadoController implements Serializable{
         respuesta = "";
         tipo = "";
     }
-
-    public List<String> getTipos() {
+    
+     public List<String> getTipos() {
         return tipos;
     }
 
@@ -111,10 +110,9 @@ public class EntrevistadoController implements Serializable{
         return entrevistaFacade.findAll();
     }
     public void searchPostulante(){
-        System.out.println(respuesta);
-       for(Postulante pos: pFacade.findAll()){
+        for(Postulante pos: pFacade.findAll()){
            if(pos.getCedula().equals(respuesta)){
-               System.out.println("aqui toy");
+              this.p = pos;
                break;
            }
        } 
@@ -124,8 +122,8 @@ public class EntrevistadoController implements Serializable{
         searchPostulante();
         System.out.println(this.p.getCedula());
        
-      /*  e.setPostulante(this.p);
-        entrevistaFacade.create(this.e);*/
+        e.setPostulante(this.p);
+        entrevistaFacade.create(this.e);
         this.p = new Postulante();
         this.e = new Entrevistados();
         RequestContext req = RequestContext.getCurrentInstance();
@@ -133,17 +131,9 @@ public class EntrevistadoController implements Serializable{
 
         return "estados";
     }
+ 
     
-    /*public void intentomil(){
-        System.out.println(e.getRespuesta());
-        Request.
-        for (Postulante i : pFacade.findAll())
-        {
-            if (i.getCedula().equals(p.getCedula()))
-            {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Cedula ya existe."));
-                break;
-            }
-        }
-    }*/
+    
+   
+
 }

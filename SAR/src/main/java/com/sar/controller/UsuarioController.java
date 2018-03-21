@@ -24,7 +24,7 @@ import org.primefaces.context.RequestContext;
  * @author manuel
  */
 @Named("usuarioController")
-@SessionScoped
+@RequestScoped
 public class UsuarioController implements Serializable
 {
 

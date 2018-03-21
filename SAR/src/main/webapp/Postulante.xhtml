@@ -105,7 +105,7 @@
                     <p:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombreCompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
                         <p:watermark for="nombrecompleto" value="Luis Alejandro Castaing Vargas" id="watermarknombre" />
 
-                          <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                          <f:validateRegex pattern="\D*" />
                     </p:inputText>
                     <p:message for="nombrecompleto" />
                     <h:outputLabel value="Edad:" for="edad" />
@@ -172,7 +172,7 @@
                      </p:inputText>
                        <h:outputLabel value="Nombre:" for="nombrecompleto" />
                     <h:inputText required="true" id="nombrecompleto" maxlength="30" value="#{posController.p.nombreCompleto}" title="Nombrecompleto" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
-                          <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                          <f:validateRegex pattern="\D*" />
                     </h:inputText>
                        <h:outputLabel value="Edad:" for="edad" />
                     <p:inputMask id="edad"  mask="99" value="#{posController.p.edad}" maxlength="2"  validatorMessage="Edad no permitida"  title="Edad">

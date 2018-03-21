@@ -370,43 +370,145 @@ public class PostulanteController implements Serializable
             }
         }
          this.p = new Postulante();
-         
-       
+         note = "";
+         prueba= "";     
          RequestContext req = RequestContext.getCurrentInstance();
         req.execute("PF('modify').hide();");
         /*
          this.p.setNotas(notes);
        this.p.setDoprueba(s);*/
-        return "estados";
+        return "Evaluados";
     }
     
-     public void cambiarEstados(Postulante pos){
-         System.out.println(pos.getNombreCompleto());
+  public String cambiar(){
+        for(Postulante pos : pFacade.findAll()){
+            if(pos.getCedula().equals(this.p.getCedula())){
+            
+                pos.setNotas(note);
+                pFacade.edit(pos);
+                break;
+            }
+        }
+         this.p = new Postulante();
+         RequestContext req = RequestContext.getCurrentInstance();
+         req.execute("PF('modify2').hide();");
+         return "Entrevistados";
+    }
+   
+     public void cambiarEstados1(Postulante pos){
+         try{
          boolean bandera = false;
+         System.out.println(pos.getNombreCompleto());
+         //falta validaciones
          if(pos.getEstado().getCodigoEstado().equals("001")){
-             e.setCodigoEstado("002");
+            e.setCodigoEstado("002");
             pos.setEstado(this.e);
             pFacade.edit(pos);
             bandera = true;
-         }
-         else if(pos.getEstado().getCodigoEstado().equals("002") && pos.getDoprueba().equals("SI")){
+         }else if(pos.getEstado().getCodigoEstado().equals("002") && pos.getDoprueba().equals("SI")){
              e.setCodigoEstado("003");
             pos.setEstado(this.e);
             pFacade.edit(pos);
             bandera = true;
-         }else if (pos.getEstado().getCodigoEstado().equals("003")){
-             for(Entrevistados est : eFacade.findAll() ){
-                 if(est.getPostulante().getCedula().equals(pos.getCedula())){
-                e.setCodigoEstado("004");
-                pos.setEstado(this.e);
-                pFacade.edit(pos);
-                bandera = true;
-                break;
-            }
-        }
-        }
-         if(!bandera) System.out.println("ALERTA DE MENSAJE");
+         }else if(pos.getEstado().getCodigoEstado().equals("003")){
+            for(Entrevistados est : eFacade.findAll() ){
+                if(est.getPostulante().getCedula().equals(pos.getCedula())){
+                    e.setCodigoEstado("004");
+                    pos.setEstado(this.e);
+                    pFacade.edit(pos);
+                    bandera = true;
+                    break;
+                }
+         } 
+            
          }
+         
+        if(!bandera) System.out.println("ALERTA DE MENSAJE");//DEBERIA DE MOSTRAR MENSAJE
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
+
+         }
+         catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+        }
+         
+     }
+     
+     public String cambiarEstados2(Postulante pos){
+         try{
+         boolean bandera = false;
+         System.out.println(pos.getNombreCompleto());
+         //falta validaciones
+         if(pos.getEstado().getCodigoEstado().equals("001")){
+            e.setCodigoEstado("002");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }else if(pos.getEstado().getCodigoEstado().equals("002") && pos.getDoprueba().equals("SI")){
+             e.setCodigoEstado("003");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }else if(pos.getEstado().getCodigoEstado().equals("003")){
+            for(Entrevistados est : eFacade.findAll() ){
+                if(est.getPostulante().getCedula().equals(pos.getCedula())){
+                    e.setCodigoEstado("004");
+                    pos.setEstado(this.e);
+                    pFacade.edit(pos);
+                    bandera = true;
+                    break;
+                }
+         } 
+            
+         }
+         
+        if(!bandera) System.out.println("ALERTA DE MENSAJE");//DEBERIA DE MOSTRAR MENSAJE
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
+
+         }
+         catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+        }
+         return "Entrevistados";
+     }
+     
+     public String cambiarEstados3(Postulante pos){
+         try{
+         boolean bandera = false;
+         System.out.println(pos.getNombreCompleto());
+         //falta validaciones
+         if(pos.getEstado().getCodigoEstado().equals("001")){
+            e.setCodigoEstado("002");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }else if(pos.getEstado().getCodigoEstado().equals("002") && pos.getDoprueba().equals("SI")){
+             e.setCodigoEstado("003");
+            pos.setEstado(this.e);
+            pFacade.edit(pos);
+            bandera = true;
+         }else if(pos.getEstado().getCodigoEstado().equals("003")){
+            for(Entrevistados est : eFacade.findAll() ){
+                if(est.getPostulante().getCedula().equals(pos.getCedula())){
+                    e.setCodigoEstado("004");
+                    pos.setEstado(this.e);
+                    pFacade.edit(pos);
+                    bandera = true;
+                    break;
+                }
+         } 
+            
+         }
+         
+        if(!bandera) System.out.println("ALERTA DE MENSAJE");//DEBERIA DE MOSTRAR MENSAJE
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
+
+         }
+         catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+        }
+         return "addRequisicion";
+     }
+     
     
 
 }
