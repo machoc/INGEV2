@@ -44,4 +44,5 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/ultimainge" object-type="user" pool-name="oracle-thin_XE_INGE3Pool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/ingecompleto" object-type="user" pool-name="oracle-thin_XE_INGE3Pool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/jdbc/pruebaestados" object-type="user" pool-name="oracle-thin_XE_INGE3Pool"/>
 </resources>

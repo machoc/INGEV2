@@ -7,20 +7,17 @@ package com.sar.session;
 
 import com.sar.model.UsuarioInge;
 import java.util.List;
-import javax.ejb.Local;
 
 /**
  *
  * @author Luis Alejandro
  */
-@Local
 public interface UsuarioIngeFacadeLocal {
+    void create(UsuarioInge requisicion);
 
-    void create(UsuarioInge usuarioInge);
+    void edit(UsuarioInge requisicion);
 
-    void edit(UsuarioInge usuarioInge);
-
-    void remove(UsuarioInge usuarioInge);
+    void remove(UsuarioInge requisicion);
 
     UsuarioInge find(Object id);
 

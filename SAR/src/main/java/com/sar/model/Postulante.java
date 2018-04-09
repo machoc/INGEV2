@@ -6,6 +6,7 @@
 package com.sar.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Postulante.findByNotas", query = "SELECT p FROM Postulante p WHERE p.notas = :notas")
     , @NamedQuery(name = "Postulante.findByDoprueba", query = "SELECT p FROM Postulante p WHERE p.doprueba = :doprueba")})
 public class Postulante implements Serializable {
+
+    @OneToMany(mappedBy = "postulante")
+    private Collection<Seleccionados> seleccionadosCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -214,6 +220,15 @@ public class Postulante implements Serializable {
     @Override
     public String toString() {
         return "com.sar.model.Postulante[ cedula=" + cedula + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Seleccionados> getSeleccionadosCollection() {
+        return seleccionadosCollection;
+    }
+
+    public void setSeleccionadosCollection(Collection<Seleccionados> seleccionadosCollection) {
+        this.seleccionadosCollection = seleccionadosCollection;
     }
     
 }
