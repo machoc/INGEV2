@@ -1,8 +1,0 @@
-#surefire
-#Tue Mar 20 23:37:10 CST 2018
-maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=C\:\\Users\\Luis Alejandro\\Desktop\\INGE-RELEASE\\INGEV2\\SAR
-file.encoding=UTF-8
-localRepository=C\:\\Users\\Luis Alejandro\\.m2\\repository
-netbeans.deploy=true
-basedir=C\:\\Users\\Luis Alejandro\\Desktop\\INGE-RELEASE\\INGEV2\\SAR

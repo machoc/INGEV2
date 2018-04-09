@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/postulante.css"/>
+        <h:outputStylesheet name="css/addRequisicion.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+            <h:form id="table" class="formpostu">
+                <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR2/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR2/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR2/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR2/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR2/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+                </div>
+                <h1 align="center"><h:outputText value=" Estado Contratado"/></h1>
+                <div>
+                    <p:button class="botonrequi1" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/estados.xhtml" value="Preseleccionados" outcome="estados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Contratados.xhtml" value="Contratados" outcome="Contratados"></p:button>
+
+                </div><br></br>
+ 
+                <p:dataTable rendered="true" emptyMessage="No se encuentra postulante" id="listaContratados"   paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         currentPageReportTemplate="1 de 1" paginatorPosition="bottom" rowStyleClass="#{item.prioridad eq 1 ? 'colorPrimario' : null}"  value="#{seleccionadoController.listSeleccionados()}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Prioridad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.prioridad}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.cedula}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.nombrecompleto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Requisicion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.requisicion}" style="text-transform: uppercase"/>
+                            </p:column>
+                    
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.telefono}" style="text-transform: uppercase"/>
+                            </p:column>
+                    <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Notas"/>
+                                </f:facet>
+                        <h:outputText value="#{item.postulante.notas}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Prueba"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.doprueba}" style="text-transform: uppercase"/>
+                            </p:column>
+
+                            
+                            <p:column headerText="Opciones" style="width:180px; text-align: center">
+                                <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">
+                                    <f:setPropertyActionListener value="#{item.postulante}" target="#{requisicionController.seleccionado}" />
+                                </p:commandButton>
+                                <p:commandButton icon="ui-icon-wrench" actionListener="#{posController.edit(item.postulante)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
+                                <p:commandButton icon="f" actionListener="#{posController.finalizarEstados(item.postulante)}"/>
+                               
+                            </p:column>
+                        </p:dataTable>
+               
+                </h:form>
+        </f:view>
+  
+        <p:dialog header="Informacion Postulante" style="width:auto"   widgetVar="informacion" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="posInfo1" style="text-align:center;" >
+           <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty requisicionController.seleccionado}" >
+
+              <p:outputLabel value="Nombre Completo" />
+               <p:outputLabel value="#{requisicionController.seleccionado.nombrecompleto}" />
+              <p:outputLabel value="Edad" />
+              <p:outputLabel value="#{requisicionController.seleccionado.edad}" />
+              <p:outputLabel value="Especialidad" />
+              <p:outputLabel value="#{requisicionController.seleccionado.especialidad}" />
+              <p:outputLabel value="Experiencia" />
+              <p:outputLabel value="#{requisicionController.seleccionado.experiencia}" />
+              <p:outputLabel value="Licencia" />
+              <p:outputLabel value="#{requisicionController.seleccionado.licencia}" />
+              
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+       
+        
+         <p:dialog id="dialogoEdit2" widgetVar="modify2" header="Modificar Postulante">
+            <f:view>
+
+
+
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Cedula:" for="ced" />
+                        <p:inputText  id="ced" value="#{posController.p.cedula}"  title="cedula" />
+                        <p:outputLabel value="Notas:" for="notas" />
+                        <p:inputTextarea id="notas" value="#{posController.note}"  label="Description"
+                                         maxlength="200"  autoResize="false">
+                            <p:watermark for="notas" value="Agregar nueva nota" id="watermarknotas" />
+
+                        </p:inputTextarea>
+
+                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR"  action="#{posController.cambiar()}" onclick="document.location.reload()" update="table:listaContratados" />
+
+                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify2').hide();" />
+
+
+                    </p:panelGrid>
+                </h:form>
+
+
+
+            </f:view>
+
+        </p:dialog>
+    </h:body>
+</html>

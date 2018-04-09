@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/postulante.css"/>
+        <h:outputStylesheet name="css/addRequisicion.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+            <h:form id="table" class="formpostu">
+                <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR2/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR2/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR2/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR2/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR2/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+                </div>
+                <h1 align="center"><h:outputText value=" Estado Seleccionado"/></h1>
+                <div>
+                    <p:button class="botonrequi1" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/estados.xhtml" value="Preseleccionados" outcome="estados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR2/faces/Contratados.xhtml" value="Contratados" outcome="contratados"></p:button>
+                </div><br></br>
+                 <p:dataTable emptyMessage="No se encuentra postulante" id="listaSeleccionados" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         currentPageReportTemplate="1 de 1" paginatorPosition="bottom" value="#{requisicionController.seleccionados()}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cedula"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cedula}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre Completo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombrecompleto}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Edad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.edad}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Experiencia"/>
+                                </f:facet>
+                                <h:outputText value="#{item.experiencia}" style="text-transform: uppercase"/>
+                            </p:column>
+                     <p:column filterBy="#{item.requisicion.puesto}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Requisición"/>
+                        </f:facet>
+                        <h:outputText value="#{item.requisicion.puesto}" style="text-transform: uppercase"/>
+                    </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Especialidad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.especialidad}" style="text-transform: uppercase"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Notas"/>
+                                </f:facet>
+                                <h:outputText value="#{item.notas}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Prueba"/>
+                                </f:facet>
+                                <h:outputText value="#{item.doprueba}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column headerText="Opciones" style="width:180px; text-align: center">
+                               <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">
+                                    <f:setPropertyActionListener value="#{item}" target="#{requisicionController.seleccionado}" />
+                                </p:commandButton>
+                                 <p:commandButton icon="ui-icon-wrench" actionListener="#{posController.edit(item)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
+                                 <p:commandButton icon="e" actionListener="#{posController.edit(item)}"  oncomplete="PF('select').show();" update="seleccion"  />
+                                 <p:commandButton action="#{posController.cambiarEstados4(item)}" onclick="document.location.reload()" icon="c" update="listaSeleccionados,mensaje2"  />
+                            </p:column>
+                        </p:dataTable>
+               
+                </h:form>
+        </f:view>
+
+        
+        
+               
+
+        <p:dialog header="Informacion Postulante" widgetVar="informacion" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="posInfo1" style="text-align:center;" >
+           <p:panelGrid  columns="2" columnClasses="label,value" rendered="#{not empty requisicionController.seleccionado}" >
+
+               <p:outputLabel value="Cedula:" />
+               <p:outputLabel value="#{requisicionController.seleccionado.cedula}" />
+              <p:outputLabel value="Nombre Completo" />
+              <p:outputLabel value="#{requisicionController.seleccionado.nombrecompleto}" />
+               <p:outputLabel value="Notas:" />
+               <p:outputLabel value="#{requisicionController.seleccionado.notas}" />
+              <p:outputLabel value="Prueba" />
+              <p:outputLabel value="#{requisicionController.seleccionado.doprueba}" />
+               <p:outputLabel value="Requisición:" />
+               <p:outputLabel value="#{requisicionController.seleccionado.requisicion}" />
+              <p:outputLabel value="Teléfono:" />
+              <p:outputLabel value="#{requisicionController.seleccionado.telefono}" />
+
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+        
+        <p:dialog id="dialogoEdit2" widgetVar="modify2" header="Modificar Postulante">
+            <f:view>
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Cedula:" for="ced" />
+                        <p:inputText  id="ced" value="#{posController.p.cedula}"  title="cedula" />
+                        <p:outputLabel value="Notas:" for="notas" />
+                        <p:inputTextarea id="notas" value="#{posController.note}"  label="Description"
+                                         maxlength="200"  autoResize="false">
+                            <p:watermark for="notas" value="Agregar nueva nota" id="watermarknotas" />
+
+                        </p:inputTextarea>
+
+                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR"  action="#{posController.cambiar()}" onclick="document.location.reload()" update="table:listaSeleccionados" />
+
+                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify2').hide();" />
+
+
+                    </p:panelGrid>
+                </h:form>
+            </f:view>
+
+        </p:dialog>
+        
+         <p:dialog id="seleccion" widgetVar="select" header="Prioridad Postulante">
+            <f:view>
+
+
+
+                <h:form>
+                    <h1><h:outputText value="Prioridad"/></h1>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Postulante:" for="pos" />   
+                        <p:inputText id="pos"   value="#{posController.p.cedula}" title="cedula"/>
+                           
+
+                        <p:outputLabel value="Prioridad: " for="res" />   
+                        <p:selectOneMenu id="res"    value="#{seleccionadoController.tipo}" title="tipo">
+                            <f:selectItem itemLabel="Seleccionar Prioridad" itemValue="" noSelectionOption="true" />
+                            <f:selectItem  itemValue="1" itemLabel="ALTA" />
+                            <f:selectItem  itemValue="2" itemLabel="MEDIA" />
+                            <f:selectItem itemValue="3" itemLabel="BAJA" />
+                            
+                        </p:selectOneMenu>
+
+                       
+                        <p:commandButton class="si" icon="ui-icon-check" value="GUARDAR" action="#{seleccionadoController.agregarSeleccionado()}" update="mensaje2" >
+                            <f:setPropertyActionListener target="#{seleccionadoController.respuesta}" value="#{posController.p.cedula}" />
+                          </p:commandButton>
+
+                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('dates').hide();" />
+
+
+                    </p:panelGrid>
+                </h:form>
+
+
+            </f:view>
+
+        </p:dialog>
+       
+        
+        <script type="text/javascript">
+                
+    function intento(){
+        var x = document.getElementById("respuesta").value;
+        if(x==="SI"){
+             alert(".l.");
+         }
+         }
+    function cargar(){
+             var x = document.getElementById('res');
+             x.addEventListener("blur",obtener);
+         }
+       
+        function obtener(){
+        var x = document.getElementById('res').value;
+        var y = document.getElementById('tipo');
+
+        if(x==="SI"){
+            y.disabled = false;
+        }
+        document.addEventListener("DOMContentLoaded",cargar)
+    </script>
+       
+       
+
+    </h:body>
+</html>
