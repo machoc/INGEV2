@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="css/postulante.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <p:growl id="mensaje2" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+            <h:form id="table" class="formpostu">
+                <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                    </p:panelGrid>     
+                </div>
+                <h1 align="center"><h:outputText value="Departamentos"/></h1>
+                <p:commandButton class="agregar" icon="ui-icon-circle-arrow-e" value="Agregar" oncomplete="PF('widModify').show();" update="dialogo"  />
+                <br></br>
+                <br></br>
+                <p:dataTable emptyMessage="No se encuentra departamento" id="listD" value="#{departamentoController.listar()}" var="item" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         currentPageReportTemplate="Paginación" paginatorPosition="bottom" >
+                    <p:column filterBy="#{item.codigoDepartamento}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Código"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoDepartamento}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.descripcion}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}" style="text-transform: uppercase"/>
+                    </p:column>
+                    
+                   
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opciones"/>
+                        </f:facet>
+                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{departamentoController.delete(item)}" update="mensaje2, listD">
+                                <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR EL DEPARTAMENTO?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
+                         </p:confirmDialog>
+                        <p:commandButton update="depInfo" class="ver" value="Ver" actionListener="#{departamentoController.edit(item)}" oncomplete="PF('depDialog').show()" icon="ui-icon-search" title="Ver Departamento">
+                           </p:commandButton>
+                        <p:commandButton icon="ui-icon-wrench" class="modificar" value="Editar" actionListener="#{departamentoController.edit(item)}" oncomplete="PF('modify').show();" update="dialogoEdit"  />
+                      </p:column>
+                </p:dataTable>
+               
+                </h:form>
+        </f:view>
+        
+        <p:dialog id="dialogo" widgetVar="widModify" header="Agregar Departamento" maximizable="true" >
+            <p:messages id="advertencia" showDetail="true" autoUpdate="false" closable="true" />
+
+            <h:form> 
+                <p:fieldset legend="Datos Departamento" style="margin-bottom:100px">
+                <h1><font family="futura">
+                <h:outputText value="Crear"/></font></h1>
+                <h:panelGrid cellpadding="3" columns="3" id="grid">
+                    <h:outputLabel value="Código:" for="codigo" />
+                    <p:inputText id="codigo" maxlength="4" value="#{departamentoController.dep.codigoDepartamento}"  title="Código" required="true" requiredMessage="Código vacio.">
+                        <p:watermark for="codigo" value="1506" id="watermarkcodigo" />
+
+                     </p:inputText>
+                    
+                    <p:message for="codigo" />
+                    <h:outputLabel value="Descripción:" for="descripcion" />
+                    <p:inputText required="true" id="descripcion" maxlength="50" value="#{departamentoController.dep.descripcion}" title="Descripcion" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                        <p:watermark for="descripcion" value="Recursos Humanos" id="watermarkdescripcion" />
+
+                        
+                    </p:inputText>
+                    <p:message for="descripcion" />
+                    
+                    <p:commandButton class="si" icon="ui-icon-plusthick" validateClient="true" value="GUARDAR" action="#{departamentoController.agregar()}" update=":table:listD, grid,mensaje2"  />
+                    <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('widModify').hide();" />
+
+                </h:panelGrid>
+                </p:fieldset>
+
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog id="dialogoEdit" widgetVar="modify" header="Modificar Departamento">
+            <f:view>
+
+
+                <h:form>
+                    <h1><h:outputText value="Modificar"/></h1>
+                    <p:panelGrid columns="2">
+                        <h:outputLabel value="Código:" for="codigo" />
+                        <p:inputText id="codigo" maxlength="4" value="#{departamentoController.dep.codigoDepartamento}"  title="Codigo" required="true" requiredMessage="Código vacío.">
+                     </p:inputText>
+                       <h:outputLabel value="Descripcion:" for="descripcion" />
+                       <h:inputText required="true" id="descripcion" maxlength="15" value="#{departamentoController.dep.descripcion}" title="descripcion" requiredMessage="Llenar este campo" validatorMessage="Favor escribir letras" >
+                          
+                    </h:inputText>
+
+                           
+                       <p:commandButton class="si" icon="ui-icon-check" value="MODIFICAR" action="#{departamentoController.modify()}" update=":table:listD,mensaje2" />
+                         <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify').hide();" />
+                    </p:panelGrid>
+                </h:form>
+            </f:view>
+
+        </p:dialog>
+        
+        <p:dialog header="Información Departamento" widgetVar="depDialog" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="depInfo" style="text-align:center;">
+           <p:panelGrid  columns="2" columnClasses="label,value">
+
+               <p:outputLabel value="Código:" />
+               <p:outputLabel value="#{departamentoController.dep.codigoDepartamento}" />
+
+              <p:outputLabel value="Descripción" />
+              <p:outputLabel value="#{departamentoController.dep.descripcion}" style="text-transform: uppercase"/>
+
+               
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+
+    </h:body>
+</html>
+
