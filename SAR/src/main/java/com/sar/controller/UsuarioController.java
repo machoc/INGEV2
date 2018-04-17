@@ -29,6 +29,7 @@ public class UsuarioController implements Serializable
 {
 
     private UsuarioInge  user = new UsuarioInge();
+    private String setcontraseña;
      
 
     @EJB
@@ -39,6 +40,14 @@ public class UsuarioController implements Serializable
    
     
 }
+
+    public String getSetcontraseña() {
+        return setcontraseña;
+    }
+
+    public void setSetcontraseña(String setcontraseña) {
+        this.setcontraseña = setcontraseña;
+    }
     
     
 
@@ -161,6 +170,45 @@ public class UsuarioController implements Serializable
         }
         
         return redireccion;
+    }
+    
+        public String cambiarContraseña(){
+        try{
+            for(UsuarioInge usuarios : this.facade.findAll()){
+                if(this.user.getContraseña().equals(usuarios.getContraseña()) && this.user.getCedula().equals(usuarios.getCedula())){
+                    //this.user.setContraseña(this.setcontraseña);
+                    usuarios.setContraseña(setcontraseña);
+                   this.user = usuarios;
+                   modificar();
+                  RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('cambiar').hide();");
+                   //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "Contraseña Modificada Correctamente"));
+      
+                }else{
+                      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "AVISO", "Cedula o Contraseña Incorrectas"));
+      
+                }
+            }
+        }catch(Exception e){
+                        System.err.println(e.getMessage());
+                      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+      
+        }
+        return "login";
+    }
+    
+    
+    public void checkId()
+    {
+        for (UsuarioInge i : facade.findAll())
+        {
+            if (!i.getCedula().equals(user.getCedula()))
+            {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Cedula ya existe."));
+                break;
+            }
+        }
+
     }
     
 }

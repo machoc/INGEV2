@@ -10,6 +10,8 @@
         <h:outputStylesheet name="css/postulante.css"/>
         <h:outputStylesheet name="css/addRequisicion.css"/>
         <h:outputStylesheet name="grid/grid.css" library="primefaces" />
+        <f:event type="preRenderView" listener="#{bean.verificarSesion()}"/>
+
     </h:head>
     <h:body>
         <f:view>
@@ -116,6 +118,7 @@
                         <p:outputLabel value="Notas:" for="notas" />
                         <p:inputTextarea id="notas" value="#{posController.note}"  label="Description"
                                          maxlength="200"  autoResize="false">
+                            <f:validateRegex pattern="\D*" />
                             <p:watermark for="notas" value="Agregar nueva nota" id="watermarknotas" />
 
                         </p:inputTextarea>
@@ -152,6 +155,7 @@
                         <p:outputLabel value="Se realizo entrevista: " for="res" />   
                         <p:inputText maxlength="2" id="res" onblur="intento()" value="#{entrevistaController.e.respuesta}" title="Respuesta">
                             <p:watermark for="res" value="SI" id="watermarkres" />
+                            <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$"  />
                         </p:inputText>
 
                         <p:outputLabel value="Tipo:" for="tipo" />   

@@ -10,6 +10,8 @@
         <h:outputScript name="js/index.js" />
     </h:head>
     <h:body>
+        
+        <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
 
         <h:form>
             <p:messages autoUpdate="true" showDetail="true" id="mensajes" />
@@ -23,8 +25,26 @@
                 <p:commandButton value="Ingresar" action="#{usuarioController.iniciarSesion()}" icon="ui-icon-key"/>
             </p:panelGrid>
             <p:separator />
-            <p:link value="Cambiar Contraseña" outcome="index"/>
+            <p:commandButton value="Cambiar Contraseña" oncomplete="PF('cambiar').show();" />
         </h:form>
+
+                 <p:dialog id="cambiarcontraseña" widgetVar="cambiar" header="Cambiar Contraseña">
+                     <p:messages showDetail="true" id="mensajes2"  />
+           
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Usuario:" for="ced" />
+                        <p:inputText  id="ced" value="#{usuarioController.user.cedula}"  title="cedula" />
+                        <p:outputLabel value="Contraseña:" for="notas" />
+                        <p:password id="notas" value="#{usuarioController.user.contraseña}" title="contraseña" />
+                        <p:outputLabel value="Nueva Contraseña:" for="nueva" />
+                        <p:password id="nueva" value="#{usuarioController.setcontraseña}" title="contraseña nueva" />
+                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR" action="#{usuarioController.cambiarContraseña()}" update="mensajes2,mensajeLogin" />
+
+                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('cambiar').hide();" />
+                    </p:panelGrid>
+                </h:form>
+        </p:dialog>
 
 
     </h:body>
