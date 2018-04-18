@@ -88,8 +88,8 @@ and open the template in the editor.
     transform: scale(1.1) !important;
     -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
     transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
-    background: #ffff00 !important;
-    box-shadow: inset 0 0 0 1px #4d4d00 !important;
+    background: #cccc00 !important;
+    box-shadow: inset 0 0 0 1px #ffff00 !important;
 }
 
 .ver{
@@ -162,4 +162,49 @@ and open the template in the editor.
     background-color: #056B8C;
     /*045670  033D4F*/
     background-image: none;
+}
+
+.busqueda{
+    box-shadow: inset 0 0 0 2px #33ccff !important;
+    color: white !important;
+    background: #00ace6 !important;
+}
+
+.busqueda:hover , .busqueda:focus , .busqueda:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #006080 !important;
+    box-shadow: inset 0 0 0 1px #33ccff !important;
+}
+
+.next{
+    box-shadow: inset 0 0 0 2px #80ff00 !important;
+    color: white !important;
+    background: #59b300 !important;
+}
+
+.next:hover , .next:focus , .next:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #336600 !important;
+    box-shadow: inset 0 0 0 1px #80ff00 !important;
+}
+
+.data{
+    box-shadow: inset 0 0 0 2px #ff5500 !important;
+    color: white !important;
+    background: #e67300 !important;
+}
+
+.data:hover , .data:focus , .data:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #994d00 !important;
+    box-shadow: inset 0 0 0 1px #ff5500 !important;
 }

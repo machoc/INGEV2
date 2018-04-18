@@ -29,15 +29,15 @@
                 </div>
                 <h1 align="center"><h:outputText value=" Estado Contratado"/></h1>
                 <div>
-                     <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Preseleccionados" outcome="estados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
+                     <p:button class="botonrequi2" icon="ui-icon-calculator" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Preseleccionados" outcome="estados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-folder-open" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-script" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-circle-check" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
                    
                 </div><br></br>
  
                 <p:dataTable rendered="true" emptyMessage="No se encuentra postulante" id="listaContratados"   paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" 
                          currentPageReportTemplate="1 de 1" paginatorPosition="bottom" rowStyleClass="#{item.prioridad eq 1 ? 'colorPrimario' : null}"  value="#{seleccionadoController.listSeleccionados()}" var="item">
                             <p:column>
                                 <f:facet name="header">
@@ -86,11 +86,11 @@
 
                             
                             <p:column headerText="Opciones" style="width:180px; text-align: center">
-                                <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">
+                                <p:commandButton class="busqueda" update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">
                                     <f:setPropertyActionListener value="#{item.postulante}" target="#{requisicionController.seleccionado}" />
                                 </p:commandButton>
-                                <p:commandButton icon="ui-icon-wrench" actionListener="#{posController.edit(item.postulante)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
-                                <p:commandButton icon="f" actionListener="#{posController.finalizarEstados(item.postulante)}" onclick="document.location.reload()" update="listaContratados"/>
+                                <p:commandButton class="modificar" icon="ui-icon-wrench" actionListener="#{posController.edit(item.postulante)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
+                                <p:commandButton class="next" icon="ui-icon-check" actionListener="#{posController.finalizarEstados(item.postulante)}" onclick="document.location.reload()" update="listaContratados"/>
                                
                             </p:column>
                         </p:dataTable>

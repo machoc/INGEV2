@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 18, 2018, 12:47:19 AM
+    Author     : Jason
+*/
+
+.cambio{
+    box-shadow: inset 0 0 0 2px #00ffbf !important;
+    color: white !important;
+    background: #00b386 !important;
+}
+
+.cambio:hover , .cambio:focus , .cambio:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #004d39 !important;
+    box-shadow: inset 0 0 0 1px #00ffbf !important;
+}
+
+.ingresa{
+    box-shadow: inset 0 0 0 1px #00ff00 !important;
+    color: white !important;
+    background: #006600 !important;
+}
+
+.ingresa:hover , .ingresa:focus , .ingresa:active{
+    -webkit-transform: scale(1.1) !important;
+    transform: scale(1.1) !important;
+    -webkit-transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    transition-timing-function: cubic-bezier(0.35, 1.02, 0.25, -0.25) !important;
+    background: #003300 !important;
+    box-shadow: inset 0 0 0 1px #00ff00 !important;
+}
+
+
+body{
+background: -moz-radial-gradient(center, ellipse cover, rgba(255,0,4,1) 0%, rgba(255,3,7,1) 1%, rgba(255,59,62,0.75) 23%, rgba(255,125,127,0.5) 49%, rgba(255,207,207,0.25) 81%, rgba(255,255,255,0) 100%);
+background: -webkit-radial-gradient(center, ellipse cover, rgba(255,0,4,1) 0%,rgba(255,3,7,1) 1%,rgba(255,59,62,0.75) 23%,rgba(255,125,127,0.5) 49%,rgba(255,207,207,0.25) 81%,rgba(255,255,255,0) 100%);
+background: radial-gradient(ellipse at center, rgba(255,0,4,1) 0%,rgba(255,3,7,1) 1%,rgba(255,59,62,0.75) 23%,rgba(255,125,127,0.5) 49%,rgba(255,207,207,0.25) 81%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0004', endColorstr='#00ffffff',GradientType=1 );
+}

@@ -29,15 +29,15 @@
                 </div>
                 <h1 align="center"><h:outputText value=" Estado Preseleccionado"/></h1>
                 <div>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
-                    <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/Contratados.xhtml" value="Contratados" outcome="Contratados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-folder-open" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-script" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-circle-check" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
+                    <p:button class="botonrequi2" icon="ui-icon-tag" href="http://localhost:8080/SAR/faces/Contratados.xhtml" value="Contratados" outcome="Contratados"></p:button>
 
                 </div><br></br>
  
                 <p:dataTable rendered="true" emptyMessage="No se encuentra postulante" id="listaPres"   paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" 
                          currentPageReportTemplate="1 de 1" paginatorPosition="bottom"  value="#{requisicionController.preseleccionados()}" var="item">
                             <p:column>
                                 <f:facet name="header">
@@ -79,12 +79,12 @@
 
                             
                             <p:column headerText="Opciones" style="width:180px; text-align: center">
-                                <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">
+                                <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View" class="busqueda">
                                     <f:setPropertyActionListener value="#{item}" target="#{requisicionController.seleccionado}" />
                                 </p:commandButton>
                  
                                
-                                <p:commandButton   icon="icon-right-2" actionListener="#{posController.cambiarEstados1(item)}" onclick="document.location.reload()" update="listaPres,mensaje2"/>
+                                <p:commandButton  icon="ui-icon-seek-next" class="next" actionListener="#{posController.cambiarEstados1(item)}" onclick="document.location.reload()" update="listaPres,mensaje2"/>
 
                             </p:column>
                         </p:dataTable>
