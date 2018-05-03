@@ -573,4 +573,32 @@ public class PostulanteController implements Serializable
             //guardar registro de errores
         }
     }
+       public void reasignar1(String cedula){
+           try{
+           System.out.println(cedula);
+
+           for(Postulante pos : pFacade.findAll()){
+               System.out.println(cedula);
+
+            if(pos.getCedula().equals(cedula)){
+            
+                r.setNumrequisicion(BigDecimal.valueOf(100));
+            //System.out.println(estadoFacade.find("000").getDetalle());
+            e.setCodigoEstado("000");
+
+            pos.setEstado(this.e);
+            pos.setRequisicion(this.r);
+                pFacade.edit(pos);
+                break;
+            }
+        }
+         this.p = new Postulante();
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE REASIGNÓ CORRECTAMENTE"));
+           }
+         catch(Exception e){
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+     
+                 }
+
+       }
 }
