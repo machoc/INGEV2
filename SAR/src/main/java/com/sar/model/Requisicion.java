@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Entity
 @Table(name = "REQUISICION")
@@ -42,14 +42,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Requisicion.findByVacantes", query = "SELECT r FROM Requisicion r WHERE r.vacantes = :vacantes")
     , @NamedQuery(name = "Requisicion.findByContratante", query = "SELECT r FROM Requisicion r WHERE r.contratante = :contratante")
     , @NamedQuery(name = "Requisicion.findByFechaInicio", query = "SELECT r FROM Requisicion r WHERE r.fechaInicio = :fechaInicio")
-    , @NamedQuery(name = "Requisicion.findByFechaEntrega", query = "SELECT r FROM Requisicion r WHERE r.fechaEntrega = :fechaEntrega")})
+    , @NamedQuery(name = "Requisicion.findByFechaEntrega", query = "SELECT r FROM Requisicion r WHERE r.fechaEntrega = :fechaEntrega")
+    , @NamedQuery(name = "Requisicion.findByEstado", query = "SELECT r FROM Requisicion r WHERE r.estado = :estado")})
 public class Requisicion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
-     @GeneratedValue(generator="some_seq_name")
+    @GeneratedValue(generator="some_seq_name")
    @SequenceGenerator(name="some_seq_name", sequenceName="AUTO_SEQ", allocationSize = 1)
     @NotNull
     @Column(name = "NUMREQUISICION")
@@ -68,11 +69,14 @@ public class Requisicion implements Serializable {
     @Column(name = "FECHA_ENTREGA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
+    @Size(max = 20)
+    @Column(name = "ESTADO")
+    public String estado;
     @JoinColumn(name = "DEPARTAMENTO", referencedColumnName = "CODIGO_DEPARTAMENTO")
     @ManyToOne
     private Departamento departamento;
     @JoinColumn(name = "USUARIO", referencedColumnName = "CEDULA")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private UsuarioInge usuario;
     @OneToMany(mappedBy = "requisicion")
     private Collection<Postulante> postulanteCollection;
@@ -130,6 +134,14 @@ public class Requisicion implements Serializable {
 
     public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Departamento getDepartamento() {

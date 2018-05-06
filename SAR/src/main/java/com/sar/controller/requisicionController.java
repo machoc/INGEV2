@@ -129,6 +129,7 @@ public class requisicionController implements Serializable
 
     public String agregar() {
         try {
+            this.r.setEstado("ABIERTA");
             this.r.setDepartamento(this.d);
           //  System.out.println(r.getNumrequisicion());   
               //  System.out.println(sirva[0].getCedula());
@@ -232,6 +233,31 @@ public class requisicionController implements Serializable
         
         flag = false;
         return requisicion;
+    }
+    
+    public void cerrarRequisicion(String num){
+         try{
+           System.out.println(num);
+
+           for(Requisicion req : requisicionFacade.findAll()){
+               System.out.println(num);
+
+            if(req.getNumrequisicion().toString().equals(num)){
+            
+                req.setEstado("CERRADA");
+                requisicionFacade.edit(req);
+              
+                break;
+            }
+        }
+         this.r = new Requisicion();
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
+           }
+         catch(Exception e){
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+     
+                 }
+        
     }
     
 }

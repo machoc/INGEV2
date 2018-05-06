@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Stateless
 public class RequisicionFacade extends AbstractFacade<Requisicion> implements RequisicionFacadeLocal {

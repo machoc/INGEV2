@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Local
 public interface DepartamentoFacadeLocal {

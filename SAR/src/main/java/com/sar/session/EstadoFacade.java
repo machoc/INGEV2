@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Stateless
 public class EstadoFacade extends AbstractFacade<Estado> implements EstadoFacadeLocal {

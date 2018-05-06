@@ -63,6 +63,12 @@
                         </f:facet>
                         <h:outputText value="#{item.departamento.descripcion}" style="text-transform: uppercase"/>
                     </p:column>
+            <p:column filterBy="#{item.estado}">
+                        <f:facet name="header">
+                            <h:outputText value="Estado"/>
+                        </f:facet>
+                <h:outputText value="#{item.estado}" style="text-transform: uppercase"/>
+                    </p:column>
                     <p:column>
                      <f:facet name="header">
                             <h:outputText value="Opciones"/>
@@ -74,6 +80,13 @@
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="SÍ" onclick="document.location.reload()" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Cerrar" actionListener="#{requisicionController.cerrarRequisicion(item.numrequisicion)}" update="requisicion,mensaje2">
+                            <p:confirm header="CONFIRMACIÓN" message="DESEA CERRAR LA REQUISICIÓN?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="SÍ"  type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                      <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>

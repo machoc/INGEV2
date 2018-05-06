@@ -6,13 +6,12 @@
 package com.sar.session;
 
 import com.sar.model.Requisicion;
-import com.sar.model.UsuarioInge;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author manuel
+ * @author Luis Alejandro
  */
 @Local
 public interface RequisicionFacadeLocal {
@@ -30,6 +29,5 @@ public interface RequisicionFacadeLocal {
     List<Requisicion> findRange(int[] range);
 
     int count();
-    
     
 }
