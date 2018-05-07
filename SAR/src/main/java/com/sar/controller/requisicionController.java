@@ -47,6 +47,7 @@ public class requisicionController implements Serializable
     private Estado estado = new Estado();
     private UsuarioInge user = new UsuarioInge();
     private List<Postulante> aux = new ArrayList<Postulante>();
+    private List<UsuarioInge> usuario = new ArrayList<UsuarioInge>();
     private Postulante seleccionado;
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
@@ -214,6 +215,7 @@ public class requisicionController implements Serializable
     public String edit(Requisicion req) {
         this.r = req;
         this.d = req.getDepartamento();
+        this.user = req.getUsuario();
        
         //return add
         return "addRequisicion";
@@ -258,6 +260,32 @@ public class requisicionController implements Serializable
      
                  }
         
+    }
+    
+    public List<UsuarioInge> loadUsuarios()
+    {
+        for (UsuarioInge i : userFacade.findAll())
+        {
+            
+                usuario.add(i);
+            
+        }
+        return usuario;
+    }
+    
+    public void cambiar(BigDecimal numero){
+        for(Requisicion req : requisicionFacade.findAll()){
+            if(req.getNumrequisicion().equals(numero)){
+            
+                req.setUsuario(user);
+                requisicionFacade.edit(req);
+                break;
+            }
+        }
+         this.r = new Requisicion();
+         RequestContext req = RequestContext.getCurrentInstance();
+         req.execute("PF('modify7').hide();");
+        // return "Entrevistados";
     }
     
 }

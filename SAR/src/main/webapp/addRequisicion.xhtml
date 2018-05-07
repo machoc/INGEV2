@@ -69,6 +69,12 @@
                         </f:facet>
                 <h:outputText value="#{item.estado}" style="text-transform: uppercase"/>
                     </p:column>
+            <p:column filterBy="#{item.usuario.cedula}">
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                <h:outputText value="#{item.usuario.cedula}" style="text-transform: uppercase"/>
+                    </p:column>
                     <p:column>
                      <f:facet name="header">
                             <h:outputText value="Opciones"/>
@@ -90,6 +96,8 @@
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                      <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
+                     <p:commandButton update="posInfo" class="ver" value="Asignar" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modify7').show()" icon="ui-icon-search" title="Asignar Requisición"/>
+
 
                     </p:column>
                 </p:dataTable>
@@ -163,10 +171,43 @@
                
                <p:outputLabel value="Departamento:" />
                <p:outputLabel value="#{requisicionController.r.departamento.descripcion}" style="text-transform: uppercase"/>
+               
+               <p:outputLabel value="Usuario:" />
+               <p:outputLabel value="#{requisicionController.r.usuario.cedula}" style="text-transform: uppercase"/>
+               
+
+              
 
            </p:panelGrid>
         </p:outputPanel>
-    </p:dialog>
+    </p:dialog>   
+                <p:dialog id="dialogoEdit2" widgetVar="modify7" header="Asignar Requisicion">
+            <f:view>
+
+
+
+                <h:form>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Usuario:" />
+                        <p:selectOneMenu style="text-transform: uppercase" id="usuarios" value="#{requisicionController.user.cedula}" >
+                        <!-- TODO: update below reference to list of available items-->
+                       
+                        <f:selectItems value="#{requisicionController.loadUsuarios()}" var="it" itemLabel="#{it.toString()}" itemValue="#{it.cedula}" />
+                    </p:selectOneMenu>
+
+                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR"  action="#{requisicionController.cambiar(item.numrequisicion)}" onclick="document.location.reload()" update="table:requisicion" />
+
+                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify2').hide();" />
+
+
+                    </p:panelGrid>
+                </h:form>
+
+
+
+            </f:view>
+
+        </p:dialog>  
         <h:outputScript library="js" name="calendar_es.js"/>
     </h:body>
 </html>
