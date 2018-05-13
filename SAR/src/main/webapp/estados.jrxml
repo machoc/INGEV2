@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estados" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43ab0ff2-1b67-4531-b36c-6b4fc3a936d1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="estado" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="180" splitType="Stretch">
+			<frame>
+				<reportElement x="-20" y="43" width="580" height="137" uuid="73959e53-d2e2-4642-8671-24c14f6ffdb6"/>
+				<rectangle>
+					<reportElement x="200" y="0" width="380" height="40" uuid="58e25987-74ba-4f7b-ad4d-50dd79bf6002"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="200" y="0" width="380" height="70" uuid="d5510527-99c0-4bc5-bd9c-95cde02dc310"/>
+					<textElement textAlignment="Center">
+						<font fontName="Bitstream Charter" size="22" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[REPORTE DE ESTADOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="200" y="40" width="380" height="30" uuid="1d74912f-557f-4487-8f3b-206b136f1df3"/>
+					<textElement textAlignment="Center">
+						<font size="20"/>
+					</textElement>
+					<text><![CDATA[SISTEMA DE RECLUTAMIENTO(SAR)]]></text>
+				</staticText>
+				<image>
+					<reportElement x="20" y="0" width="170" height="70" uuid="4dfcbae0-b0f0-45fa-b1a8-ef31642d31bb"/>
+					<imageExpression><![CDATA["https://image.ibb.co/nPswWx/logo_lanco.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="230" height="30" uuid="a3f18c5e-74f7-44c6-87ec-7b277eab7615">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76f45dec-fe2b-42cf-87f3-295d1d219e8c"/>
+				</reportElement>
+				<text><![CDATA[Estados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="150" height="30" uuid="ff2eb3ba-2d4e-4c54-8114-d1a7adfed943">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="25c40cca-784f-4cf0-b394-bd8d147457d3"/>
+				</reportElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="230" height="30" uuid="511be6bb-efb3-4c51-9593-96aa777738b5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="76f45dec-fe2b-42cf-87f3-295d1d219e8c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="5" width="150" height="25" uuid="134a694d-9cfd-4137-8fbe-d603e7809db4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="25c40cca-784f-4cf0-b394-bd8d147457d3"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="550" height="1" uuid="9360aa78-e3db-40a7-b8ec-6c219fd5177b"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="51" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="12" width="170" height="30" uuid="0c86bc70-7288-40d7-9e2f-2d2109ea1777"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="160" height="30" uuid="cde58d24-a3f5-4241-94fc-2a1f0e5636f5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="0" width="100" height="30" uuid="3805474b-19eb-44bf-93db-593fa03dc1af"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

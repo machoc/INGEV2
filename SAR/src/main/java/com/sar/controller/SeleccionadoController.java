@@ -123,6 +123,41 @@ public class SeleccionadoController implements Serializable {
         }
         return "Seleccionados";
     }
+    
+        public String modify()
+    {
+        try
+        {
+            //falta requisicion
+            searchPostulante();
+            System.out.println(p.getCedula()); 
+        for(Evaluados evaluado : eFacade.findAll()){
+            if(evaluado.getPostulante().getCedula().equals(this.p.getCedula())){
+                this.evaluate = evaluado;
+                
+                break;
+            }
+        }
+            System.out.println(evaluate.getCodigo());
+            this.evaluate.setPostulante(this.p);
+            this.eFacade.edit(this.evaluate);
+            this.p = new Postulante();
+            this.evaluate = new Evaluados();
+            RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('dates').hide();");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE MODIFICO CORRECTAMENTE"));
+
+        } catch (Exception e)
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR AL MODIFICAR"));
+        }
+
+        /*
+         Definir tod en  la base de datos mayuscula o minuscula
+
+         */
+        return "Seleccionados";
+    }
  
        public void checkSeleccionado(Postulante pos){
       for (Evaluados i : eFacade.findAll())

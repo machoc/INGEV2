@@ -49,8 +49,9 @@ public class Estado implements Serializable {
     public Estado() {
     }
 
-    public Estado(String codigoEstado) {
+    public Estado(String codigoEstado,String detalle) {
         this.codigoEstado = codigoEstado;
+        this.detalle = detalle;
     }
 
     public String getCodigoEstado() {

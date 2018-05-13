@@ -36,7 +36,7 @@ public void beforePageLoad()
     public boolean isFlag() {
          UsuarioInge us = (UsuarioInge) FacesContext.getCurrentInstance().getExternalContext().
                  getSessionMap().get("usuario");
-         if(us.getTipo().equals("Usuario")){
+         if(us.getTipo().equals("USUARIO")){
              flag = true;
          }
         return flag;
@@ -56,6 +56,37 @@ public void beforePageLoad()
             //log para guardar algun registro de un error
         }
     }
+ 
+  public void isAdmi() {
+     try{
+     FacesContext context = FacesContext.getCurrentInstance();
+            UsuarioInge us = (UsuarioInge) context.getExternalContext().getSessionMap().get("usuario");
+     if(flag  || us == null){
+          context.getExternalContext().redirect("permisos.xhtml");
+     }
+     }catch(Exception e){
+         
+     }
+ }
+ 
+public String logout() {
+    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    return "login?faces-redirect=true";
+} 
+
+//public String logout()
+//{
+//    setAccount(null);
+//    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+//    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+//
+//    NavigationUtils.redirect("/admin/login");
+//    return "";
+//}
+//
+/////page
+//<h:commandLink action="#{loginBean.logout()}" value="Logout" rendered="#{!empty loginBean.account}" />
+
 
 }
 

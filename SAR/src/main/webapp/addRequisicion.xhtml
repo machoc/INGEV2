@@ -69,12 +69,6 @@
                         </f:facet>
                 <h:outputText value="#{item.estado}" style="text-transform: uppercase"/>
                     </p:column>
-            <p:column filterBy="#{item.usuario.cedula}">
-                        <f:facet name="header">
-                            <h:outputText value="Usuario"/>
-                        </f:facet>
-                <h:outputText value="#{item.usuario.cedula}" style="text-transform: uppercase"/>
-                    </p:column>
                     <p:column>
                      <f:facet name="header">
                             <h:outputText value="Opciones"/>
@@ -82,10 +76,11 @@
                        
 
                         <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
-                            <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICIÓN?" icon="ui-icon-alert" />
+                                                        <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICIÓN?" icon="ui-icon-alert" />
+
                     </p:commandButton>
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="SÍ" onclick="document.location.reload()" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="SÍ"  type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                         <p:commandButton icon="ui-icon-trash" class="eliminar" value="Cerrar" actionListener="#{requisicionController.cerrarRequisicion(item.numrequisicion)}" update="requisicion,mensaje2">
@@ -96,8 +91,9 @@
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                      <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
-                     <p:commandButton update="posInfo" class="ver" value="Asignar" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modify7').show()" icon="ui-icon-search" title="Asignar Requisición"/>
-
+                      <p:commandButton icon="ui-icon-wrench" class="modificar" value="Editar" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modify').show();" update="Modify"  />
+                      <p:commandButton icon="ui-icon-wrench" class="modificar" value="Responsable" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modifyuser').show();" update="ModifyUser"  />
+                     
 
                     </p:column>
                 </p:dataTable>
@@ -116,7 +112,7 @@
                     
                                 <p:outputLabel value="Puesto:" for="puesto" />
                                 <p:inputText id="puesto" placeholder="Facturación" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
-                                             <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                                             <f:validateRegex pattern="\D*" />
                                 </p:inputText>
                                  <p:message for="puesto" />
                                 <p:outputLabel value="Vacantes:" for="vacantes" />
@@ -124,7 +120,7 @@
                                 <p:message for="vacantes" />
                                 <p:outputLabel value="Contratante:" for="contratante" />
                                 <p:inputText id="contratante" placeholder="Alicia Hernández" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
-                                         <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                                         <f:validateRegex pattern="\D*" />
                                 </p:inputText>
                                 <p:message for="contratante" />
                                 <p:outputLabel value="Fecha Inicio:" for="startDate" />
@@ -153,6 +149,96 @@
             </h:form>
         </p:dialog>
        
+ 
+            <p:dialog id="Modify" widgetVar="modify" header="Modificar  Requisición" maximizable="true" >
+            <h:form>
+                <p:fieldset legend="Datos Requisicion" style="margin-bottom:100px">
+                <h1><font family="futura">
+                <h:outputText value="Modificar"/></font></h1>
+                <h:panelGrid cellpadding="3" columns="3" id="grid">
+                    <h:outputLabel value="Requisicion:" for="cedula" />
+                    <p:inputText id="cedula" maxlength="20" value="#{requisicionController.r.numrequisicion}"  title="NUmero Requisicion" required="true" requiredMessage="Requicision vacía.">
+                     </p:inputText>
+                            <p:message for="cedula" />
+                    
+                                <p:outputLabel value="Puesto:" for="puesto" />
+                                <p:inputText id="puesto" placeholder="Facturación" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
+                                             <f:validateRegex pattern="\D*" />
+                                </p:inputText>
+                                 <p:message for="puesto" />
+                    
+                                <p:outputLabel value="Estado:" for="estados" />
+                                <p:inputText id="estados" required="true" value="#{requisicionController.r.estado}" title="Estado" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
+                                             <f:validateRegex pattern="\D*" />
+                                </p:inputText>
+                                 <p:message for="estados" />
+                                <p:outputLabel value="Vacantes:" for="vacantes" />
+                                <p:inputNumber id="vacantes" placeholder="7" maxValue="50" maxlength="3" decimalPlaces="0" value="#{requisicionController.r.vacantes}"  validatorMessage="No se permite letras" title="Vacantes" />
+                                <p:message for="vacantes" />
+                                <p:outputLabel value="Contratante:" for="contratante" />
+                                <p:inputText id="contratante" placeholder="Alicia Hernández" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
+                                         <f:validateRegex pattern="\D*" />
+                                </p:inputText>
+                                <p:message for="contratante" />
+                                <p:outputLabel value="Fecha Inicio:" for="startDate" />
+                       
+                                 <p:calendar id="startDate" pattern="dd/MM/yyyy"  widgetVar="calwidget" locale="es" value="#{requisicionController.r.fechaInicio}" >
+                                            
+                                    </p:calendar> 
+                                 <p:message for="startDate" />
+                                 <p:outputLabel value="Fecha Entrega:" for="endDate" />
+                                 <p:calendar id="endDate"  locale="es" pattern="dd/MM/yyyy"  value="#{requisicionController.r.fechaEntrega}" />
+                                   <p:message for="endDate" /> 
+                                   <p:outputLabel value="Departamento:" for="departamento" />
+                                <p:selectOneMenu id="departamento" value="#{requisicionController.d.codigoDepartamento}" >
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{lController.listDepartamentos()}"  var="depar" itemLabel="#{depar.descripcion}" itemValue="#{depar.codigoDepartamento}"/>
+                                </p:selectOneMenu>
+                                 <p:message for="departamento" />
+                         
+                                <p:outputLabel value="Usuario:" for="user" />
+                                <p:selectOneMenu id="user" value="#{requisicionController.user.cedula}" >
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{usuarioController.listar()}"  var="dep" itemLabel="#{dep.nombre}" itemValue="#{dep.cedula}"/>
+                                </p:selectOneMenu>
+                                 <p:message for="user" />
+                         
+
+                    
+                                 <p:commandButton class="si" icon="ui-icon-plusthick" validateClient="true" value="GUARDAR" action="#{requisicionController.modify()}" update=":table:requisicion, grid,mensaje2"  />
+                    <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify').hide();" />
+
+                </h:panelGrid>
+                    </p:fieldset>
+            </h:form>
+        </p:dialog>
+       
+            <p:dialog id="ModifyUser" widgetVar="modifyuser" header="Modificar  Responsable" maximizable="true" >
+            <h:form>
+                <p:fieldset legend="Datos Requisicion" style="margin-bottom:100px">
+                <h1><font family="futura">
+                <h:outputText value="Modificar Usuario"/></font></h1>
+                <h:panelGrid cellpadding="2" columns="2" id="grid">
+                    <h:outputLabel value="Requisicion:" for="cedula" />
+                    <p:inputText id="cedula" maxlength="20" value="#{requisicionController.r.numrequisicion}"  title="NUmero Requisicion" required="true" requiredMessage="Requicision vacía.">
+                     </p:inputText>
+                                <p:outputLabel value="Usuario:" for="user" />
+                                <p:selectOneMenu id="user" value="#{requisicionController.user.cedula}" >
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{usuarioController.listar()}"  var="dep" itemLabel="#{dep.nombre}" itemValue="#{dep.cedula}"/>
+                                </p:selectOneMenu>
+                                 <p:message for="user" />
+                         
+
+                    
+                                 <p:commandButton class="si" icon="ui-icon-plusthick" validateClient="true" value="GUARDAR" action="#{requisicionController.asignarResponsable()}" update=":table:requisicion, grid,mensaje2"  />
+                    <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modifyuser').hide();" />
+
+                </h:panelGrid>
+                    </p:fieldset>
+            </h:form>
+        </p:dialog>
+       
        <p:dialog header="Información Requisición" widgetVar="posDialog" modal="true" showEffect="fade" hideEffect="fade" >
        <p:outputPanel id="posInfo" style="text-align:center;">
            <p:panelGrid  columns="2" columnClasses="label,value">
@@ -171,43 +257,11 @@
                
                <p:outputLabel value="Departamento:" />
                <p:outputLabel value="#{requisicionController.r.departamento.descripcion}" style="text-transform: uppercase"/>
-               
-               <p:outputLabel value="Usuario:" />
-               <p:outputLabel value="#{requisicionController.r.usuario.cedula}" style="text-transform: uppercase"/>
-               
-
-              
 
            </p:panelGrid>
         </p:outputPanel>
-    </p:dialog>   
-                <p:dialog id="dialogoEdit2" widgetVar="modify7" header="Asignar Requisicion">
-            <f:view>
-
-
-
-                <h:form>
-                    <p:panelGrid columns="2">
-                        <p:outputLabel value="Usuario:" />
-                        <p:selectOneMenu style="text-transform: uppercase" id="usuarios" value="#{requisicionController.user.cedula}" >
-                        <!-- TODO: update below reference to list of available items-->
-                       
-                        <f:selectItems value="#{requisicionController.loadUsuarios()}" var="it" itemLabel="#{it.toString()}" itemValue="#{it.cedula}" />
-                    </p:selectOneMenu>
-
-                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR"  action="#{requisicionController.cambiar(item.numrequisicion)}" onclick="document.location.reload()" update="table:requisicion" />
-
-                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('modify2').hide();" />
-
-
-                    </p:panelGrid>
-                </h:form>
-
-
-
-            </f:view>
-
-        </p:dialog>  
+    </p:dialog>
+       
         <h:outputScript library="js" name="calendar_es.js"/>
     </h:body>
 </html>

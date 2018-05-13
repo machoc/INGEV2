@@ -19,7 +19,7 @@
         <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
 
         <h:form>
-            <p:messages autoUpdate="true" showDetail="true" id="mensajes" />
+            <p:messages autoUpdate="false" showDetail="true" id="mensajes" />
             <p:panelGrid columns="2">
                 <p:outputLabel for="usuario" value="Usuario:"/>
                 <p:inputText id="usuario"  value="#{usuarioController.user.cedula}" required="true" />
@@ -27,26 +27,29 @@
                 <p:outputLabel for="password" value="Contraseña:"/>
                 <p:password id="password"  value="#{usuarioController.user.contraseña}" required="true" />
                 <p:column></p:column>
-                <p:commandButton class="ingresa" value="Ingresar" action="#{usuarioController.iniciarSesion()}" icon="ui-icon-key"/>
+                <p:commandButton class="ingresa" value="Ingresar" action="#{usuarioController.iniciarSesion()}" update="mensajes" icon="ui-icon-key"/>
             </p:panelGrid><br></br><br></br>
-            <p:commandButton class="cambio" icon="ui-icon-pencil" value="Cambiar Contraseña" oncomplete="PF('cambiar').show();" />
+              <p:commandButton class="cambio" icon="ui-icon-pencil" value="Cambiar Contraseña" oncomplete="PF('cambiar').show();" />
         </h:form>
 
                  <p:dialog id="cambiarcontraseña" widgetVar="cambiar" header="Cambiar Contraseña">
-                     <p:messages showDetail="true" id="mensajes2"  />
+                     <p:messages showDetail="true" autoUpdate="false" id="mensajes2"  />
            
-                <h:form>
-                    <p:panelGrid columns="2">
+                     <h:form id="formNew">
+                         <p:panelGrid id="panelNew" columns="2">
                         <p:outputLabel value="Usuario:" for="ced" />
-                        <p:inputText  id="ced" value="#{usuarioController.user.cedula}"  title="cedula" />
+                        <p:inputText  id="ced" value="#{usuarioController.user.cedula}" required="true"  title="cedula" />
                         <p:outputLabel value="Contraseña:" for="notas" />
-                        <p:password id="notas" value="#{usuarioController.user.contraseña}" title="contraseña" />
+                        <p:password id="notas" value="#{usuarioController.user.contraseña}" required="true" title="contraseña" />
                         <p:outputLabel value="Nueva Contraseña:" for="nueva" />
                         <p:password id="nueva" value="#{usuarioController.setcontraseña}" title="contraseña nueva" />
-                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR" action="#{usuarioController.cambiarContraseña()}" update="mensajes2,mensajeLogin" />
+                        <p:commandButton class="si" icon="ui-icon-check"  value="GUARDAR" action="#{usuarioController.cambiarContraseña()}" update="mensajes2, mensajeLogin" />
+                           
 
-                        <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('cambiar').hide();" />
-                    </p:panelGrid>
+                        <p:commandButton class="no" icon="ui-icon-close" value="LIMPIAR"  onclick="PF('cambiar').hide();" >
+                              <p:ajax update="panelNew" resetValues="true" />
+                        </p:commandButton>
+                         </p:panelGrid>
                 </h:form>
         </p:dialog><br></br><br></br><br></br>
 
@@ -60,5 +63,3 @@
 </div> 
     </h:body>
 </html>
-
-

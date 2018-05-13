@@ -11,6 +11,7 @@
         <h:outputStylesheet name="grid/grid.css" library="primefaces" />
         <f:event type="preRenderView" listener="#{bean.verificarSesion()}"/>
 
+
     </h:head>
     <h:body>
         <f:view>
@@ -31,7 +32,7 @@
                 <br></br>
                 <br></br>
                 <p:dataTable emptyMessage="No se encuentra postulante" id="listP" value="#{posController.listar()}" var="item" paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {NextPageLink} {RowsPerPageDropdown}" rows="10"
                          currentPageReportTemplate="1 de 1" paginatorPosition="bottom" >
                     <p:column filterBy="#{item.cedula}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -81,13 +82,12 @@
                            <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Postulante">
                            </p:commandButton>
                         <p:commandButton icon="ui-icon-wrench" class="modificar" value="Editar" actionListener="#{posController.edit(item)}" oncomplete="PF('modify').show();" update="dialogoEdit"  />
-                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Reasignar" actionListener="#{posController.reasignar1(item.cedula)}" update="mensaje2, listP">
-                                <p:confirm header="CONFIRMACIÓN" message="DESEA REASIGNAR EL POSTULANTE?" icon="ui-icon-alert" />
-                            </p:commandButton>
                           <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                          </p:confirmDialog>
+                            <p:commandButton update="posNota" class="ver" value="Ver Notas" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialogNotas').show()" icon="ui-icon-search" title="Ver Notas">
+                           </p:commandButton>
                       </p:column>
                 </p:dataTable>
                
@@ -254,6 +254,16 @@
                 
                 <p:outputLabel value="Requisición:" />
                 <p:outputLabel value="#{posController.p.requisicion}" style="text-transform: uppercase"/>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+        
+        <p:dialog header="Notas Postulante" widgetVar="posDialogNotas" modal="true" showEffect="fade" hideEffect="fade" >
+       <p:outputPanel id="posNota" style="text-align:center;">
+           <p:panelGrid  columns="2" columnClasses="label,value">
+
+               <p:outputLabel value="Notas:" />
+               <p:outputLabel value="#{posController.p.notas}" />
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>

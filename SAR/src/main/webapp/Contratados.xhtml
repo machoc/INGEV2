@@ -90,7 +90,7 @@
                                     <f:setPropertyActionListener value="#{item.postulante}" target="#{requisicionController.seleccionado}" />
                                 </p:commandButton>
                                 <p:commandButton class="modificar" icon="ui-icon-wrench" actionListener="#{posController.edit(item.postulante)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
-                                <p:commandButton class="next" icon="ui-icon-check" actionListener="#{posController.finalizarEstados(item.postulante)}" onclick="document.location.reload()" update="listaContratados"/>
+                                <p:commandButton class="next" icon="ui-icon-check" actionListener="#{posController.finalizarEstados(item.postulante)}"  update="listaContratados"/>
                                
                             </p:column>
                         </p:dataTable>

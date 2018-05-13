@@ -3,6 +3,7 @@ com\sar\model\Entrevistados_.class
 com\sar\session\RequisicionFacadeLocal.class
 com\sar\controller\SeleccionadoController.class
 com\sar\controller\PostulanteController.class
+com\sar\model\ReporteUsuarios.class
 com\sar\model\Estado.class
 com\sar\model\Evaluados_.class
 com\sar\model\UsuarioInge.class
@@ -13,6 +14,7 @@ com\sar\session\DepartamentoFacade.class
 com\sar\model\Requisicion_.class
 com\sar\session\DepartamentoFacadeLocal.class
 com\sar\session\EvaluadosFacadeLocal.class
+com\sar\controller\PDfController.class
 com\sar\model\Postulante.class
 com\sar\controller\ListController.class
 com\sar\session\EntrevistadosFacadeLocal.class
@@ -21,6 +23,7 @@ com\sar\controller\requisicionController.class
 com\sar\model\Estado_.class
 com\sar\controller\PlantillaController.class
 com\sar\session\PostulanteFacade.class
+com\sar\model\EstadosPDF.class
 com\sar\session\AbstractFacade.class
 com\sar\session\PostulanteFacadeLocal.class
 com\sar\controller\UsuarioController.class
@@ -29,6 +32,7 @@ com\sar\model\Postulante_.class
 com\sar\controller\EntrevistadoController.class
 com\sar\session\UsuarioIngeFacade.class
 com\sar\model\Departamento_.class
+com\sar\controller\GraficosController.class
 com\sar\model\UsuarioInge_.class
 com\sar\model\Entrevistados.class
 com\sar\model\Requisicion.class

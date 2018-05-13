@@ -93,7 +93,7 @@
                                 </p:commandButton>
                                 <p:commandButton class="modificar" icon="ui-icon-wrench" actionListener="#{posController.edit(item)}"  oncomplete="PF('modify').show();" update="dialogoEdit"  />
 
-                                <p:commandButton class="next"  icon="ui-icon-seek-next" actionListener="#{posController.cambiarEstados2(item)}" onclick="document.location.reload()" update="listaEvaluados,mensaje2"/>
+                                <p:commandButton class="next"  icon="ui-icon-seek-next" actionListener="#{posController.cambiarEstados2(item)}"  update="listaEvaluados,mensaje2"/>
 
                             </p:column>
                         </p:dataTable>

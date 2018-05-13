@@ -171,6 +171,7 @@ public class EntrevistadoController implements Serializable {
             if(entrevista.getPostulante().getCedula().equals(this.p.getCedula())){
                 this.e = entrevista;
                 
+                
                 break;
             }
         }

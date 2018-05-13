@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>SAR-LANCO</title>
+        <h:outputStylesheet name="css/index.css"/>
+        <h:outputStylesheet name="css/general.css"/>
+        <h:outputStylesheet name="grid/grid.css" library="primefaces" /> <!--libreria propia de PRIMEFACES-->
+        <h:outputScript name="js/index.js" />
+    </h:head>
+    <h:body>
+          <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+          
+        <h:form>
+              <p:outputLabel value="Requisiciones:" for="requis" />
+            <p:selectOneMenu style="text-transform: uppercase" id="requis" value="#{pdfcontroller.requisicion}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel="Todas" itemValue="0"/>
+                        <f:selectItems value="#{posController.loadRequisiciones()}" var="it" itemLabel="#{it.toString()}" itemValue="#{it.numrequisicion}" />
+                    </p:selectOneMenu>
+              <p:commandButton value="pdf requisicion" ajax="false" action="#{pdfcontroller.loadListFilter()}" />
+        </h:form>
+             <p:separator />
+        <h:form >
+             <p:panelGrid columns="2">
+                    <p:outputLabel value="Usuarios:" for="usuarios" />
+                    <p:selectOneMenu style="text-transform: uppercase" id="usuarios" value="#{pdfcontroller.idUsuario}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItem itemLabel="Todos" itemValue="Todos"/>
+                        <f:selectItems value="#{usuarioController.listar()}" var="it" itemLabel="#{it.nombre}" itemValue="#{it.cedula}" />
+                    </p:selectOneMenu>
+               <p:outputLabel value="Desde:" for="fEntrada" />
+               <p:calendar id="fEntrada" pattern="dd/MM/yyyy"  widgetVar="calwidget" locale="es" value="#{pdfcontroller.entrada}" >
+                   <p:ajax event="dateSelect"/>
+               </p:calendar> 
+              
+               <p:outputLabel value="Hasta:" for="fSalida" />
+               <p:calendar id="fSalida" pattern="dd/MM/yyyy"  widgetVar="calwidget" locale="es" value="#{pdfcontroller.salida}" >
+                   <p:ajax event="dateSelect"/>
+               </p:calendar> 
+              
+              <p:outputLabel value="Requisiciones:" for="requis" />
+              <p:commandButton id="requis" value="pdf usuario" ajax="false" action="#{pdfcontroller.loadRequisicionFilter()}" />
+             </p:panelGrid>
+        </h:form>
+                 <p:separator />
+                 <p:chart type="bar" model="#{graficosController.barModel}" style="width:600px;height:400px;"  widgetVar="chart"/>
+                 <p:commandButton type="button" value="Descargar" icon="ui-icon-extlink" onclick="exportChart()"/>
+ 
+<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
+    <p:outputPanel id="output" layout="block" style="width:600px;height:400px;" />
+</p:dialog>
+ <p:separator/>
+ <p:chart type="pie" model="#{graficosController.pieModel1}" style="width:600px;height:400px;" widgetVar="chartpie"/>
+ <p:commandButton type="button" value="Descargar" icon="ui-icon-extlink" onclick="exportChartPie()"/>
+
+ <p:dialog widgetVar="dlgpie" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
+     <p:outputPanel id="outputpie" layout="block" style="width:600px;height:400px"/>
+ </p:dialog>
+
+<script type="text/javascript">
+function exportChart() {
+    //export image
+    $('#output').empty().append(PF('chart').exportAsImage());
+ 
+    //show the dialog
+    PF('dlg').show();
+}
+function exportChartPie() {
+    //export image
+    $('#outputpie').empty().append(PF('chartpie').exportAsImage());
+ 
+    //show the dialog
+    PF('dlgpie').show();
+}
+</script>
+            <h:outputScript library="js" name="calendar_es.js"/>
+    </h:body>
+</html>
+
+

@@ -9,7 +9,7 @@
         <h:outputStylesheet name="css/general.css"/>
         <h:outputStylesheet name="css/usuario.css"/>
         <h:outputStylesheet name="grid/grid.css" library="primefaces" />
-                <f:event type="preRenderView" listener="#{bean.verificarSesion()}"/>
+        <f:event type="preRenderView" listener="#{bean.isAdmi()}"/>
 
     </h:head>
     <h:body >
@@ -75,7 +75,10 @@
                 </p:column>
                
             </p:dataTable>
-                
+                <h:commandLink immediate="true" action="/reportes?faces-redirect=true.xhtml" >
+            <h:graphicImage url="./../resources/imagenes/pdf.png" width="60px" height="60px" />
+           
+        </h:commandLink>
             </h:form>
        
         <p:dialog id="dialogo1" widgetVar="widModify" header="Agregar Usuario">
@@ -92,13 +95,13 @@
                     <p:message for="cedula" />
                     <h:outputLabel value="Nombre:" for="nombre" />
                     <p:inputText id="nombre" placeholder="Jason Chaves Araya" maxlength="30" value="#{usuarioController.user.nombre}" title="Nombre">
-                        <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
+                        <f:validateRegex pattern="\D*" />
                     </p:inputText>
                     <p:message for="nombre" />
                     <h:outputLabel value="Tipo:" for="tipo"/>
                     <p:selectOneMenu id="tipo" value= "#{usuarioController.user.tipo}">
-                        <f:selectItem itemValue='Administrador' itemLabel="Administrador"/>
-                        <f:selectItem itemValue='Usuario' itemLabel="Usuario"/>
+                        <f:selectItem itemValue='ADMINISTRADOR' itemLabel="ADMINISTRADOR"/>
+                        <f:selectItem itemValue='USUARIO' itemLabel="USUARIO"/>
                     </p:selectOneMenu>
                     <p:message for="tipo" />
                     <h:outputLabel value="Email:" for="email" />
@@ -118,7 +121,7 @@
         </f:view>
      </p:dialog>
         
-     <p:dialog id="dialogo" widgetVar="widModify" header="Modificar Categoría">
+     <p:dialog id="dialogo" widgetVar="widModify" header="Modificar Usuario">
          <f:view>
              <h:form >
                 <h1><h:outputText value="Editar Usuario"/></h1>
@@ -127,10 +130,6 @@
                     <h:inputText id="cedula"  value="#{usuarioController.user.cedula}" title="Cedula" />
                     <h:outputLabel value="Nombre:" for="nombre" />
                     <h:inputText id="nombre" value="#{usuarioController.user.nombre}" title="Nombre" />
-                         <h:outputLabel value="Contraseña:" for="contraseña" />
-                         <h:inputText id="contraseña" value="#{usuarioController.user.contraseña}" title="Contraseña" />
-                         <h:outputLabel value="Tipo:" for="tipo" />
-                         <h:inputText id="tipo" value="#{usuarioController.user.tipo}" title="Tipo" />
                          <h:outputLabel value="Email:" for="email" />
                          <h:inputText id="email" value="#{usuarioController.user.email}" title="Email" />
                          <h:outputLabel value="Teléfono:" for="telefono" />

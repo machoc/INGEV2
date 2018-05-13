@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Luis Alejandro
+ * @author manuel
  */
 @Local
 public interface PostulanteFacadeLocal {

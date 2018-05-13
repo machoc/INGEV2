@@ -1,7 +1,10 @@
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\model\Departamento.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\UsuarioController.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\model\Requisicion.java
+C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\PDfController.java
+C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\model\EstadosPDF.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\PostulanteFacadeLocal.java
+C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\model\ReporteUsuarios.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\RequisicionFacadeLocal.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\EvaluadosFacade.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\DepartamentoController.java
@@ -17,6 +20,7 @@ C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\mo
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\EntrevistadosFacade.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\EvaluadosFacadeLocal.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\model\Postulante.java
+C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\GraficosController.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\requisicionController.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\session\DepartamentoFacadeLocal.java
 C:\Users\Luis Alejandro\Desktop\INGE-RELEASE\INGEV2\SAR\src\main\java\com\sar\controller\EntrevistadoController.java

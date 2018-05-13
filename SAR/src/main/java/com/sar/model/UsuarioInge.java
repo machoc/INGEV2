@@ -160,7 +160,7 @@ public class UsuarioInge implements Serializable {
 
     @Override
     public String toString() {
-        return  cedula +"- "+ nombre;
+        return "com.sar.model.UsuarioInge[ cedula=" + cedula + " ]";
     }
     
 }

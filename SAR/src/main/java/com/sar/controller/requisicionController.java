@@ -10,9 +10,11 @@ import com.sar.model.Estado;
 import com.sar.model.Postulante;
 import com.sar.model.Requisicion;
 import com.sar.model.UsuarioInge;
+import com.sar.session.EstadoFacadeLocal;
 import com.sar.session.PostulanteFacadeLocal;
 import com.sar.session.RequisicionFacadeLocal;
 import com.sar.session.UsuarioIngeFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,8 +23,10 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -40,6 +44,8 @@ public class requisicionController implements Serializable
     private PostulanteFacadeLocal postulanteFacade;
     @EJB
     private UsuarioIngeFacadeLocal userFacade;
+    @EJB
+    private EstadoFacadeLocal estadoFacade;
 
     private Requisicion r = new Requisicion();
     private Departamento d = new Departamento();
@@ -47,14 +53,13 @@ public class requisicionController implements Serializable
     private Estado estado = new Estado();
     private UsuarioInge user = new UsuarioInge();
     private List<Postulante> aux = new ArrayList<Postulante>();
-    private List<UsuarioInge> usuario = new ArrayList<UsuarioInge>();
     private Postulante seleccionado;
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
-
+    private String cedulaUsuario= "";
     public requisicionController()
     {
-
+     
     }
     
      public List<Requisicion> listar() {
@@ -71,6 +76,15 @@ public class requisicionController implements Serializable
     {
         this.r = r;
     }
+
+    public String getCedulaUsuario() {
+        return cedulaUsuario;
+    }
+
+    public void setCedulaUsuario(String cedulaUsuario) {
+        this.cedulaUsuario = cedulaUsuario;
+    }
+
 
     public Departamento getD()
     {
@@ -145,16 +159,6 @@ public class requisicionController implements Serializable
             req.execute("PF('widAdd').hide();");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "AGREGADA EXITOSAMENTE"));
 
-           /* for (Postulante pos : sirva) {
-                if(pos.equals(null))
-                    break;
-                
-                System.out.println(pos.getCedula());
-                System.out.println(r.getPuesto());
-                pos.setRequisicion(this.r);
-                estado.setCodigoEstado("evaluacion");
-                pos.setEstado(estado);
-                this.r.getPostulanteList().add(pos);*/
             
        } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -184,7 +188,7 @@ public class requisicionController implements Serializable
     
     public List<Postulante> entrevistados(){
                for (Postulante i : postulanteFacade.findAll()) {
-            if (i.getEstado().getDetalle().equals("ENTREVISTADO")) {
+            if (i.getEstado().getDetalle().equals("ENTREVISTADO")/* && i.getRequisicion().getEstado().equals("ABIERTA")*/) {
                 aux.add(i);
             }
         }
@@ -201,26 +205,54 @@ public class requisicionController implements Serializable
     }
     
       public void delete(Requisicion req) {
+        
         try{
-        this.requisicionFacade.remove(req);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "ELIMINADO EXITOSAMENTE"));
-
-        }
-        catch(Exception e){
-         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
-
+        
+            this.requisicionFacade.remove(req);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "ELIMINADO EXITOSAMENTE"));
+        } catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
         }
     }
+        
       
-    public String edit(Requisicion req) {
-        this.r = req;
-        this.d = req.getDepartamento();
-        this.user = req.getUsuario();
-       
-        //return add
+
+    public String modify()
+    {
+        try
+        {
+            //falta requisicion
+            this.r.setDepartamento(this.d);
+            this.r.setUsuario(this.user);
+           this.requisicionFacade.edit(this.r);
+            this.r = new Requisicion();
+            this.user = new UsuarioInge();
+            this.d = new Departamento();
+            RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('modify').hide();");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE MODIFICO CORRECTAMENTE"));
+
+        } catch (Exception e)
+        {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+        }
+
+        /*
+         Definir tod en  la base de datos mayuscula o minuscula
+
+         */
         return "addRequisicion";
     }
-    
+
+    //falta modificar , falta campo area, falta
+    public String edit(Requisicion cur)
+    {
+        this.r = cur;
+        this.d = cur.getDepartamento();
+        this.user = cur.getUsuario();
+        //return add
+        return "addRequisicion";
+    }    
     public List<Requisicion> listFilter() {
        
           if (flag) {
@@ -236,56 +268,93 @@ public class requisicionController implements Serializable
         flag = false;
         return requisicion;
     }
-    
-    public void cerrarRequisicion(String num){
+       /*         for(Postulante pos : this.postulanteFacade.findAll()) {
+                    if(pos.getRequisicion().equals(req)){
+                        
+                        pos.setEstado(new Estado("000","NINGUNO"));
+                        postulanteFacade.edit(pos);
+                        break;
+                    }*/
+     
+      public String cerrarRequisicion(String num){
          try{
            System.out.println(num);
 
            for(Requisicion req : requisicionFacade.findAll()){
                System.out.println(num);
-
+              
             if(req.getNumrequisicion().toString().equals(num)){
             
                 req.setEstado("CERRADA");
                 requisicionFacade.edit(req);
-              
+              reasignarPostulantes(req);
+             
                 break;
             }
         }
          this.r = new Requisicion();
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
+          reload();   
+         }
+         catch(Exception e){
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+     
+                 }
+         
+        
+        return "addRequisicion";
+    }
+      
+    public void reasignarPostulantes(Requisicion requisicion){
+        for(Postulante pos : postulanteFacade.findAll()){
+            if(pos.getRequisicion().equals(requisicion) && !pos.getEstado().getDetalle().equals("FINALIZADO")){
+                this.p = pos;
+              //  estado.setCodigoEstado("000");
+              estado = this.estadoFacade.find("000");
+                this.p.setEstado(this.estado);
+                this.p.setDoprueba("");
+            System.out.println(this.p.getEstado().getCodigoEstado());
+            this.postulanteFacade.edit(this.p);
+
+            }
+        }
+    }
+    
+    public String asignarResponsable(){
+        try{
+             searchRequisicion();
+            // this.user= userFacade.find(user.getCedula());
+              this.r.setUsuario(this.user);
+               this.requisicionFacade.edit(this.r);
+           
+        this.r = new Requisicion();
+        RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('ModifyUser').hide();");
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "USUARIO MODIFICADO"));
            }
          catch(Exception e){
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
      
                  }
         
+        return "addRequisicion";
     }
     
-    public List<UsuarioInge> loadUsuarios()
-    {
-        for (UsuarioInge i : userFacade.findAll())
-        {
-            
-                usuario.add(i);
-            
-        }
-        return usuario;
-    }
-    
-    public void cambiar(BigDecimal numero){
-        for(Requisicion req : requisicionFacade.findAll()){
-            if(req.getNumrequisicion().equals(numero)){
-            
-                req.setUsuario(user);
-                requisicionFacade.edit(req);
+    public void searchRequisicion() {
+        for (Requisicion requisicionaux : requisicionFacade.findAll()) {
+            if (requisicionaux.getNumrequisicion().equals(this.r.getNumrequisicion())) {
+                this.r = requisicionaux;
                 break;
             }
         }
-         this.r = new Requisicion();
-         RequestContext req = RequestContext.getCurrentInstance();
-         req.execute("PF('modify7').hide();");
-        // return "Entrevistados";
+
     }
+    
+       public void reload() throws IOException {
+    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+    ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
+    
+}
     
 }

@@ -94,8 +94,8 @@ public class UsuarioController implements Serializable
         try
         {
             // this.user.setCodigo(persona);
-            facade.create(user);
-            this.user.setContraseña("1234");
+             this.user.setContraseña("1234");
+            facade.create(user);   
             this.user = new UsuarioInge();
             RequestContext req = RequestContext.getCurrentInstance();
             req.execute("PF('widModify').hide();");
@@ -114,6 +114,7 @@ public class UsuarioController implements Serializable
         {
             facade.edit(user);
             this.user = new UsuarioInge();
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "MODIFICADO EXITOSAMENTE"));
         } catch (Exception e)
         {
@@ -145,7 +146,7 @@ public class UsuarioController implements Serializable
 
     public void reset()
     {
-        RequestContext.getCurrentInstance().reset("formCrear:panel");
+        RequestContext.getCurrentInstance().reset("formNew:panelNew");
     }
     
     public String iniciarSesion(){
@@ -182,18 +183,20 @@ public class UsuarioController implements Serializable
                    modificar();
                   RequestContext req = RequestContext.getCurrentInstance();
             req.execute("PF('cambiar').hide();");
-                   //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "Contraseña Modificada Correctamente"));
-      
+                //   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "Contraseña Modificada Correctamente"));
+                
                 }else{
                       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "AVISO", "Cedula o Contraseña Incorrectas"));
       
                 }
+               
             }
         }catch(Exception e){
-                        System.err.println(e.getMessage());
-                      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
+                     //   System.err.println(e.getMessage());
+                    //  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
       
         }
+        
         return "login";
     }
     

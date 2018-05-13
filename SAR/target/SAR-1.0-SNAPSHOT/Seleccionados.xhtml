@@ -94,7 +94,7 @@
                                 </p:commandButton>
                                 <p:commandButton class="modificar" icon="ui-icon-wrench" actionListener="#{posController.edit(item)}"  oncomplete="PF('modify2').show();" update="dialogoEdit2"  />
                                 <p:commandButton class="data" icon="ui-icon-mail-open" actionListener="#{posController.edit(item)}"  oncomplete="PF('select').show();" update="seleccion"  />
-                                <p:commandButton class="next" action="#{posController.cambiarEstados4(item)}" onclick="document.location.reload()" icon="ui-icon-seek-next"  />
+                                <p:commandButton class="next" action="#{posController.cambiarEstados4(item)}"  icon="ui-icon-seek-next"  />
                             </p:column>
                         </p:dataTable>
                
@@ -180,7 +180,9 @@
 
                         <p:commandButton class="no" icon="ui-icon-close" value="CANCELAR"  onclick="PF('dates').hide();" />
 
-
+<p:commandButton class="si" icon="ui-icon-check" value="MODIFICAR" action="#{seleccionadoController.modify()}" >
+                            <f:setPropertyActionListener target="#{seleccionadoController.respuesta}" value="#{posController.p.cedula}" />
+                          </p:commandButton>
                     </p:panelGrid>
                 </h:form>
 
