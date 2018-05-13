@@ -23,6 +23,10 @@
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
+            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
+           
+        </h:commandLink>
                     </p:panelGrid>     
                 </div><br></br>
        
