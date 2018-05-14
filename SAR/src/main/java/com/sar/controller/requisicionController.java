@@ -53,6 +53,7 @@ public class requisicionController implements Serializable
     private Estado estado = new Estado();
     private UsuarioInge user = new UsuarioInge();
     private List<Postulante> aux = new ArrayList<Postulante>();
+    private List<Postulante> filtered = new ArrayList<Postulante>();
     private Postulante seleccionado;
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
@@ -61,6 +62,16 @@ public class requisicionController implements Serializable
     {
      
     }
+
+    public List<Postulante> getFiltered() {
+        return filtered;
+    }
+
+    public void setFiltered(List<Postulante> filtered) {
+        this.filtered = filtered;
+    }
+    
+    
     
      public List<Requisicion> listar() {
         return this.requisicionFacade.findAll();
@@ -207,13 +218,17 @@ public class requisicionController implements Serializable
       public void delete(Requisicion req) {
         
         try{
-        
+            initRequisiciones(req);
             this.requisicionFacade.remove(req);
+             FacesContext context = FacesContext.getCurrentInstance();
+         context.getExternalContext().getFlash().setKeepMessages(true);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "ELIMINADO EXITOSAMENTE"));
+            reload();
         } catch (Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
         }
     }
+        
         
       
 
@@ -293,6 +308,8 @@ public class requisicionController implements Serializable
             }
         }
          this.r = new Requisicion();
+         FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
           reload();   
          }
@@ -356,5 +373,20 @@ public class requisicionController implements Serializable
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
     
 }
+       public void initRequisiciones(Requisicion requisicion){
+        for(Postulante pos : postulanteFacade.findAll()){
+            if(pos.getRequisicion().equals(requisicion) ){
+                this.p = pos;
+              //  estado.setCodigoEstado("000");
+              estado = this.estadoFacade.find("000");
+              r = this.requisicionFacade.find(BigDecimal.valueOf(100));
+                this.p.setEstado(this.estado);
+                this.p.setRequisicion(this.r);
+            System.out.println(this.p.getEstado().getCodigoEstado());
+            this.postulanteFacade.edit(this.p);
+
+            }
+        }
+    }
     
 }
