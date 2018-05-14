@@ -15,6 +15,20 @@
           <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
           
         <h:form>
+            <div align="center" >     
+                    <p:panelGrid columns="6" class="panelpostu" layout="grid">
+                        <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
+                        <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
+                        <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
+            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
+           
+        </h:commandLink>
+                    </p:panelGrid>     
+                </div>
               <p:outputLabel value="Requisiciones:" for="requis" />
             <p:selectOneMenu style="text-transform: uppercase" id="requis" value="#{pdfcontroller.requisicion}" >
                         <!-- TODO: update below reference to list of available items-->
@@ -47,19 +61,8 @@
              </p:panelGrid>
         </h:form>
                  <p:separator />
-                 <p:chart type="bar" model="#{graficosController.barModel}" style="width:600px;height:400px;"  widgetVar="chart"/>
-                 <p:commandButton type="button" value="Descargar" icon="ui-icon-extlink" onclick="exportChart()"/>
+                 
  
-<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
-    <p:outputPanel id="output" layout="block" style="width:600px;height:400px;" />
-</p:dialog>
- <p:separator/>
- <p:chart type="pie" model="#{graficosController.pieModel1}" style="width:600px;height:400px;" widgetVar="chartpie"/>
- <p:commandButton type="button" value="Descargar" icon="ui-icon-extlink" onclick="exportChartPie()"/>
-
- <p:dialog widgetVar="dlgpie" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
-     <p:outputPanel id="outputpie" layout="block" style="width:600px;height:400px"/>
- </p:dialog>
 
 <script type="text/javascript">
 function exportChart() {
