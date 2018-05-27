@@ -21,18 +21,15 @@
                     <p:panelGrid columns="6" class="panelpostu" layout="grid">
                         <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                         <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" disabled="#{bean.flag}"  value="USUARIOS" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
-                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
-            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
-           
-        </h:commandLink>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA"  outcome="usuario"></p:button>
                     </p:panelGrid>     
                 </div>
                 <h1 align="center"><h:outputText value=" Estado Preseleccionado"/></h1>
                 <div>
+                         <p:button class="botonrequi2" icon="ui-icon-calculator" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Preseleccionados" outcome="estados"></p:button>
                     <p:button class="botonrequi2" icon="ui-icon-folder-open" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
                     <p:button class="botonrequi2" icon="ui-icon-script" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
                     <p:button class="botonrequi2" icon="ui-icon-circle-check" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
@@ -49,7 +46,7 @@
                                 </f:facet>
                                 <h:outputText value="#{item.cedula}" style="text-transform: uppercase"/>
                             </p:column>
-                            <p:column>
+                            <p:column >
                                 <f:facet name="header">
                                     <h:outputText value="Nombre Completo"/>
                                 </f:facet>
@@ -61,13 +58,8 @@
                                 </f:facet>
                                 <h:outputText value="#{item.edad}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Experiencia"/>
-                                </f:facet>
-                                <h:outputText value="#{item.experiencia}" style="text-transform: uppercase"/>
-                            </p:column>
-                    <p:column filterBy="#{item.requisicion.puesto}" filterMatchMode="contains">
+                            
+                    <p:column >
                         <f:facet name="header">
                             <h:outputText value="Requisición"/>
                         </f:facet>
@@ -81,6 +73,18 @@
                                 <h:outputText value="#{item.especialidad}" style="text-transform: uppercase"/>
                             </p:column>
 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Residencia"/>
+                                </f:facet>
+                                <h:outputText value="#{item.residencia}" style="text-transform: uppercase"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono"/>
+                                </f:facet>
+                                <h:outputText value="#{item.telefono}" style="text-transform: uppercase"/>
+                            </p:column>
                             
                             <p:column headerText="Opciones" style="width:180px; text-align: center">
                                 <p:commandButton update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View" class="busqueda">

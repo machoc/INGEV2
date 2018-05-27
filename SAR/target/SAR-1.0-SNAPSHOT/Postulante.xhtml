@@ -21,14 +21,10 @@
                     <p:panelGrid columns="6" class="panelpostu" layout="grid">
                         <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                         <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person"  disabled="#{bean.flag}" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
-                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
-            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
-           
-        </h:commandLink>
                     </p:panelGrid>     
                 </div>
                 <h1 align="center"><h:outputText value="Postulantes"/></h1>
@@ -90,8 +86,6 @@
                                 <p:commandButton value="SÍ" type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                          </p:confirmDialog>
-                            <p:commandButton update="posNota" class="ver" value="Ver Notas" actionListener="#{posController.edit(item)}" oncomplete="PF('posDialogNotas').show()" icon="ui-icon-search" title="Ver Notas">
-                           </p:commandButton>
                       </p:column>
                 </p:dataTable>
                
@@ -258,16 +252,6 @@
                 
                 <p:outputLabel value="Requisición:" />
                 <p:outputLabel value="#{posController.p.requisicion}" style="text-transform: uppercase"/>
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
-        
-        <p:dialog header="Notas Postulante" widgetVar="posDialogNotas" modal="true" showEffect="fade" hideEffect="fade" >
-       <p:outputPanel id="posNota" style="text-align:center;">
-           <p:panelGrid  columns="2" columnClasses="label,value">
-
-               <p:outputLabel value="Notas:" />
-               <p:outputLabel value="#{posController.p.notas}" />
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>

@@ -22,6 +22,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -67,6 +69,8 @@ public class PostulanteController implements Serializable
     private List<String> provincias;
     private String[] selectedCities;
     private List<Postulante> aux = new ArrayList<Postulante>();
+     private List<Postulante> filtered= new ArrayList<Postulante>();
+   
     private List<Requisicion> requisicion = new ArrayList<Requisicion>();
     boolean flag = true;
     private Postulante[] selected;
@@ -83,6 +87,15 @@ public class PostulanteController implements Serializable
         this.selectedCities = selectedCities;
     }
 
+    public List<Postulante> getFiltered() {
+        return filtered;
+    }
+
+    public void setFiltered(List<Postulante> filtered) {
+        this.filtered = filtered;
+    }
+
+    
     public List<String> getLicencias()
     {
         return licencias;
@@ -282,13 +295,15 @@ public class PostulanteController implements Serializable
     {
         licencias = new ArrayList<String>();
         licencias.add("A2");
-        licencias.add("A3");
         licencias.add("B1");
         licencias.add("B2");
         licencias.add("B3");
         licencias.add("B4");
         licencias.add("E1");
         licencias.add("E2");
+        licencias.add("D1");
+        licencias.add("D2");
+        
 
         provincias = new ArrayList<String>();
         provincias.add("SAN JOSE");
@@ -368,7 +383,9 @@ public class PostulanteController implements Serializable
             e.setCodigoEstado("001");
             pos.setEstado(this.e);
             pFacade.edit(pos);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE ASIGNÓ EXITOSAMENTE"));
+           FacesContext context = FacesContext.getCurrentInstance();
+          context.getExternalContext().getFlash().setKeepMessages(true);
+          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE ASIGNÓ EXITOSAMENTE"));
             reload();
             //RequestContext req = RequestContext.getCurrentInstance();
             // req.execute("PF('tableDialog').hide();");
@@ -393,6 +410,7 @@ public class PostulanteController implements Serializable
                 
                 pFacade.edit(pos);
                // System.out.println("paso");
+               reload();
                 break;
             }
         }
@@ -411,18 +429,23 @@ public class PostulanteController implements Serializable
     }
     
   public void cambiar(){
-        for(Postulante pos : pFacade.findAll()){
-            if(pos.getCedula().equals(this.p.getCedula())){
-            
-                pos.setNotas(note);
-                pFacade.edit(pos);
-                break;
+        try {
+            for(Postulante pos : pFacade.findAll()){
+                if(pos.getCedula().equals(this.p.getCedula())){
+                    
+                    pos.setNotas(note);
+                    pFacade.edit(pos);
+                    break;
+                }
             }
+            this.p = new Postulante();
+            RequestContext req = RequestContext.getCurrentInstance();
+            req.execute("PF('modify2').hide();");
+            reload();
+            // return "Entrevistados";
+        } catch (IOException ex) {
+            Logger.getLogger(PostulanteController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         this.p = new Postulante();
-         RequestContext req = RequestContext.getCurrentInstance();
-         req.execute("PF('modify2').hide();");
-        // return "Entrevistados";
     }
    
     public String cambiarEstados1(Postulante pos) {
@@ -435,6 +458,8 @@ public class PostulanteController implements Serializable
                 pos.setEstado(this.e);
                 pFacade.edit(pos);
                 bandera = true;
+                  FacesContext context = FacesContext.getCurrentInstance();
+                    context.getExternalContext().getFlash().setKeepMessages(true);
                   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
                   reload();
               
@@ -460,11 +485,17 @@ public class PostulanteController implements Serializable
             pos.setEstado(this.e);
             pFacade.edit(pos);
             bandera = true;
+               FacesContext context = FacesContext.getCurrentInstance();
+                   context.getExternalContext().getFlash().setKeepMessages(true);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
             reload();
             
          }
        if(!bandera){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "No se ha asignado prioridad"));
+                   FacesContext context = FacesContext.getCurrentInstance();
+                   context.getExternalContext().getFlash().setKeepMessages(true);
+      
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "NO SE HA ASIGNADO PRIORIDAD"));
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -472,9 +503,15 @@ public class PostulanteController implements Serializable
                  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "No se ha asignado prioridad"));
       
         }
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
-
+            FacesContext context = FacesContext.getCurrentInstance();
+                   context.getExternalContext().getFlash().setKeepMessages(true);
+      
+            try {
+            reload();
+        } catch (IOException ex) {
+            Logger.getLogger(PostulanteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
         return "Evaluados";
      }
      
@@ -526,6 +563,8 @@ public class PostulanteController implements Serializable
                     pos.setEstado(this.e);
                     pFacade.edit(pos);
                     bandera = true;
+                      FacesContext context = FacesContext.getCurrentInstance();
+         context.getExternalContext().getFlash().setKeepMessages(true);
                     reload();
                     break;
                 }
@@ -548,7 +587,7 @@ public class PostulanteController implements Serializable
          return "Seleccionados";
      }
      
-     public String finalizarEstados(Postulante pos){
+     public String finalizarEstados(Postulante pos) throws IOException{
          
          boolean bandera = false;
          try{
@@ -577,9 +616,11 @@ public class PostulanteController implements Serializable
                   FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "No se ha asignado prioridad o cedula ya existente"));
         
         }
-         
+          FacesContext context = FacesContext.getCurrentInstance();
+         context.getExternalContext().getFlash().setKeepMessages(true);
+        
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CAMBIÓ EXITOSAMENTE"));
-  
+        reload();
          return "Contratados";
      }
      

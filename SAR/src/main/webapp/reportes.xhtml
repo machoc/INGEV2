@@ -10,25 +10,23 @@
         <h:outputStylesheet name="css/general.css"/>
         <h:outputStylesheet name="grid/grid.css" library="primefaces" /> <!--libreria propia de PRIMEFACES-->
         <h:outputScript name="js/index.js" />
+          <f:event type="preRenderView" listener="#{bean.verificarSesion()}"/>
     </h:head>
     <h:body>
-          <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
-          
-        <h:form>
-            <div align="center" >     
+         <div align="center" >     
                     <p:panelGrid columns="6" class="panelpostu" layout="grid">
                         <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                         <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-person"  disabled="#{bean.flag}" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
-                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
-            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
-           
-        </h:commandLink>
+                        
                     </p:panelGrid>     
                 </div>
+          <p:growl id="mensajeLogin" autoUpdate="false" showDetail="true" showSummary="true" severity="fatal,info"/>
+          
+        <h:form>
               <p:outputLabel value="Requisiciones:" for="requis" />
             <p:selectOneMenu style="text-transform: uppercase" id="requis" value="#{pdfcontroller.requisicion}" >
                         <!-- TODO: update below reference to list of available items-->
@@ -60,9 +58,7 @@
               <p:commandButton id="requis" value="pdf usuario" ajax="false" action="#{pdfcontroller.loadRequisicionFilter()}" />
              </p:panelGrid>
         </h:form>
-                 <p:separator />
-                 
- 
+           
 
 <script type="text/javascript">
 function exportChart() {
@@ -83,5 +79,3 @@ function exportChartPie() {
             <h:outputScript library="js" name="calendar_es.js"/>
     </h:body>
 </html>
-
-

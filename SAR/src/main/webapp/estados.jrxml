@@ -15,26 +15,22 @@
 			<frame>
 				<reportElement x="-20" y="43" width="580" height="137" uuid="73959e53-d2e2-4642-8671-24c14f6ffdb6"/>
 				<rectangle>
-					<reportElement x="200" y="0" width="380" height="40" uuid="58e25987-74ba-4f7b-ad4d-50dd79bf6002"/>
+					<reportElement x="100" y="0" width="380" height="40" uuid="58e25987-74ba-4f7b-ad4d-50dd79bf6002"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="200" y="0" width="380" height="70" uuid="d5510527-99c0-4bc5-bd9c-95cde02dc310"/>
+					<reportElement x="107" y="0" width="380" height="70" uuid="d5510527-99c0-4bc5-bd9c-95cde02dc310"/>
 					<textElement textAlignment="Center">
 						<font fontName="Bitstream Charter" size="22" isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[REPORTE DE ESTADOS]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="200" y="40" width="380" height="30" uuid="1d74912f-557f-4487-8f3b-206b136f1df3"/>
+					<reportElement x="100" y="40" width="380" height="30" uuid="1d74912f-557f-4487-8f3b-206b136f1df3"/>
 					<textElement textAlignment="Center">
 						<font size="20"/>
 					</textElement>
 					<text><![CDATA[SISTEMA DE RECLUTAMIENTO(SAR)]]></text>
 				</staticText>
-				<image>
-					<reportElement x="20" y="0" width="170" height="70" uuid="4dfcbae0-b0f0-45fa-b1a8-ef31642d31bb"/>
-					<imageExpression><![CDATA["https://image.ibb.co/nPswWx/logo_lanco.png"]]></imageExpression>
-				</image>
 			</frame>
 		</band>
 	</title>

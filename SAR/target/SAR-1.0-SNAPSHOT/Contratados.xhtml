@@ -21,14 +21,10 @@
                     <p:panelGrid columns="6" class="panelpostu" layout="grid">
                         <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                         <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                        <p:button class="boton"  disabled="#{bean.flag}"  icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
-                        <h:commandLink immediate="true"  action="#{bean.logout()}" >
-            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
-           
-        </h:commandLink>
                     </p:panelGrid>     
                 </div>
                 <h1 align="center"><h:outputText value=" Estado Contratado"/></h1>
@@ -37,7 +33,8 @@
                     <p:button class="botonrequi2" icon="ui-icon-folder-open" href="http://localhost:8080/SAR/faces/Evaluados.xhtml" value="Evaluados" outcome="Evaluados"></p:button>
                     <p:button class="botonrequi2" icon="ui-icon-script" href="http://localhost:8080/SAR/faces/Entrevistados.xhtml" value="Entrevistados" outcome="entrevistados"></p:button>
                     <p:button class="botonrequi2" icon="ui-icon-circle-check" href="http://localhost:8080/SAR/faces/Seleccionados.xhtml" value="Seleccionados" outcome="seleccionados"></p:button>
-                   
+                    <p:button class="botonrequi2" icon="ui-icon-tag" href="http://localhost:8080/SAR/faces/Contratados.xhtml" value="Contratados" outcome="Contratados"></p:button>
+
                 </div><br></br>
  
                 <p:dataTable rendered="true" emptyMessage="No se encuentra postulante" id="listaContratados"   paginator="true"
@@ -55,7 +52,7 @@
                                 </f:facet>
                                 <h:outputText value="#{item.postulante.cedula}" style="text-transform: uppercase"/>
                             </p:column>
-                            <p:column>
+                            <p:column filterBy="#{item.postulante.nombrecompleto}" filterMatchMode="contains">
                                 <f:facet name="header">
                                     <h:outputText value="Nombre"/>
                                 </f:facet>
@@ -77,6 +74,13 @@
                     
                             <p:column>
                                 <f:facet name="header">
+                                    <h:outputText value="Residencia"/>
+                                </f:facet>
+                                <h:outputText value="#{item.postulante.residencia}" style="text-transform: uppercase"/>
+                            </p:column>
+                    
+                            <p:column>
+                                <f:facet name="header">
                                     <h:outputText value="Notas"/>
                                 </f:facet>
                                 <h:outputText value="#{item.postulante.notas}" style="text-transform: uppercase"/>
@@ -87,7 +91,6 @@
                                 </f:facet>
                                 <h:outputText value="#{item.postulante.doprueba}" style="text-transform: uppercase"/>
                             </p:column>
-
                             
                             <p:column headerText="Opciones" style="width:180px; text-align: center">
                                 <p:commandButton class="busqueda" update="posInfo1" oncomplete="PF('informacion').show()" icon="ui-icon-search" title="View">

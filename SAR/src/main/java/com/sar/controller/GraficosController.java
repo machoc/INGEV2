@@ -5,7 +5,17 @@
  */
 package com.sar.controller;
 
+import com.sar.model.Evaluados;
+import com.sar.model.Postulante;
+import com.sar.model.Requisicion;
+import com.sar.model.UsuarioInge;
+import com.sar.session.PostulanteFacadeLocal;
+import com.sar.session.RequisicionFacadeLocal;
+import com.sar.session.UsuarioIngeFacadeLocal;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import org.primefaces.model.chart.Axis;
@@ -23,6 +33,18 @@ import org.primefaces.model.chart.PieChartModel;
 public class GraficosController implements Serializable {
     private BarChartModel barModel;
     private PieChartModel pieModel1;
+      private List<Postulante> aux = new ArrayList<Postulante>();
+     private List<Evaluados> aux2 = new ArrayList<Evaluados>();
+  
+    @EJB
+    private RequisicionFacadeLocal requisicionFacade;
+    
+    @EJB
+    private UsuarioIngeFacadeLocal usuarioFacade;
+    
+    
+    @EJB
+    private PostulanteFacadeLocal postulanteFacade;
     
     
     public GraficosController() {
@@ -42,12 +64,12 @@ public class GraficosController implements Serializable {
  
         ChartSeries boys = new ChartSeries();
         boys.setLabel("Candidatos");
-        boys.set("Preseleccionados", 120);
-        boys.set("Evaluados", 100);
-        boys.set("Entrevistados", 44);
-        boys.set("Seleccionados", 150);
-        boys.set("Contratados", 25);
-        boys.set("Descartados", 30);
+        boys.set("Preseleccionados", this.preseleccionados().size());
+        boys.set("Evaluados", this.evaluados().size());
+        boys.set("Entrevistados", this.entrevistados().size());
+        boys.set("Seleccionados", this.seleccionados().size());
+        boys.set("Contratados", this.listContratados().size());
+        boys.set("Descartados", this.descartados().size());
  
         model.addSeries(boys);
          
@@ -89,15 +111,83 @@ public class GraficosController implements Serializable {
     private void createPieModel1() {
         pieModel1 = new PieChartModel();
          //hacerlo dinamico
-        pieModel1.set("User 1", 540);
-        pieModel1.set("User 2", 325);
-        pieModel1.set("User 3", 702);
-        pieModel1.set("User 4", 421);
+         int contador=0;
+         for(UsuarioInge user : usuarioFacade.findAll()){
+             for(Requisicion requis : requisicionFacade.findAll()){
+                 if(requis.getUsuario().getCedula().equals(user.getCedula())){
+                     contador++;
+                 }
+            
+             }
+              pieModel1.set(user.getNombre(), contador);
+              contador=0;
+         }
          
         pieModel1.setTitle("Usuarios");
         pieModel1.setLegendPosition("w");
     }
      
-   
+       public List<Postulante> preseleccionados() {
+        aux = new ArrayList<Postulante>();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("PRESELECCIONADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+
+    public List<Postulante> evaluados() {
+        aux = new ArrayList<Postulante>();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("EVALUADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+
+    public List<Postulante> entrevistados() {
+        aux = new ArrayList<Postulante>();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("ENTREVISTADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+
+    public List<Postulante> seleccionados() {
+        aux = new ArrayList<Postulante>();
+        aux = new ArrayList();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("SELECCIONADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+
+    public List<Postulante> listContratados() {
+
+        aux = new ArrayList<Postulante>();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("CONTRATADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+    public List<Postulante> descartados() {
+
+        aux = new ArrayList<Postulante>();
+        for (Postulante i : postulanteFacade.findAll()) {
+            if (i.getEstado().getDetalle().equals("DESCARTADO")) {
+                aux.add(i);
+            }
+        }
+        return aux;
+    }
+
      
 }

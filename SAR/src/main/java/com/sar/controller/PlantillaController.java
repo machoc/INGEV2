@@ -61,7 +61,6 @@ public void beforePageLoad()
      try{
      FacesContext context = FacesContext.getCurrentInstance();
             UsuarioInge us = (UsuarioInge) context.getExternalContext().getSessionMap().get("usuario");
-            this.isFlag();
      if(flag  || us == null){
           context.getExternalContext().redirect("permisos.xhtml");
      }

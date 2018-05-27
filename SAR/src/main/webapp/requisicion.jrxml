@@ -13,7 +13,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="76" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<staticText>
 				<reportElement x="130" y="0" width="450" height="70" uuid="842afc39-916f-44f5-ab1a-394a6cfed012"/>
 				<textElement textAlignment="Center">
@@ -28,10 +28,6 @@
 				</textElement>
 				<text><![CDATA[SISTEMA DE RECLUTAMIENTO(SAR)]]></text>
 			</staticText>
-			<image>
-				<reportElement x="-10" y="0" width="140" height="76" uuid="31e599c1-f9d6-4cc5-9464-db9ac08825db"/>
-				<imageExpression><![CDATA["https://image.ibb.co/nPswWx/logo_lanco.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

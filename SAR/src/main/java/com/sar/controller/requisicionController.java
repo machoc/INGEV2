@@ -62,16 +62,6 @@ public class requisicionController implements Serializable
     {
      
     }
-
-    public List<Postulante> getFiltered() {
-        return filtered;
-    }
-
-    public void setFiltered(List<Postulante> filtered) {
-        this.filtered = filtered;
-    }
-    
-    
     
      public List<Requisicion> listar() {
         return this.requisicionFacade.findAll();
@@ -96,7 +86,15 @@ public class requisicionController implements Serializable
         this.cedulaUsuario = cedulaUsuario;
     }
 
+    public List<Postulante> getFiltered() {
+        return filtered;
+    }
 
+    public void setFiltered(List<Postulante> filtered) {
+        this.filtered = filtered;
+    }
+
+    
     public Departamento getD()
     {
         return d;
@@ -159,7 +157,7 @@ public class requisicionController implements Serializable
             this.r.setDepartamento(this.d);
           //  System.out.println(r.getNumrequisicion());   
               //  System.out.println(sirva[0].getCedula());
-              this.user = userFacade.find("20764013");
+              this.user = userFacade.find("109150468");
             System.out.println(user.getNombre());
               this.r.setUsuario(this.user);
              requisicionFacade.create(this.r);
@@ -228,7 +226,6 @@ public class requisicionController implements Serializable
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
         }
     }
-        
         
       
 
@@ -309,11 +306,12 @@ public class requisicionController implements Serializable
         }
          this.r = new Requisicion();
          FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getFlash().setKeepMessages(true);
+         context.getExternalContext().getFlash().setKeepMessages(true);
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
           reload();   
          }
          catch(Exception e){
+                        
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "AVISO", "ERROR"));
      
                  }
@@ -324,7 +322,7 @@ public class requisicionController implements Serializable
       
     public void reasignarPostulantes(Requisicion requisicion){
         for(Postulante pos : postulanteFacade.findAll()){
-            if(pos.getRequisicion().equals(requisicion) && !pos.getEstado().getDetalle().equals("FINALIZADO")){
+            if(pos.getRequisicion().equals(requisicion) && !pos.getEstado().getDetalle().equals("CONTRATADO")){
                 this.p = pos;
               //  estado.setCodigoEstado("000");
               estado = this.estadoFacade.find("000");
@@ -345,8 +343,6 @@ public class requisicionController implements Serializable
                this.requisicionFacade.edit(this.r);
            
         this.r = new Requisicion();
-        RequestContext req = RequestContext.getCurrentInstance();
-            req.execute("PF('ModifyUser').hide();");
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "USUARIO MODIFICADO"));
            }
          catch(Exception e){
@@ -373,6 +369,7 @@ public class requisicionController implements Serializable
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AVISO", "SE CERRÓ CORRECTAMENTE"));
     
 }
+       
        public void initRequisiciones(Requisicion requisicion){
         for(Postulante pos : postulanteFacade.findAll()){
             if(pos.getRequisicion().equals(requisicion) ){
@@ -388,5 +385,11 @@ public class requisicionController implements Serializable
             }
         }
     }
+       
+     public boolean isCerrada(Requisicion r){
+         return (r.getEstado().equals("CERRADA"))? true:false;
+             
+         
+     }  
     
 }

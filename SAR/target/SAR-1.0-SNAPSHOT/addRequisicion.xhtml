@@ -22,14 +22,10 @@
                 <p:panelGrid columns="6" class="panelusuario" layout="grid">
                     <p:graphicImage value="/resources/imagenes/logo-lanco.png" class="imagenmini"/>
                     <p:button class="boton" icon="ui-icon-home" href="http://localhost:8080/SAR/faces/index.xhtml" value="INICIO" outcome="inicio"></p:button>
-                    <p:button class="boton" icon="ui-icon-person" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
+                    <p:button class="boton" icon="ui-icon-person" disabled="#{bean.flag}" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
                     <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                     <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="requisicion"></p:button>
                     <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="ayuda"></p:button>
-                    <h:commandLink immediate="true"  action="#{bean.logout()}" >
-            <h:graphicImage url="./../resources/imagenes/logout.jpg" width="30px" height="30px" />
-           
-        </h:commandLink>
                 </p:panelGrid>     
             </div>
              
@@ -37,7 +33,7 @@
   
              <h1 align="center" ><h:outputText value=" Requisiciones"/></h1>
        <div>      
-        <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e" value="Agregar"  oncomplete="PF('widAdd').show();"  />
+        <p:commandButton class="botonrequiAGRE" icon="ui-icon-circle-arrow-e"  disabled="#{bean.flag}" value="Agregar"  oncomplete="PF('widAdd').show();"  />
         <p:button class="botonrequi1" icon="ui-icon-newwin" href="http://localhost:8080/SAR/faces/estados.xhtml" value="Estados Requisición" outcome="estados"></p:button>
         <p:button class="botonrequi2" icon="ui-icon-shuffle" href="http://localhost:8080/SAR/faces/asignarPostulantes.xhtml" value="Asignar Postulante" outcome="asignarPostulantes"></p:button>
         <p:button class="botonrequi2" icon="ui-icon-clipboard" href="http://localhost:8080/SAR/faces/departamentos.xhtml" value="Departamentos" outcome="departamentos"></p:button>
@@ -79,15 +75,11 @@
                         </f:facet>
                        
 
-                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}" update="requisicion,mensaje2">
-                                                        <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICIÓN?" icon="ui-icon-alert" />
-
-                    </p:commandButton>
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="SÍ"  type="button" styleClass="si , ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Cerrar" actionListener="#{requisicionController.cerrarRequisicion(item.numrequisicion)}" update="requisicion,mensaje2">
+                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Eliminar" actionListener="#{requisicionController.delete(item)}"  update="requisicion,mensaje2">
+                                     <p:confirm header="CONFIRMACIÓN" message="DESEA ELIMINAR LA REQUISICIÓN?" icon="ui-icon-alert" />
+                   
+                        </p:commandButton>
+                        <p:commandButton icon="ui-icon-trash" class="eliminar" value="Cerrar" disabled="#{requisicionController.isCerrada(item)}" actionListener="#{requisicionController.cerrarRequisicion(item.numrequisicion)}" update="requisicion,mensaje2">
                             <p:confirm header="CONFIRMACIÓN" message="DESEA CERRAR LA REQUISICIÓN?" icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -95,8 +87,8 @@
                                 <p:commandButton value="NO" type="button" styleClass="no , ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
                      <p:commandButton update="posInfo" class="ver" value="Ver" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('posDialog').show()" icon="ui-icon-search" title="Ver Requisicion"/>
-                      <p:commandButton icon="ui-icon-wrench" class="modificar" value="Editar" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modify').show();" update="Modify"  />
-                      <p:commandButton icon="ui-icon-wrench" class="modificar" value="Responsable" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modifyuser').show();" update="ModifyUser"  />
+                      <p:commandButton icon="ui-icon-wrench" class="modificar" disabled="#{bean.flag}" value="Editar" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modify').show();" update="Modify"  />
+                      <p:commandButton icon="ui-icon-wrench" class="modificar" disabled="#{bean.flag}" value="Responsable" actionListener="#{requisicionController.edit(item)}" oncomplete="PF('modifyuser').show();" update="ModifyUser"  />
                      
 
                     </p:column>
@@ -107,6 +99,7 @@
             </h:form>
         </f:view>
  
+
             <p:dialog id="dialogo" widgetVar="widAdd" header="Agregar Requisición" maximizable="true" >
             <h:form>
                 <p:fieldset legend="Datos Requisicion" style="margin-bottom:100px">
@@ -116,7 +109,7 @@
                     
                                 <p:outputLabel value="Puesto:" for="puesto" />
                                 <p:inputText id="puesto" placeholder="Facturación" required="true" value="#{requisicionController.r.puesto}" title="Puesto" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" >
-                                             <f:validateRegex pattern="\D*" />
+                                             <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                                 </p:inputText>
                                  <p:message for="puesto" />
                                 <p:outputLabel value="Vacantes:" for="vacantes" />
@@ -124,7 +117,7 @@
                                 <p:message for="vacantes" />
                                 <p:outputLabel value="Contratante:" for="contratante" />
                                 <p:inputText id="contratante" placeholder="Alicia Hernández" required="true" value="#{requisicionController.r.contratante}" requiredMessage="Favor llenar" validatorMessage="No se permite numeros" title="Contratante" >
-                                         <f:validateRegex pattern="\D*" />
+                                         <f:validateRegex pattern="^[a-zA-z][a-zA-z\s]*$" />
                                 </p:inputText>
                                 <p:message for="contratante" />
                                 <p:outputLabel value="Fecha Inicio:" for="startDate" />
@@ -134,7 +127,7 @@
                                     </p:calendar> 
                                  <p:message for="startDate" />
                                  <p:outputLabel value="Fecha Entrega:" for="endDate" />
-                                 <p:calendar id="endDate"  locale="es" pattern="dd/MM/yyyy"  value="#{requisicionController.r.fechaEntrega}" mindate="#{requisicionController.r.fechaInicio}" disabled="#{empty requisicionController.r.fechaInicio}"/>
+                                 <p:calendar id="endDate"  locale="es" pattern="dd/MM/yyyy"  value="#{requisicionController.r.fechaEntrega}" mindate="#{requisicionController.r.fechaInicio}" />
                                    <p:message for="endDate" />            
                                 <p:outputLabel value="Departamento:" for="departamento" />
                                 <p:selectOneMenu id="departamento" value="#{requisicionController.d.codigoDepartamento}" >
