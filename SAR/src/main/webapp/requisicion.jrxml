@@ -13,18 +13,18 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
-				<reportElement x="130" y="0" width="450" height="70" uuid="842afc39-916f-44f5-ab1a-394a6cfed012"/>
-				<textElement textAlignment="Center">
-					<font fontName="Bitstream Charter" size="22" isBold="true" isItalic="true"/>
+				<reportElement x="40" y="3" width="470" height="70" uuid="842afc39-916f-44f5-ab1a-394a6cfed012"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Serif" size="20" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE REQUISICIONES USUARIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="40" width="450" height="30" uuid="1e01b046-ab09-47ef-a913-2abc469c8ee5"/>
+				<reportElement x="60" y="40" width="450" height="30" uuid="1e01b046-ab09-47ef-a913-2abc469c8ee5"/>
 				<textElement textAlignment="Center">
-					<font size="20"/>
+					<font fontName="Serif" size="20"/>
 				</textElement>
 				<text><![CDATA[SISTEMA DE RECLUTAMIENTO(SAR)]]></text>
 			</staticText>
@@ -120,7 +120,7 @@
 			</textField>
 			<textField>
 				<reportElement x="290" y="10" width="160" height="30" uuid="7617e05a-bb65-48da-b052-8c6419e7f02b"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" markup="none"/>
 				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">

@@ -19,15 +19,15 @@
 				</rectangle>
 				<staticText>
 					<reportElement x="107" y="0" width="380" height="70" uuid="d5510527-99c0-4bc5-bd9c-95cde02dc310"/>
-					<textElement textAlignment="Center">
-						<font fontName="Bitstream Charter" size="22" isBold="true" isItalic="true"/>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Serif" size="22" isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[REPORTE DE ESTADOS]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="100" y="40" width="380" height="30" uuid="1d74912f-557f-4487-8f3b-206b136f1df3"/>
 					<textElement textAlignment="Center">
-						<font size="20"/>
+						<font fontName="Serif" size="20"/>
 					</textElement>
 					<text><![CDATA[SISTEMA DE RECLUTAMIENTO(SAR)]]></text>
 				</staticText>

@@ -6,6 +6,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>SAR-LANCO</title>
+                <link rel="icon" href="imagenes/logo-lanco.png"></link>
+
         <h:outputStylesheet name="css/index.css"/>
         <h:outputStylesheet name="css/general.css"/>
         <h:outputStylesheet name="grid/grid.css" library="primefaces" /> <!--libreria propia de PRIMEFACES-->
@@ -20,7 +22,7 @@
                         <p:button class="boton" icon="ui-icon-person"  disabled="#{bean.flag}" href="http://localhost:8080/SAR/faces/usuario.xhtml" value="USUARIOS" outcome="usuario"></p:button>
                         <p:button class="boton" icon="ui-icon-circle-plus" href="http://localhost:8080/SAR/faces/Postulante.xhtml" value="POSTULANTES" outcome="Postulante"></p:button>
                         <p:button class="boton" icon="ui-icon-document" href="http://localhost:8080/SAR/faces/addRequisicion.xhtml" value="REQUISICIONES" outcome="usuario"></p:button>
-                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/index.xhtml" value="AYUDA" outcome="usuario"></p:button>
+                        <p:button class="boton" icon="ui-icon-help" href="http://localhost:8080/SAR/faces/ayuda.xhtml" value="AYUDA" outcome="usuario"></p:button>
                         
                     </p:panelGrid>     
                 </div>
